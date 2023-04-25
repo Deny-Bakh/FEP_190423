@@ -1,3 +1,12 @@
-hoursNumber = prompt ('Write down random number of hours, please.');
-secondsNumber = hoursNumber * 60 * 60;
-alert (`In ${hoursNumber} hours there are ${secondsNumber} seconds.`);
+phraseOne = prompt ('What is the first word in Beatles "Let it Be"?');
+phraseTwo = prompt ('How do we mark neuter?');
+phraseThree = prompt ('Traffic lights show stop and ...?');
+
+console.log(phraseOne + ' ' + phraseTwo + ' ' + phraseThree);
+
+// ****************************************************************************
+
+randomNumber = prompt ('Type in five digits number, please.')
+fiveDigits = randomNumber.split('');
+
+console.log(fiveDigits.join(' '));
