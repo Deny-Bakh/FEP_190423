@@ -6,7 +6,6 @@ console.log(phraseOne + ' ' + phraseTwo + ' ' + phraseThree);
 
 // ****************************************************************************
 
-randomNumber = prompt ('Type in five digits number, please.')
-fiveDigits = randomNumber.split('');
-
-console.log(fiveDigits.join(' '));
+randomNumber = prompt ('Type in five digits number, please.');
+randomNumberString = randomNumber.replaceAll('', ' ').trim();
+console.log(randomNumberString);
