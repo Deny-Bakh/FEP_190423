@@ -1,204 +1,93 @@
 
-plus = 10;
+number = 20;
 
-document.write('Numbers from 10 to 20: <br>');
-while (plus <=20) {
-    document.write(plus)
-    if(plus !== 20){
+document.write('Numbers from 20 to 30, with a step of 0.5: <br>');
+do{
+    document.write(number);
+    if(number !== 30){
         document.write(', ');
     }
-    plus++;
-};
+    number += 0.5;
+}while (number <= 30);
 
-// plus = 10;
-// resultPlusOne = '';
-
-// while (plus <=20) {
-//     resultPlusOne += plus;
-//     if(plus < 20){
-//         resultPlusOne += ', ';
-//     }
-//     plus++;
-// }
-
-// document.write (`Numbers from 10 to 20: <br> ${resultPlusOne} <br>`);
 // **********************************************************************************************
 
-square = 10;
+dollar = 27;
+numberOfDollars = 10;
 
-document.write('<br> Square numbers of 10 to 20: <br>');
+document.write('<br> One dollar costs 27 grivnas. Here\'s how many grivnas in 10, 20, 30... 100 dollars: <br>');
 do{
-    document.write(square**2);
-    if(square !==20){
-        document.write(', ');
+    sumOfGrivnas = dollar * numberOfDollars;
+    document.write(sumOfGrivnas);
+    if(numberOfDollars !== 100){
+        document.write(', ')
     }
-    square++;
-}while(square <=20);
+    numberOfDollars += 10;
+}while(numberOfDollars <= 100);
 
 // **********************************************************************************************
 
-multiply = 1;
+integer = prompt('Please input an integer and watch the square happen!');
+numberToSquare = 1;
 
-document.write('<br> Multiplication board for 7: <br>');
-do {
-    resultMultiplication = multiply * 7;
-    document.write(`${multiply} * 7 = ${resultMultiplication} <br>`);
-    multiply++
-} while(multiply <= 10);
-
-// **********************************************************************************************
-
-sum = 0;
-sumResult = 1;
-
-do {
-    sum += sumResult
-    sumResult++;
-} while (sumResult <= 15);
-
-document.write(`Product of integers from 1 to 15: ${sum} <br>`);
-
-// **********************************************************************************************
-
-multiplication = 15;
-multiplicationResult = 1;
-
-do {
-    multiplicationResult *= multiplication;
-    multiplication++;
-} while (multiplication <= 35);
-
-document.write(`Multiplication Result: ${multiplicationResult} <br>`);
-
-// **********************************************************************************************
-
-arSum = 0;
-arMean = 1;
-arClicker = 0;
-
+document.write('<br>Those are the square numbers from 1 to 100 which are < than the number you entered <br>')
 do{
-    arSum += arMean;
-    arMean++;
-    arClicker++;
-}while(arMean <= 500);
-
-avDivide = arSum / arClicker;
-
-document.write(`Arithmetic Mean: ${avDivide} <br>`);
-
-// **********************************************************************************************
-
-evenNumbers = 0;
-even = 30;
-
-do{
-    if(even % 2 === 0){
-        evenNumbers += even;
+    squareNumber = numberToSquare * numberToSquare;
+    if(squareNumber <= integer){
+        document.write(squareNumber + ' ');
     }
-    even++;
-}while(even <= 80);
-
-document.write(`Sum of even numbers from 30 to 80: ${evenNumbers} <br>`);
+    numberToSquare++;
+}while(squareNumber <= integer);
 
 // **********************************************************************************************
 
-numbersEqualThree = 100;
+integerNumber = parseInt(prompt('Please enter a number more than 1 and let\'s see what kind of number it becomes!'));
+divideNumber = 2;
+isPrime = true;
 
-document.write('All numbers that are equal to three from 100 to 200 <br>');
-do{
-    if(numbersEqualThree % 3 === 0){
-        document.write(numbersEqualThree + ' ');
-    }
-    numbersEqualThree++;
-}while(numbersEqualThree <= 200);
-
-// **********************************************************************************************
-
-// naturalNumber = prompt('Enter a natural number, please');
-// divider = 1;
-
-// document.write(`<br> All of your ${naturalNumber} dividers: <br>`);
-// do{
-//     if(naturalNumber % divider === 0){
-//         document.write(`${divider} `);
-//     }divider++;
-// }while(divider < naturalNumber);
-
-// **********************************************************************************************
-
-// naturalNumber = prompt('Enter a natural number, please');
-// divider = 1;
-// pairClick = 0;
-
-
-// document.write(`<br> All of your ${naturalNumber} even dividers: <br>`);
-// do{
-//     if(naturalNumber % divider === 0){
-//         // document.write(`${divider} `);
-//         if (divider % 2 === 0){
-//             pairClick++
-//         }
-//     }divider++;
-// }while(divider < naturalNumber);
-
-// document.write(pairClick)
-
-// **********************************************************************************************
-// naturalNumber = prompt('Enter a natural number, please');
-// divider = 1;
-// pairClick = 0;
-// pairClickSum = 0;
-
-
-// document.write(`<br> The sum of your even dividers: <br>`);
-// do{
-//     if(naturalNumber % divider === 0){
-//         // document.write(`${divider} `);
-//         if (divider % 2 === 0){
-//             pairClick++
-//             pairClickSum += divider;
-//         }
-//     }divider++;
-// }while(divider < naturalNumber);
-
-// document.write(pairClickSum)
-
-// **********************************************************************************************
-
-naturalNumber = prompt('Enter a natural number, please');
-divider = 1;
-pairClick = 0;
-pairClickSum = 0;
-
-
-document.write(`<br> All of your ${naturalNumber} dividers: <br>`);
-do{
-    if(naturalNumber % divider === 0){
-        document.write(`${divider} `);
-        if (divider % 2 === 0){
-            pairClick++
-            pairClickSum += divider;
+if (integerNumber <= 1){
+    document.write('<br> You entered 1 while you were asked to enter a bigger number <br>');
+    } else {
+        do{
+            if(integerNumber % divideNumber === 0 && divideNumber !== integerNumber){
+                isPrime = false;
+                break;
+            }
+            divideNumber++;
+        }while(divideNumber < integerNumber);
+        if(isPrime){
+            document.write(`<br> ${integerNumber} is Prime Number`);
+        }else{
+        document.write(`<br> ${integerNumber} is not Prime Number`);
         }
-    }divider++;
-}while(divider < naturalNumber);
-
-
-document.write(`<br> All of your ${naturalNumber} even dividers: <br> ${pairClick}`)
-document.write(`<br> The sum of your even dividers: <br> ${pairClickSum} <br>`)
+    };
 
 // **********************************************************************************************
 
-firstMultiplyNumber = 1;
+// someNumber = parseInt(prompt('Enter a number you like and lets see if it is possible to obtain this number by raising the number 3 to a certain power'));
+// resultNumber = 1;
 
-document.write('Multiply board from 1 to 10: <br>')
-do{
-    secondMultiplyNumber = 1;
-    do{
-        multiplyResult = firstMultiplyNumber * secondMultiplyNumber
-        document.write(`${firstMultiplyNumber}*${secondMultiplyNumber}=${multiplyResult} <br>`);
-        secondMultiplyNumber++
-    }while(secondMultiplyNumber <=10);
-    document.write('<br>');
-    firstMultiplyNumber++
-}while(firstMultiplyNumber <= 10);
+// do{
+//     resultNumber *= 3;
+// }while(resultNumber < someNumber);
 
+// if(resultNumber === someNumber){
+//     document.write(`<br> ${someNumber} can be obtained by raising 3 to a power`);
+// }else{
+//     document.write('<br> Cannot be obtained by raising 3 to a power');
+// };
+
+someNumber = parseInt(prompt('Enter a number you like and lets see if it is possible to obtain this number by raising the number 3 to a certain power'));
+powerNumber = 0;
+
+do {
+  if (3 ** powerNumber === someNumber) {
+    document.write(`<br> ${someNumber} can be obtained by raising 3 to a power of ${powerNumber}`);
+    break;
+  }
+  powerNumber++;
+} while (3 ** powerNumber <= someNumber);
+
+if (3 ** powerNumber > someNumber) {
+  document.write(`<br> ${someNumber} cannot be obtained by raising 3 to a power`);
+};
