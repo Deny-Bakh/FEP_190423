@@ -1,85 +1,272 @@
-do {
-    arrayLength = parseInt(prompt('Please tell us the number of elements you want in your array. But because in our future calulations we need 5 or more elements it cannot be less, than five'));
-} while (isNaN(arrayLength) || arrayLength === null || arrayLength < 5);
 
-document.write(`The number of elements of your array is ${arrayLength} <br>`);
-
-userArray = [];
-for (i = 0; i < arrayLength; i++) {
-    do {
-        arrayElement = parseInt(prompt(`Enter your ${i+1} element of array. It can only be numbers The amount of them depends on what you entered in the previous prompt`));
-    } while (isNaN(arrayElement) || arrayElement === null);
-    userArray.push(arrayElement);
-};
-
-document.write(`Array before sorting: ${userArray.join(', ')} <br>`);
-
-for (i = 0; i<userArray.length; i++) {
-    for (let j = i + 1; j < userArray.length; j++) {
-        if (userArray[i] > userArray[j]) {
-            temp = userArray[i];
-            userArray[i] = userArray[j];
-            userArray[j] = temp;
-        }
+season = '';
+while (season === '') {
+    season = prompt('Winter or summer period?');
+    if (season === null){
+        season = '';
+        continue;
+    }
+    season = season.toLowerCase().replaceAll(' ', '');
+    if (season !== 'winter' && season !== 'summer'){
+        season = '';
     }
 };
-  
-document.write(`Array after sorting: ${userArray.join(', ')} <br>`);
 
-userArray.splice(1, 3);
+console.log(season);
 
-document.write(`Array after deleting elements: ${userArray.join(', ')}`);
+if (season === 'winter'){
+    seasonPrice = 2;
+} else if (season === 'summer'){
+    seasonPrice = 0.8;
+};
 
-// ***********************************************************************************************
+category = '';
+while(category === '') {
+    category = prompt('Choose category from which you want to buy products: vegetables or fruits');
+    if(category === null) {
+        category = '';
+        continue;
+    }
+    category = category.toLowerCase().replaceAll(' ', '');
+    if(category !== 'vegetables' && category !== 'fruits') {
+        category = '';
+    }
+};
 
-// length = prompt("Введіть довжину масиву:");
-// arr = [];
+console.log(category);
 
-// for (i = 0; i < length; i++) {
-//   element = prompt(`Введіть елемент #${i + 1}:`);
-//   if (!isNaN(element)) {
-//     arr.push(Number(element));
-//   } else if (element.startsWith("-") && !isNaN(element.slice(1))) {
-//     arr.push(-1 * Number(element.slice(1)));
-//   } else {
-//     arr.push(element);
-//   }
-// }
+chosenProduct = '';
+productPrice = 0;
+if (category === 'vegetables'){
+    while (chosenProduct === '') {
+        chosenProduct = prompt('Choose product from one of the categories: cabbage, avocado, tomato.')
 
-// numbersArr = [];
-// stringsArr = [];
+        if (chosenProduct === null) {
+            chosenProduct = '';
+            continue;
+        }
 
-// for (i = 0; i < arr.length; i++) {
-//   if (typeof arr[i] === "number") {
-//     numbersArr.push(arr[i]);
-//   } else {
-//     stringsArr.push(arr[i]);
-//   }
-// }
+        chosenProduct = chosenProduct.toLowerCase().replaceAll(' ','');
+        if (chosenProduct !== 'cabbage' && chosenProduct !== 'avocado' && chosenProduct !== 'tomato') {
+            chosenProduct = '';
+        }
+    }
 
-// for (i = 0; i < numbersArr.length - 1; i++) {
-//   for (j = 0; j < numbersArr.length - i - 1; j++) {
-//     if (numbersArr[j] > numbersArr[j + 1]) {
-//       temp = numbersArr[j];
-//       numbersArr[j] = numbersArr[j + 1];
-//       numbersArr[j + 1] = temp;
-//     }
-//   }
-// }
+    switch (chosenProduct) {
+        case 'cabbage':
+            productPrice = 8;
+            break;
+        case 'avocado':
+            productPrice = 30;
+            break;
+        case 'tomato':
+            productPrice = 10;
+            break;
+    };
 
-// for (i = 0; i < stringsArr.length - 1; i++) {
-//   for (j = 0; j < stringsArr.length - i - 1; j++) {
-//     if (stringsArr[j] > stringsArr[j + 1]) {
-//       temp = stringsArr[j];
-//       stringsArr[j] = stringsArr[j + 1];
-//       stringsArr[j + 1] = temp;
-//     }
-//   }
-// }
+} else if (category === 'fruits') {
+    while (chosenProduct === '') {
+        chosenProduct = prompt('Choose product from one of the categories: grapes, raspberry, coconut.')
 
-// sortedArr = numbersArr.concat(stringsArr);
+        if (chosenProduct === null) {
+            chosenProduct = '';
+            continue;
+        }
 
-// document.write("Масив: ");
-// for (i = 0; i < sortedArr.length; i++) {
-//   document.write(sortedArr[i] + " ");
+        chosenProduct = chosenProduct.toLowerCase().replaceAll(' ','');
+        if (chosenProduct !== 'grapes' && chosenProduct !== 'raspberry' && chosenProduct !== 'coconut') {
+            chosenProduct = '';
+        }
+    }
+
+    switch (chosenProduct) {
+        case 'grapes':
+            productPrice = 20;
+            break;
+        case 'raspberry':
+            productPrice = 25;
+            break;
+        case 'coconut':
+            productPrice = 50;
+            break;
+    }
+};
+
+console.log(chosenProduct);
+
+do {
+    numberOfGoods = parseInt(prompt(`How many ${chosenProduct} do you want?`));
+} while (isNaN(numberOfGoods) || numberOfGoods < 1);
+
+console.log(numberOfGoods);
+
+sum = numberOfGoods * productPrice * seasonPrice;
+
+console.log(sum);
+
+document.write(`
+    <div style = "text-align: center">
+        <img src="./images 2/${category}/${chosenProduct}.svg" alt="${chosenProduct}" width="100" height="100">
+        <p> Selected product: <b> ${chosenProduct} </b> </p>
+        <p> Count of ${chosenProduct}: <b> ${numberOfGoods} </b> </p>
+        <p> Selected period: <b> ${season} </b> </p>
+        <p> Selected category: <b> ${category} </b> </p>
+        <p> Final cost: <b> ${sum} </b> </p>
+    </div>
+    `);
+
+// ***************************************************************************************************************************
+
+// do {
+//     season = prompt('Winter or summer period?')?.toLowerCase().replaceAll(' ', '');
+// } while (season !== 'winter' && season !== 'summer');
+
+// console.log(season);
+
+// if(season === 'winter'){
+//     seasonPrice = 2;
+// } else if (season === 'summer'){
+//     seasonPrice = 0.8;
 // };
+
+// do {
+//     category = prompt('Choose category from which you want to buy products: vegetables or fruits')?.toLowerCase().replaceAll(' ','');
+// } while (category !== 'vegetables' && category !== 'fruits');
+
+// console.log(category);
+    
+// if (category === 'vegetables'){
+//     do {
+//         chosenProduct = prompt('Choose product from one of the categories: cabbage, avocado, tomato.')?.toLowerCase().replaceAll(' ','');
+//     } while (chosenProduct !== 'cabbage' && chosenProduct !== 'avocado' && chosenProduct !== 'tomato');
+
+//     switch (chosenProduct) {
+//         case 'cabbage':
+//             productPrice = 8;
+//             break;
+//         case 'avocado':
+//             productPrice = 30;
+//             break;
+//         case 'tomato':
+//             productPrice = 10;
+//             break;
+//     };
+
+// } else if(category === 'fruits') {
+//     do {
+//         chosenProduct = prompt('Choose product from one of the categories: grapes, raspberry, coconut.')?.toLowerCase().replaceAll(' ','');
+//     } while (chosenProduct !== 'grapes' && chosenProduct !== 'raspberry' && chosenProduct !== 'coconut');
+
+//     switch (chosenProduct) {
+//         case 'grapes':
+//             productPrice = 20;
+//             break;
+//         case 'raspberry':
+//             productPrice = 25;
+//             break;
+//         case 'coconut':
+//             productPrice = 50;
+//             break;
+//     }
+// };
+
+// console.log(chosenProduct);
+
+// do {
+//     numberOfGoods = parseInt(prompt(`How many ${chosenProduct} do you want?`));
+// } while (isNaN(numberOfGoods) || numberOfGoods < 1);
+
+// console.log(numberOfGoods);
+
+// sum = numberOfGoods * productPrice * seasonPrice;
+
+// console.log(sum);
+
+// document.write(`
+//     <div style = "text-align: center">
+//         <img src="./images 2/${category}/${chosenProduct}.svg" alt="${chosenProduct}" width="100" height="100">
+//         <p> Selected product: <b> ${chosenProduct} </b> </p>
+//         <p> Count of ${chosenProduct}: <b> ${numberOfGoods} </b> </p>
+//         <p> Selected period: <b> ${season} </b> </p>
+//         <p> Selected category: <b> ${category} </b> </p>
+//         <p> Final cost: <b> ${sum} </b> </p>
+//     </div>
+//     `);
+
+// *************************************************************************************************************************
+
+// do {
+//     season = prompt('Winter or summer period?').toLowerCase().replaceAll(' ', '');
+// } while (season !== 'winter' && season !== 'summer');
+
+// console.log(season);
+
+// if (season === 'winter'){
+//     seasonPrice = 2;
+// } else if (season === 'summer'){
+//     seasonPrice = 0.8;
+// };
+
+// do {
+//     category = prompt('Choose category from which you want to buy products: vegetables or fruits').toLowerCase().replaceAll(' ','');
+// } while (category !== 'vegetables' && category !== 'fruits');
+
+// console.log(category);
+    
+// if (category === 'vegetables'){
+//     do {
+//         chosenProduct = prompt('Choose product from one of the categories: cabbage, avocado, tomato.').toLowerCase().replaceAll(' ','');
+//     } while (chosenProduct !== 'cabbage' && chosenProduct !== 'avocado' && chosenProduct !== 'tomato');
+
+//     switch (chosenProduct) {
+//         case 'cabbage':
+//             productPrice = 8;
+//             break;
+//         case 'avocado':
+//             productPrice = 30;
+//             break;
+//         case 'tomato':
+//             productPrice = 10;
+//             break;
+//     };
+
+// } else if(category === 'fruits') {
+//     do {
+//         chosenProduct = prompt('Choose product from one of the categories: grapes, raspberry, coconut.').toLowerCase().replaceAll(' ','');
+//     } while (chosenProduct !== 'grapes' && chosenProduct !== 'raspberry' && chosenProduct !== 'coconut');
+
+//     switch (chosenProduct) {
+//         case 'grapes':
+//             productPrice = 20;
+//             break;
+//         case 'raspberry':
+//             productPrice = 25;
+//             break;
+//         case 'coconut':
+//             productPrice = 50;
+//             break;
+//     }
+// };
+
+// console.log(chosenProduct);
+
+// do {
+//     numberOfGoods = parseInt(prompt(`How many ${chosenProduct} do you want?`));
+// } while (isNaN(numberOfGoods) || numberOfGoods < 1);
+
+// console.log(numberOfGoods);
+
+// sum = numberOfGoods * productPrice * seasonPrice;
+
+// console.log(sum);
+
+// document.write(`
+//     <div style = "text-align: center">
+//         <img src="./images 2/${category}/${chosenProduct}.svg" alt="${chosenProduct}" width="100" height="100">
+//         <p> Selected product: <b> ${chosenProduct} </b> </p>
+//         <p> Count of ${chosenProduct}: <b> ${numberOfGoods} </b> </p>
+//         <p> Selected period: <b> ${season} </b> </p>
+//         <p> Selected category: <b> ${category} </b> </p>
+//         <p> Final cost: <b> ${sum} </b> </p>
+//     </div>
+//     `);
