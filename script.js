@@ -6,9 +6,9 @@ do {
   season = season ? season.replaceAll(' ', '').toLowerCase() : '';
 } while (!seasonArray.includes(season));
 
-console.log(season)
+console.log(season);
 
-seasonPrice = seasonPriceArray[seasonArray.indexOf(season)]
+seasonPrice = seasonPriceArray[seasonArray.indexOf(season)];
 
 categoryArray = ['vegetables', 'fruits'];
 do {
@@ -25,7 +25,7 @@ fruitPrices = [20, 25, 50];
 
 if (category === 'vegetables') {
     do {
-        chosenProduct = prompt('Choose product from one of the categories: cabbage, avocado, tomato.')
+        chosenProduct = prompt('Choose product from one of the categories: cabbage, avocado, tomato.');
         chosenProduct = chosenProduct ? chosenProduct.replaceAll(' ', '').toLowerCase() : '';
     } while (!vegetables.includes(chosenProduct));
 
@@ -35,8 +35,8 @@ if (category === 'vegetables') {
     productPrice = vegetablePrices[vegetables.indexOf(chosenProduct)];
 
 } else if (category === 'fruits') {
-    do{
-        chosenProduct = prompt('Choose product from one of the categories: grapes, raspberry, coconut.')
+    do {
+        chosenProduct = prompt('Choose product from one of the categories: grapes, raspberry, coconut.');
         chosenProduct = chosenProduct ? chosenProduct.replaceAll(' ', '').toLowerCase() : '';
     }  while (!fruits.includes(chosenProduct));
 
