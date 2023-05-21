@@ -1,142 +1,53 @@
-numberArray = [16, -37, 54, -4, 72, -56, 47, 4, -16, 25, -37, 46, 4, -51, 27, -63, 4, -54, 76, -4, 12, -35, 4, 47];
-positiveSum = 0;
-countPositive = 0;
 
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] > 0) {
-        positiveSum += numberArray[i];
-        countPositive++;
-    }
+sports = [
+    ['skier','⛷'],
+    ['snowboarder','🏂'],
+    ['apple','🍎'],
+    ['hockey','🏒'],
+    ['ice skate','⛸'],
+    ['swimmer','🏊'],
+    ['surfer','🏄‍'],
+    ['watermelon','🍉'],
+    ['lemon','🍋'],
+    ['rowboat','🚣'],
+    ['bicyclist','🚴‍']
+];
+
+summerSports = sports.slice(5, 7).concat(sports.slice(9, 11));
+
+winterSports = sports.slice(0,2).concat(sports.slice(3,5));
+
+fruits = sports.slice(2, 3).concat(sports.slice(7, 9));
+
+// summerSports = sports.slice(5,11);
+
+// winterSports = sports.slice(0,5);
+
+// fruits = summerSports.splice(2, 2).concat(winterSports.splice(2, 1));
+
+console.log('*** Winter sports ***');
+
+for (i = 0; i < winterSports.length; i++) {
+    console.log(`${winterSports[i][0]}: ${winterSports[i][1]}`);
 }
 
-console.log(`Sum of positive elements: ${positiveSum}`);
-console.log(`Number of positive elements in your array: ${countPositive}`);
+console.log('');
 
-// *******************************************************************************************************************
+console.log('*** Summer sports ***');
 
-smallestNumber = numberArray[0];
-
-for (i = 0; i < numberArray.length; i++){
-    if (numberArray[i] < smallestNumber) {
-        smallestNumber = numberArray[i];
-        indexOfSmallest = numberArray.indexOf(smallestNumber);
-    }
+for (i = 0; i < summerSports.length; i++) {
+    console.log(`${summerSports[i][0]}: ${summerSports[i][1]}`);
 }
 
-console.log(`The smallest number in your array is: ${smallestNumber}`);
-console.log(`The index of smallest number in your array is: ${indexOfSmallest}`);
+console.log('');
 
-// *******************************************************************************************************************
+console.log('*** Fruits ***');
 
-largestNumber = numberArray[0];
-
-for (i = 0; i < numberArray.length; i++){
-    if (numberArray[i] > largestNumber) {
-        largestNumber = numberArray[i];
-        indexOfLargest = numberArray.indexOf(largestNumber);
-    }
+for (i = 0; i < fruits.length; i++) {
+    console.log(`${fruits[i][0]}: ${fruits[i][1]}`);
 }
 
-console.log(`The largest number in your array is: ${largestNumber}`);
-console.log(`The index of largest number in your array is: ${indexOfLargest}`);
-
-// *******************************************************************************************************************
-
-countNegative = 0;
-
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] < 0) {
-        countNegative++;
-    }
-}
-
-console.log(`Number of negative elements in your array: ${countNegative}`);
-
-// *******************************************************************************************************************
-
-countOddPositive = 0;
-
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] > 0 && numberArray[i] % 2 !== 0) {
-        countOddPositive++;
-    }
-}
-
-console.log(`Number of odd positive elements in your array: ${countOddPositive}`);
-
-// *******************************************************************************************************************
-
-countEvenPositive = 0;
-
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] > 0 && numberArray[i] % 2 === 0) {
-        countEvenPositive++;
-    }
-}
-
-console.log(`Number of even positive elements in your array: ${countEvenPositive}`);
-
-evenPositiveSum = 0;
-
-// *******************************************************************************************************************
-
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] > 0 && numberArray[i] % 2 === 0) {
-        evenPositiveSum += numberArray[i];
-    }
-}
-
-console.log(`Sum of even positive elements in your array: ${evenPositiveSum}`);
-
-// *******************************************************************************************************************
-
-oddPositiveSum = 0;
-
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] > 0 && numberArray[i] % 2 !== 0) {
-        oddPositiveSum += numberArray[i];
-    }
-}
-
-console.log(`Sum of odd positive elements in your array: ${oddPositiveSum}`);
-
-// *******************************************************************************************************************
-
-positiveProduct = 1;
-
-for (i = 0; i < numberArray.length; i++) {
-    if (numberArray[i] > 0) {
-        positiveProduct *= numberArray[i];
-    }
-}
-
-console.log(`Product of positive elements: ${positiveProduct}`);
-
-// *******************************************************************************************************************
-
-largestNumber = numberArray[0];
-
-for (i = 0; i < numberArray.length; i++){
-    if (numberArray[i] > largestNumber) {
-        largestNumber = numberArray[i];
-    }
-} 
-
-for (i = 0; i < numberArray.length; i++){
-    if (numberArray[i] != largestNumber) {
-        numberArray[i] = 0;
-    }
-} 
-
-console.log(`The largest number in your array is: ${largestNumber}`);
-console.log(`All the other numbers except the largest have become: ${numberArray}`);
-
-
-
-
-
-
-
-
-
+// console.log(`*** Winter sports ***\n${winterSports.join('\n').replaceAll(',', ': ')}`);
+// console.log(`\n*** Summer sports ***\n${summerSports.join('\n').replaceAll(',', ': ')}`);
+// console.log(`\n*** Fruits ***\n${fruits.join('\n').replaceAll(',', ': ')}`);
 
