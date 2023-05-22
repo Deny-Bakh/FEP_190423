@@ -17,9 +17,9 @@ rainbow.splice(3, 2, 'Gave', 'Battle', 'In', 'Vain');
 // rainbow.push('Vain');
 // rainbow.splice(6, 1, 'Vain');
 
-  colors = ['red', 'orange', 'yellow', 'green', 'lightblue', 'blue', 'purple'];
+colors = ['red', 'orange', 'yellow', 'green', 'lightblue', 'blue', 'purple'];
   
-  document.write('<div class=main_box>');
+document.write('<div class="container">');
   for (i = 0; i < rainbow.length; i++) {
     // color = colors[i];
     // word = rainbow[i];
@@ -29,9 +29,9 @@ rainbow.splice(3, 2, 'Gave', 'Battle', 'In', 'Vain');
     document.write(`<div class="rainbow"> ${rainbow[i]} </div>`);
     document.write('</div>');
   }
-  document.write('</div>');
+document.write('</div>');
 
-//   document.write('<div class=main_box>');
+//   document.write('<div class="container">');
 //   for (i = 0; i < rainbow.length; i++) {
 //     document.write('<div class="wrapper">');
   
@@ -58,8 +58,8 @@ rainbow.splice(3, 2, 'Gave', 'Battle', 'In', 'Vain');
 //     case 6:
 //       color = 'purple';
 //       break;
-//     // default:
-//     //   color = 'black';
+//     default:
+//       color = 'black';
 //   }
   
 //   document.write(`<div class="colors" style="background-color: ${color};"></div>`);
