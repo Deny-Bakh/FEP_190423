@@ -1,0 +1,7 @@
+@font-face {
+    font-family: "Quicksand";
+    src: url(./StyleScript-Regular.woff) format("woff"),
+      url(./StyleScript-Regular.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+  };
