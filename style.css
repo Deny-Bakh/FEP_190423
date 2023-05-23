@@ -1,7 +1,19 @@
 .card_board {
     border-collapse: collapse;
+    background-color: green;
+    height: 1000px;
+    width: 700px;
 }
 
-.cards {
-    
+.card_board td {
+    height: 100px;
+    width: 70px;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: red;
+
 }
+
+/* .card_board tr{
+
+} */

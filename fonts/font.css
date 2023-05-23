@@ -1,7 +1,7 @@
 @font-face {
-    font-family: "StyleScript";
-    src: url(./Roboto-Regular.woff) format("woff"),
-      url(./Roboto-Regular.woff2) format("woff2");
+    font-family: "NerkoOne";
+    src: url(./NerkoOne-Regular.woff) format("woff"),
+      url(./NerkoOne-Regular.woff2) format("woff2");
     font-weight: 400;
     font-style: normal;
   }
