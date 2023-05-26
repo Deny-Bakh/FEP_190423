@@ -1,22 +1,15 @@
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    function createSum() {
+      let total = 0;
 
-      // function generateKey(length, characters) {
-      //   let key = '';
-      //   while (key.length < length) {
-      //     const randomIndex = Math.floor(Math.random() * characters.length)
-      //     key += characters[randomIndex];
-      //   }
-      //   return key
-      // }
-
-      function generateKey(length, characters) {
-        let key = '';
-        for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * characters.length)
-          key += characters[randomIndex];
-        }
-        return key
+      function innerSum(number) {
+        total += number;
+        return total;
       }
+      return innerSum;
+    }
 
-      const key = generateKey(16, characters);
-      console.log(key);
+    const sum = createSum()
+
+    console.log(sum(3));
+    console.log(sum(5));
+    console.log(sum(7));
