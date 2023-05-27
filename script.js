@@ -89,16 +89,6 @@
 
     // **************************************************************************************************************
 
-    // let mainArrayLength;
-
-    // mainArrrayLength = prompt('Please tell us what size you want your main array to be');
-
-    // let secondaryArrayLength;
-
-    // secondaryArrayLength = prompt('Please tell us what size you want your array inside an array to be');
-
-
-
     function fillTwoDimensionalArray() {
 
       let mainArrayLength;
