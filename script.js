@@ -8,7 +8,7 @@
       return innerSum;
     }
 
-    const sum = createSum()
+    const sum = createSum();
 
     console.log(sum(3));
     console.log(sum(5));
@@ -23,7 +23,7 @@
     //   };
     // }
 
-    // const sum = createSum()
+    // const sum = createSum();
 
     // console.log(sum(3));
     // console.log(sum(5));
