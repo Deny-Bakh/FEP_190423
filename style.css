@@ -1,93 +1,51 @@
-
-
-.card_board {
-    width: 1000px;
-    justify-content: center;
+html, body {
+    font-family: "NerkoOne";
+    font-size: 20px; }
+    html svg, html img, body svg, body img {
+      height: 15px; }
+  
+  .card_board {
     background: #55aa55;
     border-radius: 6px;
     padding: 10px;
 }
 
-    html svg, html img, body svg, body img {
-      height: 15px; }
+    .card_board_td {
+        height: 130px;
+        width: 100px;
+        border-radius: 15px;
+        border: 1px solid black;
+        background-color: white;
+        position: relative;
+    }
 
-.card_board_td {
-    height: 100px;
-    width: 70px;
-    border: 1px solid black;
-    border-radius: 15px;
-    /* background-color: red; */
-}
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-.red{
-    color: red;
-}
+    .main img{
+        height: 50px;
+    }
+      
+      .suit_number {
+        position: absolute;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+      }
 
-.black{
-    color: black;
-}
-
-/* .card_board td {
-    width: 100px;
-    height: 150px;
-    border-radius: 6px;
-    background: white;
-    padding: 5px;
-    box-sizing: border-box;
-    display: inline-block;
-    margin: 3px 6px; }
-    .card--person .person {
-      height: 50px; }
-    .card__info {
-      display: flex;
-      align-items: center; }
-      .card__info:last-of-type {
-        justify-content: flex-end; }
-      .card__info img {
-        margin-left: 5px;
-}
-
-
-/* .card_board tr{
-
-} */
-
-/* body{
-    max-width: 1500px;
-} */
-
-html, body {
-    font-family: "Nerko One", cursive;
-    color: #353c4d;
-    font-size: 20px; }
-
-
-.wrapper{
-    background-color: #55aa55;
-    display: flex;
-    /* max-width: 100%; */
-    flex-flow: row wrap;
-    justify-content: center;
-}
-
-.card {
-    background-color: white;
-    border-radius: 15px;
-    height: 150px;
-    width: 100px;
-    margin: 30px;
-    /* display: block; */
-}
-
-/* .header::after{
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    display: block;
-    content: '';
-} */
-
-.header{
-
-}
-
+      .suit_number span {
+        margin-right: 3px;
+      }
+      
+      .suit_number:last-child {
+        left: 0;
+        top: 0;
+      }
+      
+      .suit_number:first-child {
+        right: 0;
+        bottom: 0;
+      }
