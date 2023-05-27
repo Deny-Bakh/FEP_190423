@@ -1,3 +1,21 @@
+      // function calculateArithmeticMeanOfNumbers (array) {
+      //   let sum = 0;
+      //   let count = 0;
+
+      //   for (let i = 0; i < array.length; i++) {
+      //     if (!isNaN(array[i])) {
+      //       sum += array[i]
+      //       count++;
+      //     }
+      //   }
+
+      //   if (count === 0) {
+      //     return 0;
+      //   }
+
+      //   return sum / count;
+      // }
+
       function calculateArithmeticMeanOfNumbers (array) {
         let sum = 0;
         let count = 0;
@@ -50,18 +68,21 @@
 
     let x;
     do{
-      x = +prompt('Please enter a random number');
+      x = parseFloat(prompt('Please enter a random number'));
     } while (isNaN(x) || !x)
 
     let y;
     do {
-       y = +prompt('Please enter another random number');
+       y = parseFloat(prompt('Please enter another random number'));
   } while (isNaN(y) || !y)
 
+    const validOperators = ['+', '-', '/', '*', '%', '^'];
+    
     let znak;
     do {
       znak = prompt('Please enter a sign', '+, -, *, /, %, ^')
-    } while(znak !== '+' && znak !== '-' && znak !== '/' && znak !== '*' && znak !== '%' && znak !== '^' );
+    } while(!validOperators.includes(znak));
+    // while(znak !== '+' && znak !== '-' && znak !== '/' && znak !== '*' && znak !== '%' && znak !== '^' );
 
     let result = doMath(x, znak, y);
     console.log('Result', result);
@@ -125,12 +146,31 @@
     
     do {
       enteredPhrase = prompt('Please enter a sentence you want to see');
-    } while(!isNaN(enteredPhrase) || !enteredPhrase);
+    } while(!enteredPhrase);
 
     let deletedSymbol = prompt('Please enter symbols you want to remove from your previous sentence', enteredPhrase);
 
     let modifiedPhrase = removeChars(enteredPhrase, deletedSymbol);
     console.log(modifiedPhrase);
+
+    // function removeChars(string, charsToRemove) {
+
+    //   for (let i = 0; i < charsToRemove.length; i++) {
+    //     string = string.split(charsToRemove[i]).join ('');
+    //   }
+    //   return string;
+    // }
+
+    // let enteredPhrase;
+    
+    // do {
+    //   enteredPhrase = prompt('Please enter a sentence you want to see').trim();
+    // } while(!enteredPhrase);
+
+    // let deletedSymbol = prompt('Please enter symbols you want to remove from your previous sentence', enteredPhrase);
+
+    // let modifiedPhrase = removeChars(enteredPhrase, deletedSymbol);
+    // console.log(modifiedPhrase);
 
     // function removeSymbol() {
 
