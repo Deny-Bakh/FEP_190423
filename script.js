@@ -562,3 +562,189 @@
 
 
 
+
+// *****************************************************************************************************************
+
+cardRow = [];
+
+cardValues = ['2', '3', '4', '5', '6', '7', '8', '9', '10'];
+
+cardSuits = [
+  ['clubs', 'black'],
+  ['spades', 'black'],
+  ['diamonds', 'red'],
+  ['hearts', 'red'],
+];
+
+cardsWithImages = [
+  ['J', 'jack'],
+  ['Q', 'queen'],
+  ['K', 'king'],
+  ['T'],
+];
+
+const fullDeckWithoutSuits = cardValues.concat(cardsWithImages);
+
+  function resultDeck() {
+    const fullDeck = [];
+    for (let i = 0; i <fullDeckWithoutSuits.length; i++) {
+      for (let j = 0; j < cardSuits.length; j++) {
+      fullDeck.push([fullDeckWithoutSuits[i], cardSuits[j]]);
+    }
+  }
+  return fullDeck;
+};
+
+const deck = resultDeck();
+console.log(deck)
+
+function createCellInfo (data) {
+  return `<div class="suit_number">
+    <span style="color:${data[1][1]}">${Array.isArray(data[0]) ? data[0][0] : data[0]}</span>
+    <img src="./images/${data[1][0]}.svg" alt="${data[1][0]}.svg">
+</div>`
+}
+
+function createCell(data) {
+  let cell = '';
+  if (data) {
+
+    cell = `<td class="card_board_td">
+      ${createCellInfo(data)}
+    <div class="main">
+    ${Array.isArray(data[0]) ? `<img src="./images/${data[0][0] === 'T' ? data[1][0] : data[0][1]}.svg" alt="">` : ''}
+    </div>
+      ${createCellInfo(data)}
+    </td>`
+  }
+  console.log(cell)
+  return cell
+}
+
+  let count = 0;
+  for (tableRow = 0; tableRow < 7; tableRow++) {
+    cardCell = [];
+    for (tableCell = 0; tableCell < 8; tableCell++) {
+      let data = '';
+      if (tableRow === 6 && tableCell === 0) {
+        data = `<td></td><td></td>`
+      }
+      data += createCell(deck[count]);
+      count++;
+      cardCell.push(data);
+    }
+    cardRow.push(`<tr>${cardCell.join('')}</tr>`);
+  }
+
+  document.write(
+  `<table class="card_board">${cardRow.join('')}</table>`
+)
+
+// function initDeck(deck) {
+//   // document.write('<div class="wrapper">');
+//   // const wrapper = document.createElement('div');
+//   // wrapper.classList = 'wrapper';
+//   // const cards = '';
+//     for (tableRow = 0; tableRow < 7; tableRow++) {
+//       deck = [];
+//       for (tableCell = 0; tableCell < 8; tableCell++) {
+//         if(tableRow !== 6) {
+//           // document.write (${deck[i][0]}
+//         }
+//       }
+//     }
+
+// function initDeck(deck) {
+//   document.write('<table class="card_board">');
+//   for (let tableRow = 0; tableRow < 7; tableRow++) {
+//     document.write('<tr>');
+//     for (let tableCell = 0; tableCell < 8; tableCell++) {
+//       const index = tableRow * 8 + tableCell;
+//       if (index < deck.length) {
+//         document.write('<td>');
+//         document.write(deck[index][0]);
+//         if (deck[index].length > 1) {
+//           document.write(`<img src="./images/${deck[index][1]}.svg" alt="">`);
+//         }
+//         document.write('</td>');
+//       } else {
+//         document.write('<td></td>');
+//       }
+//       if (tableRow === 6){
+        
+//       }
+//     }
+//     document.write('</tr>');
+//   }
+//   document.write('</table>');
+// }
+
+// initDeck(deck);
+  // for (let i = 0; i < deck.length; i++) {
+  //   document.write(`<div  class="card">`);
+  //       document.write (`<div class="header">${deck[i][0]}</div>`);
+  //       console.log(deck[i])
+  //       if(deck[i].length > 1) {
+  //         document.write (`<div class="main"><img src="./images/${deck[i][1]}" alt=""></div>`);
+  //         // console.log(deck[i][1])
+  //       } else {
+  //         document.write (`<div class="main"></div>`);
+  //       }
+  //       document.write (`<div class="footer"></div>`);
+  //   document.write(`</div>`);
+  // }
+  // document.write('</div>');
+// }
+
+// initDeck(deck);
+
+// document.write(
+//   `<table class="card_board">${deck.join('')}</table>`
+// )
+
+
+// for (tableRow = 0; tableRow < 7; tableRow++){
+//   cardCell = [];
+//   for (tableCell = 0; tableCell < 8; tableCell++) {
+//     data = '';
+//       if (tableRow !== 6) {data = `<img src=images/${cardSuits[tableCell % 4]}.svg alt="${cardSuits[tableCell % 4]}" />`
+//     } else if (tableRow === 6 && tableCell >= 2 && tableCell <= 5) {
+//       data = `<img src=images/${cardSuits[(tableCell + 2) % 4]}.svg alt="${cardSuits[(tableCell + 2) % 4]}" />`
+//     }
+
+//     index = tableRow * 2 + (tableCell >= 4 && tableCell < 8);
+
+//     if (index >= 0 && index < cardValues.length) {
+//       data += cardValues[index];
+//     }
+
+//     if (index >= 0 && index < cardValues.length) {
+//       if (cardValues[index] === 'J') {
+//         data += `<img src="images/jack.svg" alt="J" style="display: block; width: 50px; height: 100px; margin: 0 auto;" />`;
+//       } else if (cardValues[index] === 'Q') {
+//         data += `<img src="images/queen.svg" alt="Q" style="display: block; width: 50px; height: 100px; margin: 0 auto;" />`;
+//       } else if (cardValues[index] === 'K') {
+//         data += `<img src="images/king.svg" alt="K" style="display: block; width: 50px; height: 100px; margin: 0 auto;" />`;
+//       }
+//     }
+
+//     cardCell.push(`<td>${data}</td>`);
+//   }
+//   cardRow.push(`<tr>${cardCell.join('')}</tr>`);
+// }
+
+
+// document.write(
+//   `<table class="card_board">${cardRow.join('')}</table>`
+// )
+
+
+
+
+
+
+
+/* <div class="footer">
+<span>${Array.isArray(data[0]) ? data[0][0] : data[0]}</span>
+<img src="./images/${data[1][0]}.svg" alt="${data[1][0]}.svg">
+</div>  */
