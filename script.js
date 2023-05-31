@@ -12,42 +12,39 @@ const tuesday = [
 
 function convertMinutesToHours(array) {
   return array.map(function(item) {
-    return [item[0], item[1] / 60]
-  })
-};
+    return [item[0], item[1] / 60];
+  });
+}
 
 function filterTasks(array) {
   return convertMinutesToHours(array).filter(function(item) {
-    return item[1] > 2
-  })
-};
+    return item[1] > 2;
+  });
+}
 
 function paymentForHours(array) {
   return filterTasks(array).map(function(item) {
-    return [item[0], item[1], amount * item[1]]
-  })
-};
+    return [item[0], item[1], amount * item[1]];
+  });
+}
 
 function renderArray(array) {
-  const yourTasks = paymentForHours(array).map((item) => `<tr>
+  const yourTasks = paymentForHours(array).map(function(item) {
+  return `<tr>
     <td>Task name: ${item[0]}</td>
     <td>Task duration: ${item[1]}</td>
     <td>Task amount: ${item[2]}</td>
-   </tr>`
-  ).join('')
+   </tr>`;
+  }).join('');
   return `<table>${yourTasks}</table>`;
 }
 
-document.write(`<h2>Monday Tasks:${renderArray(monday)}</h2>`);
-document.write(`<h2>Tuesday Tasks:${renderArray(tuesday)}</h2>`);
+document.write(`<h2>Monday Tasks:</h2> ${renderArray(monday)}`, `<h2>Tuesday Tasks:</h2>${renderArray(tuesday)}`);
+
+// document.write(`<h2>Monday Tasks:</h2>${renderArray(monday)}`);
+// document.write(`<h2>Tuesday Tasks:${renderArray(tuesday)}</h2>`);
  
-// [monday, tuesday].forEach((item, index) => document.write(`<h1>Day ${[index +1]}: ${renderArray(item)}</h1>`))
-
-// [monday, tuesday].forEach(function(item, index) {
-//   const arrayName = index === 0 ? 'Monday' : 'Tuesday';
-//   document.write(`<h2>${arrayName}: ${renderArray(item)}</h2>`);
-// });
-
+// [monday, tuesday].forEach((item, index) => document.write(`<h1>Day ${[index +1]}: ${renderArray(item)}</h1>`));
 // ********************************************************************************************************************************
 
 // const amount = 100;
