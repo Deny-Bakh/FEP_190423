@@ -1,23 +1,45 @@
-// let num;
-// let degree;
+function deepClone(array) {
+  const newArray = [];
 
-function pow(num,degree) {
-  return degree === 0 ? 1 : degree === 1 ? num : degree < 0 ? 1 / pow(num, -degree) : num * pow(num, degree -1);
+  for (let i = 0; i < array.length; i++) {
+    if (Array.isArray(array[i])) {
+      newArray[i] = deepClone(array[i]);
+    } else {
+      newArray[i] = array[i];
+    }
+  }
+  return newArray;
 }
 
-// function pow(num, degree) {
-//   if (degree === 0) {
-//     return 1;
-//   } else if (degree === 1) {
-//     return num;
-//   } else if (degree < 0) {
-//     return 1 / pow (num, -degree);
-//   } else {
-//     return num * pow(num, degree - 1);
-//   }
+const array = [
+  [["some text", true, [1, 2, 3, 4, [10, 20]]]],
+  [
+    [1, 2, 3, [100, 200]],
+    ["name", "age"],
+  ],
+];
+
+const clonedArray = deepClone(array);
+console.log(clonedArray);
+
+
+// function deepClone(array) {
+//   return array.map(function(item) {
+//     if (Array.isArray(item)) {
+//       return deepClone(item);
+//     } else {
+//       return item;
+//     }
+//   });
 // }
 
-console.log(pow(2, 0));
-console.log(pow(3, 1));
-console.log(pow(4, -2));
-console.log(pow(5, 3));
+// const array = [
+//   [["some text", true, [1, 2, 3, 4, [10, 20]]]],
+//   [
+//     [1, 2, 3, [100, 200]],
+//     ["name", "age"],
+//   ],
+// ];
+
+// const clonedArray = deepClone(array);
+// console.log(clonedArray);
