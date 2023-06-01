@@ -35,7 +35,8 @@ function renderArray(array) {
     <td>Task duration: ${item[1]}</td>
     <td>Task amount: ${item[2]}</td>
    </tr>`;
-  }).join('');
+  })
+  .join('');
   return `<table>${yourTasks}</table>`;
 }
 
