@@ -109,10 +109,15 @@ console.log(filteredData);
 
 // console.log(richPhoneNumbers);
 
-// const sumRich = richBalance.reduce(function(sum, item) {
-//   return sum + convertString(item.balance);
-// },0);
+// // const sumRich = richBalance.reduce(function(sum, item) {
+// //   return sum + convertString(item.balance);
+// // },0);
 
+// const balanceCount = users.reduce(function(sum, user) {
+//   return sum + convertString(user.balance);
+// }, 0);
+
+// console.log(Number(balanceCount.toFixed(2)));
 // console.log(Number(sumRich.toFixed(2)));
 
 // *************************************************************************************************************************
