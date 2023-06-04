@@ -1,225 +1,136 @@
-const amount = 100;
-const monday = [
-  ['Write a tutorial',180],
-  ['Some web development',120]
-];
-const tuesday = [
-  ['Keep writing that tutorial',240],
-  ['Some more web development',360],
-   ['A whole lot of nothing',240]
-];
+let users = [
+  {
+  "index": 0,
+  "isActive": true,
+  "balance": "$2,226.60",
+  "name": "Eugenia Sawyer",
+  "gender": "female",
+  "phone": "+1 (840) 583-3207",
+  "address": "949 John Street, Rose, Puerto Rico, 1857"
+  },
+  {
+  "index": 1,
+  "isActive": true,
+  "balance": "$2,613.77",
+  "name": "Pauline Gallegos",
+  "gender": "female",
+  "phone": "+1 (985) 593-3328",
+  "address": "328 Greenpoint Avenue, Torboy, North Dakota, 6857"
+  },
+  {
+  "index": 2,
+  "isActive": false,
+  "balance": "$3,976.41",
+  "name": "Middleton Chaney",
+  "gender": "male",
+  "phone": "+1 (995) 591-2478",
+  "address": "807 Fleet Walk, Brutus, Arkansas, 9783"
+  },
+  {
+  "index": 3,
+  "isActive": true,
+  "balance": "$1,934.58",
+  "name": "Burns Poole",
+  "gender": "male",
+  "phone": "+1 (885) 559-3422",
+  "address": "730 Seba Avenue, Osage, Alabama, 6290"
+  },
+  {
+  "index": 4,
+  "isActive": true,
+  "balance": "$3,261.65",
+  "name": "Mcfadden Horne",
+  "gender": "male",
+  "phone": "+1 (942) 565-3988",
+  "address": "120 Scholes Street, Kirk, Michigan, 1018"
+  },
+  {
+  "index": 5,
+  "isActive": false,
+  "balance": "$1,790.56",
+  "name": "Suzette Lewis",
+  "gender": "female",
+  "phone": "+1 (837) 586-3283",
+  "address": "314 Dunne Place, Bawcomville, Guam, 9053"
+  }
+  ]
 
-
-function convertMinutesToHours(array) {
-  return array.map(function(item) {
-    return [item[0], item[1] / 60];
-  });
-}
-
-function filterTasks(array) {
-  return convertMinutesToHours(array).filter(function(item) {
-    return item[1] > 2;
-  });
-}
-
-function paymentForHours(array) {
-  return filterTasks(array).map(function(item) {
-    return [item[0], item[1], amount * item[1]];
-  });
-}
-
-function renderArray(array) {
-  const yourTasks = paymentForHours(array).map(function(item) {
-  return `<tr>
-    <td>Task name: ${item[0]}</td>
-    <td>Task duration: ${item[1]}</td>
-    <td>Task amount: ${item[2]}</td>
-   </tr>`;
-  })
-  .join('');
-  return `<table>${yourTasks}</table>`;
-}
-
-document.write(`<h2>Monday Tasks:</h2> ${renderArray(monday)}`, `<h2>Tuesday Tasks:</h2>${renderArray(tuesday)}`);
-
-// document.write(`<h2>Monday Tasks:</h2>${renderArray(monday)}`);
-// document.write(`<h2>Tuesday Tasks:${renderArray(tuesday)}</h2>`);
- 
-// [monday, tuesday].forEach((item, index) => document.write(`<h1>Day ${[index +1]}: ${renderArray(item)}</h1>`));
-// ********************************************************************************************************************************
-
-// const amount = 100;
-// const monday = [
-//   ['Write a tutorial',180],
-//   ['Some web development',120]
-// ];
-// const tuesday = [
-//   ['Keep writing that tutorial',240],
-//   ['Some more web development',360],
-//    ['A whole lot of nothing',240]
-// ];
-
-
-// const convertMinutesToHours = (array) => array.map((item) => [item[0], item[1] / 60]);
-
-// const filterTasks = (array) => convertMinutesToHours(array).filter((item) => filter = item[1] > 2)
-// ;
-
-// const paymentForHours = (array) => filterTasks(array).map((item) => [item[0], item[1], amount * item[1]]);
-
-// const renderArray = (array) => {const yourTasks = paymentForHours(array).map((item) => `<tr>
-//     <td>Task name: ${item[0]}</td>
-//     <td>Task duration: ${item[1]}</td>
-//     <td>Task amount: ${item[2]}</td>
-//    </tr>`
-//   ).join('')
-//   console.log(`<table>${yourTasks}</table>`);
-//   return `<table>${yourTasks}</table>`;
-// }
- 
-// [monday, tuesday].forEach((item, index) => document.write(`<h1>Day ${[index +1]}: ${renderArray(item)}</h1>`))
-
-// document.write(`<h2>Monday Tasks:</h2>${renderArray(monday)}`);
-// document.write(`<h2>Tuesday Tasks:</h2>${renderArray(tuesday)}`);
-
-// ********************************************************************************************************************************
-
-// const amount = 100;
-// const monday = [
-//   ['Write a tutorial',180],
-//   ['Some web development',120]
-// ];
-// const tuesday = [
-//   ['Keep writing that tutorial',240],
-//   ['Some more web development',360],
-//    ['A whole lot of nothing',240]
-// ];
-
-// function convertMinutesToHours(array) {
-//  const time = array.map(function(item) {
-//     return [item[0], item[1] / 60];
-//   })
-//   return time;
+// function convertStringToNumber(balance) {
+//   return parseFloat(balance.substring(1).replace(',', ''))
 // };
 
-// function filterTasks(array) {
-//   const cut = convertMinutesToHours(array).filter(function(item) {
-//     return filter = item[1] > 2;
-//   })
-//   return cut;
+// function resultArray (data) {
+//   const filteredArray = data.filter(function(item) {
+//     return convertStringToNumber(item.balance) > 2000;
+//   });
+//   const richPhoneNumbers = filteredArray.map(function(item){
+//     return item.phone;
+//   });
+//   const sumRich = filteredArray.reduce(function(sum, item) {
+//     return sum + convertStringToNumber(item.balance);
+//   }, 0);
+
+//   return {phones: richPhoneNumbers, summaryBalance: Number(sumRich.toFixed(2))};
 // };
 
-// function paymentForHours(array) {
-//   const payment = filterTasks(array).map(function(item) {
-//     const hourlyRate = amount * item[1];
-//     return [item[0], item[1], hourlyRate];
-//   })
-//   return payment;
-// }
+// const filteredData = resultArray(users);
 
-// function renderArray(array) {
-//   const resultString = paymentForHours(array).map(function(item) {
-//     return`<tr>
-//     <td>Task name: ${item[0]}</td>
-//     <td>Task duration: ${item[1]}</td>
-//     <td>Task amount: ${item[2]}</td>
-//    </tr>`;
-//   })
-//   .join('');
-//   return `<table>${resultString}</table>`;
-// }
+// console.log(filteredData);
 
-// document.write(`<h2>Monday Tasks: ${renderArray(monday)}</h2>`);
-// document.write(`<h2>Tuesday Tasks: ${renderArray(tuesday)}</h2>`);
+// *************************************************************************************************************************
 
-// ********************************************************************************************************************************
+// const convertStingToNumber = (balance) => parseFloat(balance.substring(1).replace(',', ''));
 
-// const amount = 100;
-// const monday = [
-//   ['Write a tutorial',180],
-//   ['Some web development',120]
-// ];
-// const tuesday = [
-//   ['Keep writing that tutorial',240],
-//   ['Some more web development',360],
-//    ['A whole lot of nothing',240]
-// ];
+// const resultArray = (data) => {
+//   const filteredArray = data.filter((item) => convertStingToNumber(item.balance) > 2000);
+//   const richPhoneNumbers = filteredArray.map((item) => item.phone);
+//   const sumRich = filteredArray.reduce((sum, item) => sum + convertStingToNumber(item.balance), 0);
 
-// const convertMinutesToHours = (array) => {
-//  const time = array.map((item) => {
-//     const hours = item[1] / 60;
-//     return [item[0], hours];
-//   })
-//   return time;
+//   return { phones: richPhoneNumbers, summaryBalance: Number(sumRich.toFixed(2)) };
 // };
 
-// const filterTasks = (array) => {
-//   const cut = convertMinutesToHours(array).filter((item) => {
-//     return filter = item[1] > 2;
-//   })
-//   return cut;
-// };
+// const filteredData = resultArray(users);
 
-// const paymentForHours = (array) => {
-//   const payment = filterTasks(array).map((item) => {
-//     const hourlyRate = amount * item[1];
-//     return [item[0], item[1], hourlyRate];
-//   })
-//   return payment;
-// }
+// console.log(filteredData);
 
-// const renderArray = (array) => {
-//   const resultString = paymentForHours(array).map((item) => {
-//     return`<tr>
-//     <td>Task name: ${item[0]}</td>
-//     <td>Task duration: ${item[1]}</td>
-//     <td>Task amount: ${item[2]}</td>
-//    </tr>`;
-//   })
-//   .join('');
-//   return `<table>${resultString}</table>`;
-// }
+// *************************************************************************************************************************
 
-// document.write(`<h2>Monday Tasks: ${renderArray(monday)}</h2>`);
-// document.write(`<h2>Tuesday Tasks: ${renderArray(tuesday)}</h2>`);
+function convertString(balance) {
+  return parseFloat(balance.substring(1).replace(',', ''));
+}
 
-// ********************************************************************************************************************************
+const richBalance = users.filter(function(item) {
+  return convertString(item.balance) > 2000;
+});
 
-// const amount = 100;
-// const monday = [
-//   ['Write a tutorial',180],
-//   ['Some web development',120]
-// ];
-// const tuesday = [
-//   ['Keep writing that tutorial',240],
-//   ['Some more web development',360],
-//    ['A whole lot of nothing',240]
-// ];
+const richPhoneNumbers = richBalance.map(function(item) {
+  return item.phone;
+})
 
-// function calculateTasks(tasks) {
-//   const yourTasks = tasks.map(function(item) {
-//   hours = item[1] / 60;
-//   if(hours > 2) {
-//     const hourlyRate = amount * hours;
-//     return [item[0], hours, hourlyRate];
-//   } else {
-//       return null;
-//     }
-// })
-// .filter(function(item) {
-//   return item !== null;
-// })
-// .map(function(item) {
-//   return`<tr>
-//   <td>Task name: ${item[0]}</td>
-//   <td>Task duration: ${item[1]}</td>
-//   <td>Task amount: ${item[2]}</td>
-//  </tr>`;
-// })
-// .join('');
+console.log(richPhoneNumbers);
 
-// return `<table>${yourTasks}</table>`;
-// }
+const sumRich = richBalance.reduce(function(sum, item) {
+  return sum + convertString(item.balance);
+},0);
 
-// document.write(`<h2>Monday Tasks: ${calculateTasks(monday)}</h2>`);
-// document.write(`<h2>Tuesday Tasks: ${calculateTasks(tuesday)}</h2>`);
+console.log(Number(sumRich.toFixed(2)));
+
+// *************************************************************************************************************************
+
+  // const convertSting = (balance) => parseFloat(balance.substring(1).replace(',', ''));
+
+  // const richBalance = users.filter((item) => convertSting(item.balance) > 2000);
+
+  // const richPhoneNumbers = richBalance.map((item) => item.phone)
+
+  // console.log(richPhoneNumbers);
+
+  // const sumRich = richBalance.reduce((sum, item) => {
+  // return sum + convertSting(item.balance);
+  // },0);
+
+  // console.log(Number(sumRich.toFixed(2)));
+
+// *************************************************************************************************************************
+
+  
