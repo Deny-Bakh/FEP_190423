@@ -53,29 +53,29 @@ let users = [
   "phone": "+1 (837) 586-3283",
   "address": "314 Dunne Place, Bawcomville, Guam, 9053"
   }
-  ]
+]
 
-// function convertStringToNumber(balance) {
-//   return parseFloat(balance.substring(1).replace(',', ''))
-// };
+function convertStringToNumber(balance) {
+  return parseFloat(balance.substring(1).replace(',', ''))
+};
 
-// function resultArray (data) {
-//   const filteredArray = data.filter(function(item) {
-//     return convertStringToNumber(item.balance) > 2000;
-//   });
-//   const richPhoneNumbers = filteredArray.map(function(item){
-//     return item.phone;
-//   });
-//   const sumRich = filteredArray.reduce(function(sum, item) {
-//     return sum + convertStringToNumber(item.balance);
-//   }, 0);
+function resultArray (data) {
+  const filteredArray = data.filter(function(item) {
+    return convertStringToNumber(item.balance) > 2000;
+  });
+  const richPhoneNumbers = filteredArray.map(function(item){
+    return item.phone;
+  });
+  const sumRich = filteredArray.reduce(function(sum, item) {
+    return sum + convertStringToNumber(item.balance);
+  }, 0);
 
-//   return {phones: richPhoneNumbers, summaryBalance: Number(sumRich.toFixed(2))};
-// };
+  return {phones: richPhoneNumbers, summaryBalance: Number(sumRich.toFixed(2))};
+};
 
-// const filteredData = resultArray(users);
+const filteredData = resultArray(users);
 
-// console.log(filteredData);
+console.log(filteredData);
 
 // *************************************************************************************************************************
 
@@ -95,25 +95,25 @@ let users = [
 
 // *************************************************************************************************************************
 
-function convertString(balance) {
-  return parseFloat(balance.substring(1).replace(',', ''));
-}
+// function convertString(balance) {
+//   return parseFloat(balance.substring(1).replace(',', ''));
+// }
 
-const richBalance = users.filter(function(item) {
-  return convertString(item.balance) > 2000;
-});
+// const richBalance = users.filter(function(item) {
+//   return convertString(item.balance) > 2000;
+// });
 
-const richPhoneNumbers = richBalance.map(function(item) {
-  return item.phone;
-})
+// const richPhoneNumbers = richBalance.map(function(item) {
+//   return item.phone;
+// })
 
-console.log(richPhoneNumbers);
+// console.log(richPhoneNumbers);
 
-const sumRich = richBalance.reduce(function(sum, item) {
-  return sum + convertString(item.balance);
-},0);
+// const sumRich = richBalance.reduce(function(sum, item) {
+//   return sum + convertString(item.balance);
+// },0);
 
-console.log(Number(sumRich.toFixed(2)));
+// console.log(Number(sumRich.toFixed(2)));
 
 // *************************************************************************************************************************
 
