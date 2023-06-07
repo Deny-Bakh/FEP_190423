@@ -26,12 +26,20 @@ Array.prototype.heroesRender = function (folder) {
     return `<tr>
       <td>${hero.name}</td>
       <td>
-        <img style = "width: 20px" src="images/${folder}/${heroUniverse}.svg">
+        <img src="images/${folder}/${heroUniverse}.svg">
       </td>
     </tr>`
   }).join('')
 
-  return document.write(`<table style = "width:200px">${heroRender}</table>`)
+  return document.write(`<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Icon</th>
+      </tr>
+    </thead>
+      ${heroRender}
+  </table>`)
 }
 
 marvelHeroes.heroesRender('marvel');
