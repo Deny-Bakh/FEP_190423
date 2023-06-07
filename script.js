@@ -49,6 +49,36 @@ dcHeroes.heroesRender('dc');
 
 // Array.prototype.heroesRender = function (folder) {
 
+//   const heroRender = this.map(function(hero) {
+//     const heroUniverse = hero.name.replace(' ', '').toLowerCase();
+//     return `<tr>
+//       <td>${hero.name}</td>
+//       <td>
+//         <img src="images/${folder}/${heroUniverse}.svg">
+//       </td>
+//     </tr>`
+//   }).join('')
+
+//   return document.write(`<table>
+//     <thead>
+//       <tr>
+//         <th>Name</th>
+//         <th>Icon</th>
+//       </tr>
+//     </thead>
+//     <tbody>
+//       ${heroRender}
+//     </tbody>
+//   </table>`)
+// }
+
+// marvelHeroes.heroesRender('marvel');
+// dcHeroes.heroesRender('dc');
+
+// **************************************************************************
+
+// Array.prototype.heroesRender = function (folder) {
+
 //   const heroRender = this.map((hero)=> {
 //     const heroUniverse = hero.name.replace(' ', '').toLowerCase();
 //     return `<tr>
