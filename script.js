@@ -181,3 +181,13 @@ console.log('-----------------');
 //   vehicle.revealAllInfo();
 //   console.log(`-----------------`);
 // });
+
+// *************************************************************************************************
+
+  // this.assignOwner = function(human) {
+  //   if (human.age > 18) {
+  //     this.owner = human;
+  //   } else {
+  //     this.errorMessage = (`Cannot assign owner of ${this.brand}.\n${human.name} is under 18 years old. And is not allowed to drive or own a car.\nPerhaps this car belongs to one of the parents`);
+  //   }
+  // };
