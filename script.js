@@ -107,6 +107,29 @@ console.log('-----------------');
 
 // *************************************************************************************************
 
+// const owners = [
+//   new Human('Tanya', 33),
+//   new Human('Olaf', 19),
+//   new Human('Sandra', 16)
+// ];
+
+// const vehicles = [
+//   new Vehicle('BMW', 'Yellow', 1993, 'BM4353GQ'),
+//   new Vehicle('Audi', 'Black', 2003, 'SD43654FU'),
+//   new Vehicle('Volvo', 'Red', 2010, 'WE5678ZX')
+// ];
+
+// owners.forEach(function(owner, i) {
+//   vehicles[i].assignOwner(...[owner]);
+// });
+
+// vehicles.forEach(function(vehicle) {
+//   vehicle.revealAllInfo();
+//   console.log('-----------------');
+// });
+
+// *************************************************************************************************
+
 // const humans = [
 //   new Human('Tanya', 33),
 //   new Human('Olaf', 19),
