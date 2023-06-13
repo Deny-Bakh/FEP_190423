@@ -98,11 +98,13 @@ let result = Object.keys(categories).reduce(function(acc, category) {
 
 document.write(`
   <table>
-    <tr>
-    <th>Image</th>
-    <th>Name</th>
-    <th>Price</th>
-    </tr>
+    <thead>
+      <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Price</th>
+     </tr>
+    </thead>
     ${result}
   </table>`
 );
