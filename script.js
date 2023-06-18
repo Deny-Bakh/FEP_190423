@@ -1,310 +1,331 @@
+// Мережа фастфудів пропонує кілька видів гамбургерів:
 
-// const OPERATIONS = {
-//   '+': (x, y) => x + y,
-//   '-': (x, y) => x - y,
-//   '/': (x, y) => x / y,
-//   '*': (x, y) => x * y,
-//   '+': (x, y) => x + y,
-// }
-// class SuperMath {
-//   constructor(x, y, znak) {
-//     this.x = x;
-//     this.y = y;
-//     this.znak = znak;
+// маленький (50 тугриків, 20 калорій);
+// великий (100 тугриків, 40 калорій).
+
+
+// Гамбургер може бути з одним із декількох видів начинок:
+
+// сиром (+ 10 тугриків, + 20 калорій);
+// салатом (+ 20 тугриків, + 5 калорій);
+// картоплею (+ 15 тугриків, + 10 калорій).
+
+
+// Можна додати добавки:
+
+// посипати приправою (+15 тугриків, 0 калорій) - полити майонезом (+ 20 тугриків, +5 калорій).
+
+
+// Напишіть програму, яка розраховує вартість та калорійність гамбургера. Використовуйте ООП підхід.
+
+// (підказка: потрібен клас Гамбургер, константи, методи для вибору опцій та розрахунку потрібних величин)
+
+// class Hamburger {
+//   constructor(size, filling, topping) {
+//     this.size = size;
+//     this.filling = filling;
+//     this.topping = topping;
 //   }
-//   check(obj) {
-//     const userMath = confirm(`Do you want to perform the operation ${obj.znak} with ${obj.X} and ${obj.Y} (YES/NO)`);
 
-//     if (userMath) {
-//       const result = this.calculate(obj.X, obj.Y, obj.znak);
-//       console.log(result);
-//     } else {
-//       this.input();
-//     }
-//   }
+//   getPrice() {
+//     let price = 0;
 
-//     input() {
-//       let X;
-//       do{
-//       X = parseFloat(prompt('Please enter X number'));
-//       } while (isNaN(X) || !X);
-
-//       let Y;
-//       do {
-//          Y = parseFloat(prompt('Please enter Y number'));
-//       } while (isNaN(Y) || !Y);
-
-//       const validOperators = ['+', '-', '/', '*', '%'];
-    
-//       let znak;
-//       do {
-//         znak = prompt('Please enter a sign', '+, -, *, /, %')
-//       } while(!validOperators.includes(znak));
-
-//       const obj = { X, Y, znak };
-//       this.check(obj);
+//     if (this.size === 'small') {
+//       price += 50;
+//     } else if (this.size === 'big') {
+//       price += 100;
 //     }
 
-//     calculate(X, Y, znak) {
-//       let result;
-
-//       switch (znak) {
-//         case '+':
-//           result = X + Y
-//           break;
-//         case '-':
-//           result = X - Y
-//           break;
-//         case '/':
-//           result = X / Y
-//           break;
-//         case '*':
-//           result = X * Y
-//           break;
-//         case '%':
-//           result = X % Y
-//           break;
-//         default:
-//           return NaN;
-//       }
-//       return result;
+//     if (this.filling === 'cheese') {
+//       price += 10;
+//     } else if (this.filling === 'salad') {
+//       price += 20;
+//     } else if (this.filling === 'fries') {
+//       price += 15;
 //     }
-// }
 
-//   const p = new SuperMath();
-//   const obj = { X: 12, Y: 3, znak: '/' };
-//   p.check(obj);
-
-// class SuperMath {
-//   check(obj) {
-//     const { X, Y, znak } = obj;
-
-//     // const userMath = prompt(`Do you want to perform the operation ${obj.znak} with ${obj.X} and ${obj.Y} (YES/NO)`)
-
-//     // if(userMath.toLowerCase() === 'yes') {
-//     //     const result = this.calculate(X, Y, znak)
-//     //     console.log(result);
-//     //   } else {
-//     //   this.input();
+//     // if (this.topping === 'seasoning') {
+//     //   price += 15;
+//     // } else {
+//     //   price += 20;
 //     // }
 
-//     let userMath = '';
-//     while (userMath.toLocaleLowerCase() !== 'yes' && userMath.toLocaleLowerCase() !== 'no') {
-//       userMath = prompt(`Do you want to perform the operation ${obj.znak} with ${obj.X} and ${obj.Y} (YES/NO)`)
-//     }
-//         if(userMath.toLowerCase() === 'yes') {
-//         const result = this.calculate(X, Y, znak)
-//         console.log(result);
-//       } else {
-//       this.input();
-//     }
+//     if(Array.isArray(this.topping)) {
+//       this.topping.forEach((topping) => {
+//         if (topping === 'seasoning') {
+//           price += 15;
+//         } else if (topping === 'mayo') {
+//           price += 20;
+//         }
+//       })
+//     } 
+
+//     return price;
 //   }
 
-//     input() {
-//       let X;
-//       do{
-//       X = parseFloat(prompt('Please enter X number'));
-//       } while (isNaN(X) || !X);
+//   getCalories() {
+//     let calories = 0;
 
-//       let Y;
-//       do {
-//          Y = parseFloat(prompt('Please enter Y number'));
-//       } while (isNaN(Y) || !Y);
-
-//       const validOperators = ['+', '-', '/', '*', '%'];
-    
-//       let znak;
-//       do {
-//         znak = prompt('Please enter a sign', '+, -, *, /, %')
-//       } while(!validOperators.includes(znak));
-
-//       const obj = { X, Y, znak };
-//       this.check(obj);
+//     if (this.size === 'small') {
+//       calories += 20;
+//     } else if (this.size === 'big') {
+//       calories += 40;
 //     }
 
-//     calculate(X, Y, znak) {
-//       let result;
+//     if (this.filling === 'cheese') {
+//       calories += 20;
+//     } else if (this.filling === 'salad') {
+//       calories += 5;
+//     } else if (this.filling === 'fries') {
+//       calories += 10;
+//     }
 
-//       switch (znak) {
-//         case '+':
-//           result = X + Y
-//           break;
-//         case '-':
-//           result = X - Y
-//           break;
-//         case '/':
-//           result = X / Y
-//           break;
-//         case '*':
-//           result = X * Y
-//           break;
-//         case '%':
-//           result = X % Y
-//           break;
-//         default:
-//           return NaN;
+//     if (Array.isArray(this.topping)) {
+//       if (this.topping.includes('mayo')) {
+//         calories += 5;
 //       }
-//       return result;
 //     }
+
+//     // if (this.topping === 'condiment') {
+//     //   price += 15;
+//     // } else {
+//     //   price += 20;
+//     // }
+//     return calories;
+//   }
 // }
 
-//   const p = new SuperMath();
-//   const obj = { X: 12, Y: 3, znak: '/' };
-//   p.check(obj);
+// const myOrder = new Hamburger ('big', 'cheese', ['mayo']);
 
-// const OPERATIONS = {
-//   '+': (x, y) => x + y,
-//   '-': (x, y) => x - y,
-//   '/': (x, y) => x / y,
-//   '*': (x, y) => x * y,
-//   '%': (x, y) => x % y
+// const price = myOrder.getPrice();
+// const calories = myOrder.getCalories();
+
+// console.log('Price:', price);
+// console.log('Calories:', calories);
+
+// class Hamburger {
+//   constructor(size, stuffing) {
+//     this.size = size;
+//     this.stuffing = stuffing;
+//     this.toppings = [];
+//   }
+
+//   addTopping(topping) {
+//     this.toppings.push(topping);
+//   }
+
+//   calculatePrice() {
+//     let totalPrice = this.size.price + this.stuffing.price;
+//     this.toppings.forEach(topping => {
+//       totalPrice += topping.price;
+//     });
+//     return totalPrice;
+//   }
+
+//   calculateCalories() {
+//     let totalCalories = this.size.calories + this.stuffing.calories;
+//     this.toppings.forEach(topping => {
+//       totalCalories += topping.calories;
+//     });
+//     return totalCalories;
+//   }
+// }
+
+// const SIZE_SMALL = {
+//   name: "Small",
+//   price: 50,
+//   calories: 20,
 // };
 
-// class SuperMath {
-//   constructor(x, y, znak) {
-//     this.x = x;
-//     this.y = y;
-//     this.znak = znak;
-//   }
+// const SIZE_LARGE = {
+//   name: "Large",
+//   price: 100,
+//   calories: 40,
+// };
 
-//   check(obj) {
-//     const userMath = confirm(`Do you want to perform the operation ${obj.znak} with ${obj.x} and ${obj.y}?`);
-    
-//     if (userMath) {
-//       // const result = OPERATIONS[this.znak](this.x, this.y);
-//       const result = this.calculate(this.x, this.y, this.znak)
-//       console.log(result);
-//     } else {
-//       this.input();
-//     }
-//   }
+// const STUFFING_CHEESE = {
+//   name: "Cheese",
+//   price: 10,
+//   calories: 20,
+// };
 
-//     input() {
-//     do {
-//       this.x = parseInt(prompt('Please enter X number'));
-//     } while (isNaN(this.x) || !this.x);
+// const STUFFING_SALAD = {
+//   name: "Salad",
+//   price: 20,
+//   calories: 5,
+// };
 
-//     do {
-//       this.y = parseInt(prompt('Please enter Y number'));
-//     } while (isNaN(this.y) || !this.y);
+// const STUFFING_POTATO = {
+//   name: "Potato",
+//   price: 15,
+//   calories: 10,
+// };
 
-//     do {
-//       this.znak = prompt(`Please enter a sign (${Object.keys(OPERATIONS).join(', ')})`);
-//     } while (!Object.keys(OPERATIONS).includes(this.znak));
+// // Toppings
+// const TOPPING_SPICE = {
+//   name: "Spice",
+//   price: 15,
+//   calories: 0,
+// };
 
-//     this.check({x: this.x, znak: this.znak, y: this.y});
+// const TOPPING_MAYO = {
+//   name: "Mayo",
+//   price: 20,
+//   calories: 5,
+// };
+
+// const sizeSmall = SIZE_SMALL;
+// const stuffingCheese = STUFFING_CHEESE;
+
+// const hamburger = new Hamburger(sizeSmall, stuffingCheese);
+// hamburger.addTopping(TOPPING_MAYO);
+
+// console.log("Calories: " + hamburger.calculateCalories());
+// console.log("Price: " + hamburger.calculatePrice());
+
+// hamburger.addTopping(TOPPING_SPICE);
+
+// console.log("Price with sauce: " + hamburger.calculatePrice());
+
+// class Hamburger {
+//   static SIZE_SMALL = {
+//     price: 50,
+//     calories: 20,
+//   };
+//   static SIZE_LARGE = {
+//     price: 100,
+//     calories: 40,
+//   };
+//   static STUFFING_CHEESE = {
+//     price: 10,
+//     calories: 20,
+//   };
+//   static STUFFING_SALAD = {
+//     price: 20,
+//     calories: 5,
+//   };
+//   static STUFFING_POTATO = {
+//     price: 15,
+//     calories: 10,
+//   };
+//   static TOPPING_SPICE = {
+//     price: 15,
+//     calories: 0,
+//   };
+//   static TOPPING_MAYO = {
+//     price: 20,
+//     calories: 5,
+//   };
+  
+//   constructor(size, stuffing) {
+//     this.size = size;
+//     this.stuffing = stuffing;
+//     this.toppings = [];
 //   }
   
-//     calculate(x, y, znak) {
-//     const result = O[znak](x, y);
-//     return result;
-//     }
+//   addTopping(topping) {
+//     this.toppings.push(topping);
+//   }
+  
+//   calculatePrice() {
+//     let totalPrice = this.size.price + this.stuffing.price;
+//     this.toppings.forEach(topping => {
+//       totalPrice += topping.price;
+//     });
+//     return totalPrice;
+//   }
+  
+//   calculateCalories() {
+//     let totalCalories = this.size.calories + this.stuffing.calories;
+//     this.toppings.forEach(topping => {
+//       totalCalories += topping.calories;
+//     });
+//     return totalCalories;
+//   }
 // }
 
-// const mathResult = new SuperMath();
-// const obj = {x: 12, y: 3, znak: '/'};
-// mathResult.check(obj);
+// ************************************************************************************
 
-
-// const OPERATIONS = {
-//   '+': (x, y) => x + y,
-//   '-': (x, y) => x - y,
-//   '/': (x, y) => x / y,
-//   '*': (x, y) => x * y,
-//   '%': (x, y) => x % y
-// };
-// class SuperMath {
-//   constructor(x, y, znak) {
-//     this.x = x;
-//     this.y = y;
-//     this.znak = znak;
-//   }
-
-//   check(obj) {
-//     const {x, y, znak } = obj;
-//     const userMath = confirm(`Do you want to perform the operation ${obj.znak} with ${obj.x} and ${obj.y}?`);
-
-//     if (userMath) {
-//       const result = OPERATIONS[znak](x, y);
-//       console.log(result);
-//     } else {
-//       this.input();
-//     }
-//   }
-
-//   input() {
-//     do {
-//       this.x = parseFloat(prompt('Please enter X number'));
-//     } while (isNaN(this.x) || !this.x);
-
-//     do {
-//       this.y = parseFloat(prompt('Please enter Y number'));
-//     } while (isNaN(this.y) || !this.y);
-
-//     do {
-//       this.znak = prompt(`Please enter a sign (${Object.keys(OPERATIONS).join(', ')})`);
-//     } while (!Object.keys(OPERATIONS).includes(this.znak));
-
-//     this.check({x: this.x, znak: this.znak, y: this.y});
-//   }
-
-//   // calculate(x, y, znak) {
-//   //   const result = OPERATIONS[znak](x, y);
-//   //   return result;
-//   //   }
-// }
-
-// const mathResult = new SuperMath();
-// const obj = { x: 12, y: 3, znak: '/' };
-// mathResult.check(obj);
-
-const OPERATIONS = {
-  '+': (x, y) => x + y,
-  '-': (x, y) => x - y,
-  '/': (x, y) => x / y,
-  '*': (x, y) => x * y,
-  '%': (x, y) => x % y
-};
-class SuperMath {
-
-  check(obj) {
-    const userMath = confirm(`Do you want to perform the operation ${obj.znak} with ${obj.x} and ${obj.y}?`);
-    if (userMath) {
-      const result = OPERATIONS[obj.znak](obj.x, obj.y);
-      alert(`This is your result: ${result}`);
-    } else {
-      this.input();
-    }
+class Hamburger {
+  static SIZE_SMALL = {
+    price: 50,
+    calories: 20,
   }
 
-  input() {
-    do {
-      this.x = parseFloat(prompt('Please enter X number'));
-    } while (isNaN(this.x) || !this.x);
+  static SIZE_LARGE = {
+    price: 100,
+    calories: 40,
+  }
 
-    do {
-      this.y = parseFloat(prompt('Please enter Y number'));
-    } while (isNaN(this.y) || !this.y);
+  static STUFFING_CHEESE = {
+    price: 10,
+    calories: 20,
+  }
 
-    do {
-      this.znak = prompt(`Please enter a sign (${Object.keys(OPERATIONS).join(', ')})`);
-    } while (!Object.keys(OPERATIONS).includes(this.znak));
+  static STUFFING_SALAD = {
+    price: 20,
+    calories: 5,
+  }
 
-    this.check({x: this.x, znak: this.znak, y: this.y});
+  static STUFFING_POTATO = {
+    price: 15,
+    calories: 10,
+  }
+
+  static TOPPING_CONDIMENT = {
+    price: 15,
+    calories: 0,
+  }
+
+  static TOPPING_MAYO = {
+    price: 20,
+    calories: 5,
+  }
+
+  constructor (size, stuffing) {
+    this.size = size;
+    this.stuffing = stuffing;
+    this.toppings = [];
+  }
+
+  addTopping(topping) {
+    this.toppings.push(topping);
+  }
+
+  calculatePrice() {
+    const totalPrice = this.size.price + this.stuffing.price + this.toppings.reduce((acc, topping) => acc + topping.price, 0);
+    return totalPrice;
+  }
+
+  calculateCalories() {
+    const totalCalories = this.size.calories + this.stuffing.calories + this.toppings.reduce((acc, topping) => acc + topping.calories, 0);
+    return totalCalories;
   }
 }
 
-const mathResult = new SuperMath();
-mathResult.check({x: 12, y: 3, znak: '/'});
+let hamburger = new Hamburger(Hamburger.SIZE_SMALL, Hamburger.STUFFING_CHEESE);
 
-  // constructor(x, y, znak) {
-  //   this.x = x;
-  //   this.y = y;
-  //   this.znak = znak;
+hamburger.addTopping(Hamburger.TOPPING_MAYO);
+
+console.log(`Calories: ${hamburger.calculateCalories()}`);
+
+console.log(`Price: ${hamburger.calculatePrice()}`);
+
+hamburger.addTopping(Hamburger.TOPPING_CONDIMENT);
+
+console.log(`Price with sauce: ${hamburger.calculatePrice()}`);
+
+  // calculatePrice() {
+  //   const totalPrice = this.size.price + this.stuffing.price;
+  //   this.topping.forEach((topping) => {
+  //     totalPrice += topping.price;
+  //   })
+  //   return totalPrice;
   // }
-    // const {x, y, znak } = obj;
-
-  // calculate(x, y, znak) {
-  //   const result = OPERATIONS[znak](x, y);
-  //   return result;
-  //   }
+  // calculateCalories() {
+  //   const totalCalories = this.size.calories + this.stuffing.calories;
+  //   this.topping.forEach((topping) => {
+  //     totalPrice += topping.calories;
+  //   })
+  //   return totalCalories;
+  // }
