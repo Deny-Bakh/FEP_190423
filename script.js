@@ -1,331 +1,324 @@
-// Мережа фастфудів пропонує кілька видів гамбургерів:
-
-// маленький (50 тугриків, 20 калорій);
-// великий (100 тугриків, 40 калорій).
+// Вам потрібно зробити конструктор сутності "Студент".
 
 
-// Гамбургер може бути з одним із декількох видів начинок:
 
-// сиром (+ 10 тугриків, + 20 калорій);
-// салатом (+ 20 тугриків, + 5 калорій);
-// картоплею (+ 15 тугриків, + 10 калорій).
+// Студент має ім'я, прізвище, рік народження — це властивості. Є масив з оцінками, це також властивість. І є можливість отримати вік студента та його середній бал – це методи.
 
 
-// Можна додати добавки:
 
-// посипати приправою (+15 тугриків, 0 калорій) - полити майонезом (+ 20 тугриків, +5 калорій).
+// Ще у всіх Студентів є по масиву однакової довжини, у ньому 25 елементів, спочатку він не заповнений, але на 25 елементів. Це масив, в якому відзначається відвідуваність, щоразу коли ми викликаємо метод .present() на чергове порожнє місце, в масив записується true, коли викликаємо .absent() - записується false. Передбачте будь-який захист від того, щоб у масиві відвідуваності не могло бути більше 25 записів. Масив – це властивість, present та absent – ​​методи.
 
 
-// Напишіть програму, яка розраховує вартість та калорійність гамбургера. Використовуйте ООП підхід.
 
-// (підказка: потрібен клас Гамбургер, константи, методи для вибору опцій та розрахунку потрібних величин)
+// Останній метод: .summary(), перевіряє середню оцінку і середнє відвідування(кількістьВідвідин/кількістьЗанять), і якщо середня оцінка більше 90, а середнє відвідування більше 0.9, то метод summary повертає рядок "Молодець!", якщо одне з цих значень менше , то - "Добре, але можна краще ", якщо обидва нижче - "Редиска!".
 
-// class Hamburger {
-//   constructor(size, filling, topping) {
-//     this.size = size;
-//     this.filling = filling;
-//     this.topping = topping;
+
+
+// Не забудьте після того, як напишите цей конструктор, створити 2-3 екземпляри (конкретних студентів) і показати використання цих методів.
+
+// class Student {
+//   constructor(name, surname, yearOfBirth, grades) {
+//     this.name = name;
+//     this.surname = surname;
+//     this.yearOfBirth = yearOfBirth;
+//     this.grades = grades;
+//     // this.attendance = [];
+//     // this.attendaceLimit = 25;
+//     this.attendance = new Array(25).fill(undefined);
+//     console.log(this.attendance);
 //   }
 
-//   getPrice() {
-//     let price = 0;
-
-//     if (this.size === 'small') {
-//       price += 50;
-//     } else if (this.size === 'big') {
-//       price += 100;
-//     }
-
-//     if (this.filling === 'cheese') {
-//       price += 10;
-//     } else if (this.filling === 'salad') {
-//       price += 20;
-//     } else if (this.filling === 'fries') {
-//       price += 15;
-//     }
-
-//     // if (this.topping === 'seasoning') {
-//     //   price += 15;
-//     // } else {
-//     //   price += 20;
-//     // }
-
-//     if(Array.isArray(this.topping)) {
-//       this.topping.forEach((topping) => {
-//         if (topping === 'seasoning') {
-//           price += 15;
-//         } else if (topping === 'mayo') {
-//           price += 20;
-//         }
-//       })
-//     } 
-
-//     return price;
+//   getStudentAge() {
+//     const currentYear = new Date().getFullYear();
+//     return currentYear - this.yearOfBirth;
 //   }
 
-//   getCalories() {
-//     let calories = 0;
+//   // getAverageGrade() {
+//   //   if(this.grades.length === 0) {
+//   //     return 0
+//   //   }
+//   //   const sum = this.grades.reduce((sum, grade) => sum + grade, 0);
+//   //   return sum / this.grades.length;
+//   // }
 
-//     if (this.size === 'small') {
-//       calories += 20;
-//     } else if (this.size === 'big') {
-//       calories += 40;
+//     getAverageGrade() {
+//     const sum = this.grades.reduce((sum, grade) => sum + grade, 0);
+//     const averageGrade =  sum / this.grades.length;
+//     return isNaN(averageGrade) ? 0 : averageGrade;
+//   }
+
+//   // present() {
+//   //   const attendanceIndex = this.attendance.indexOf(undefined);
+//   //   if (attendanceIndex >= 0) {
+//   //     return this.attendance[attendanceIndex] = true;
+//   //   }
+//   // }
+
+//   present() {
+//     const attendanceIndex = this.attendance.indexOf(undefined);
+//     if (attendanceIndex >= 0) {
+//       this.attendance[attendanceIndex] = true;
 //     }
+//     return this;
+//   }
 
-//     if (this.filling === 'cheese') {
-//       calories += 20;
-//     } else if (this.filling === 'salad') {
-//       calories += 5;
-//     } else if (this.filling === 'fries') {
-//       calories += 10;
+//   absent() {
+//     const attendanceIndex = this.attendance.indexOf(undefined);
+//     if (attendanceIndex !== -1) {
+//       this.attendance[attendanceIndex] = false;
 //     }
+//     return this;
+//   }
 
-//     if (Array.isArray(this.topping)) {
-//       if (this.topping.includes('mayo')) {
-//         calories += 5;
-//       }
+//   summary() {
+//     const averageGrade = this.getAverageGrade();
+//     const attendanceRatio = this.attendance.filter(index => index === true).length / this.attendance.length
+
+//     if(averageGrade > 90 && attendanceRatio > 0.9) {
+//       return 'Good Job';
+//     } else if(averageGrade < 90 || attendanceRatio < 0.9) {
+//       return 'Good, but you can do better';
+//     } else {
+//       return 'Radish';
 //     }
+//   }
+  
+// }
 
-//     // if (this.topping === 'condiment') {
-//     //   price += 15;
-//     // } else {
-//     //   price += 20;
-//     // }
-//     return calories;
+// const studentEdgar = new Student ('Edgar', 'Poe', 1809, [100, 90, 90, 90], []);
+
+// console.log(studentEdgar.getStudentAge());
+
+// console.log(studentEdgar.getAverageGrade());
+
+// studentEdgar.present().present().present().absent().present();
+
+// console.log(studentEdgar.summary());
+
+// class Student {
+//   constructor(name, surname, yearOfBirth, grades) {
+//     this.name = name;
+//     this.surname = surname;
+//     this.yearOfBirth = yearOfBirth;
+//     this.grades = grades;
+//     this.attendance = new Array(25).fill(null);
+//   }
+
+//   getStudentAge() {
+//     const currentYear = new Date().getFullYear();
+//     return currentYear - this.yearOfBirth;
+//   }
+
+//   // getAverageGrade() {
+//   //   const sum = this.grades.reduce((sum, grade) => sum + grade, 0);
+//   //   const averageGrade = sum / this.grades.length;
+//   //   return isNaN(averageGrade) ? 0 : averageGrade;
+//   // }
+
+//   getAverageGrade() {
+//     if (this.grades.length === 0) {
+//       return 0;
+//     }
+//     const sum = this.grades.reduce((total, grade) => total + grade, 0);
+//     return sum / this.grades.length;
+//   }
+
+//   // present() {
+//   //   const attendanceIndex = this.attendance.indexOf(null);
+//   //   if (attendanceIndex !== -1) {
+//   //     this.attendance[attendanceIndex] = true;
+//   //   }
+//   //   return this;
+//   // }
+
+//   // absent() {
+//   //   const attendanceIndex = this.attendance.indexOf(null);
+//   //   if (attendanceIndex !== -1) {
+//   //     this.attendance[attendanceIndex] = false;
+//   //   }
+//   //   return this;
+//   // }
+
+//   present() {
+//     const nextEmptyIndex = this.attendance.indexOf(null);
+//     this.attendance[nextEmptyIndex] = true;
+//     return this;
+//   }
+  
+//   absent() {
+//     const nextEmptyIndex = this.attendance.indexOf(null);
+//     this.attendance[nextEmptyIndex] = false;
+//     return this;
+//   }
+
+//   summary() {
+//     const averageGrade = this.getAverageGrade();
+//     const totalAttendance = this.attendance.filter(value => value !== null).length;
+//     const attendedClasses = this.attendance.filter(value => value).length;
+//     const attendanceRatio = attendedClasses / totalAttendance;
+  
+//     if (averageGrade > 90 && attendanceRatio > 0.9) {
+//       return 'Good Job';
+//     } else if (averageGrade > 90 || attendanceRatio > 0.9) {
+//       return 'Good, but you can do better';
+//     } else {
+//       return 'Radish';
+//     }
+//   }
+
+//   processStudent() {
+//     console.log(`Student Age: ${this.getStudentAge()}`);
+//     console.log(`Student\'s Average Grade: ${this.getAverageGrade()}`);
+//     console.log(`Overall Activity: ${this.summary()}`);
+//     console.log('------------');
 //   }
 // }
 
-// const myOrder = new Hamburger ('big', 'cheese', ['mayo']);
+// const studentEdgar = new Student('Edgar', 'Poe', 1809, [100, 90, 90, 90]);
+// const studentOlaf = new Student('Olaf', 'Ferguson', 2003, [88, 93, 80, 90]);
+// const studentSarah = new Student('Sarah', 'Broms', 2001, [56, 60, 40, 50]);
 
-// const price = myOrder.getPrice();
-// const calories = myOrder.getCalories();
+// // console.log(studentEdgar.getStudentAge());
 
-// console.log('Price:', price);
-// console.log('Calories:', calories);
+// // console.log(studentEdgar.getAverageGrade());
 
-// class Hamburger {
-//   constructor(size, stuffing) {
-//     this.size = size;
-//     this.stuffing = stuffing;
-//     this.toppings = [];
+// // studentEdgar.present().present().present().absent().present();
+
+// // console.log(studentEdgar.summary());
+
+// studentEdgar.present().present().present().present().present();
+// studentOlaf.present().present().present().absent().present();
+// studentSarah.present().present().present().present().present();
+// studentEdgar.processStudent();
+// studentOlaf.processStudent();
+// studentSarah.processStudent();
+
+
+
+
+
+  // summary() {
+  //   const averageGrade = this.averageGrade;
+  //   const attendanceRatio = this.attendance.filter(index => index === true).length / this.attendance.length;
+  
+  //   if (averageGrade > 90 && attendanceRatio > 0.9) {
+  //     return 'Good Job';
+  //   } else if (averageGrade < 90 || attendanceRatio < 0.9) {
+  //     return 'Good, but you can do better';
+  //   } else {
+  //     return 'Radish';
+  //   }
+  // }
+  
+
+//   getAverageGrade() {
+//     if(this.grades.length === 0) {
+//       return 0
+//     }
+//     const sum = this.grades.reduce((sum, grade) => sum + grade, 0);
+//     return sum / this.grades.length;
 //   }
 
-//   addTopping(topping) {
-//     this.toppings.push(topping);
-//   }
 
-//   calculatePrice() {
-//     let totalPrice = this.size.price + this.stuffing.price;
-//     this.toppings.forEach(topping => {
-//       totalPrice += topping.price;
-//     });
-//     return totalPrice;
-//   }
 
-//   calculateCalories() {
-//     let totalCalories = this.size.calories + this.stuffing.calories;
-//     this.toppings.forEach(topping => {
-//       totalCalories += topping.calories;
-//     });
-//     return totalCalories;
-//   }
+// class Attendance extends Student {
+//   constructor(name, surname, yearOfBirth, grades,)
 // }
 
-// const SIZE_SMALL = {
-//   name: "Small",
-//   price: 50,
-//   calories: 20,
-// };
+class Student {
+  constructor(name, surname, yearOfBirth, grades) {
+    this.name = name;
+    this.surname = surname;
+    this.yearOfBirth = yearOfBirth;
+    this.grades = grades;
+    this.attendance = new Array(25).fill(null);
+  }
 
-// const SIZE_LARGE = {
-//   name: "Large",
-//   price: 100,
-//   calories: 40,
-// };
+  getStudentAge() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.yearOfBirth;
+  }
 
-// const STUFFING_CHEESE = {
-//   name: "Cheese",
-//   price: 10,
-//   calories: 20,
-// };
+  // getAverageGrade() {
+  //   const sum = this.grades.reduce((sum, grade) => sum + grade, 0);
+  //   const averageGrade = sum / this.grades.length;
+  //   return isNaN(averageGrade) ? 0 : averageGrade;
+  // }
 
-// const STUFFING_SALAD = {
-//   name: "Salad",
-//   price: 20,
-//   calories: 5,
-// };
+  getAverageGrade() {
+    if (this.grades.length === 0) {
+      return 0;
+    }
+    const sum = this.grades.reduce((total, grade) => total + grade, 0);
+    return sum / this.grades.length;
+  }
 
-// const STUFFING_POTATO = {
-//   name: "Potato",
-//   price: 15,
-//   calories: 10,
-// };
+  // present() {
+  //   const attendanceIndex = this.attendance.indexOf(null);
+  //   if (attendanceIndex !== -1) {
+  //     this.attendance[attendanceIndex] = true;
+  //   }
+  //   return this;
+  // }
 
-// // Toppings
-// const TOPPING_SPICE = {
-//   name: "Spice",
-//   price: 15,
-//   calories: 0,
-// };
+  // absent() {
+  //   const attendanceIndex = this.attendance.indexOf(null);
+  //   if (attendanceIndex !== -1) {
+  //     this.attendance[attendanceIndex] = false;
+  //   }
+  //   return this;
+  // }
 
-// const TOPPING_MAYO = {
-//   name: "Mayo",
-//   price: 20,
-//   calories: 5,
-// };
-
-// const sizeSmall = SIZE_SMALL;
-// const stuffingCheese = STUFFING_CHEESE;
-
-// const hamburger = new Hamburger(sizeSmall, stuffingCheese);
-// hamburger.addTopping(TOPPING_MAYO);
-
-// console.log("Calories: " + hamburger.calculateCalories());
-// console.log("Price: " + hamburger.calculatePrice());
-
-// hamburger.addTopping(TOPPING_SPICE);
-
-// console.log("Price with sauce: " + hamburger.calculatePrice());
-
-// class Hamburger {
-//   static SIZE_SMALL = {
-//     price: 50,
-//     calories: 20,
-//   };
-//   static SIZE_LARGE = {
-//     price: 100,
-//     calories: 40,
-//   };
-//   static STUFFING_CHEESE = {
-//     price: 10,
-//     calories: 20,
-//   };
-//   static STUFFING_SALAD = {
-//     price: 20,
-//     calories: 5,
-//   };
-//   static STUFFING_POTATO = {
-//     price: 15,
-//     calories: 10,
-//   };
-//   static TOPPING_SPICE = {
-//     price: 15,
-//     calories: 0,
-//   };
-//   static TOPPING_MAYO = {
-//     price: 20,
-//     calories: 5,
-//   };
+  present() {
+    const nextEmptyIndex = this.attendance.indexOf(null);
+    this.attendance[nextEmptyIndex] = true;
+    return this;
+  }
   
-//   constructor(size, stuffing) {
-//     this.size = size;
-//     this.stuffing = stuffing;
-//     this.toppings = [];
-//   }
+  absent() {
+    const nextEmptyIndex = this.attendance.indexOf(null);
+    this.attendance[nextEmptyIndex] = false;
+    return this;
+  }
+
+  summary() {
+    const averageGrade = this.getAverageGrade();
+    const totalAttendance = this.attendance.filter(value => value !== null).length;
+    const attendedClasses = this.attendance.filter(value => value).length;
+    const attendanceRatio = attendedClasses / totalAttendance;
   
-//   addTopping(topping) {
-//     this.toppings.push(topping);
-//   }
-  
-//   calculatePrice() {
-//     let totalPrice = this.size.price + this.stuffing.price;
-//     this.toppings.forEach(topping => {
-//       totalPrice += topping.price;
-//     });
-//     return totalPrice;
-//   }
-  
-//   calculateCalories() {
-//     let totalCalories = this.size.calories + this.stuffing.calories;
-//     this.toppings.forEach(topping => {
-//       totalCalories += topping.calories;
-//     });
-//     return totalCalories;
-//   }
-// }
-
-// ************************************************************************************
-
-class Hamburger {
-  static SIZE_SMALL = {
-    price: 50,
-    calories: 20,
+    if (averageGrade > 90 && attendanceRatio > 0.9) {
+      return 'Good Job';
+    } else if (averageGrade > 90 || attendanceRatio > 0.9) {
+      return 'Good, but you can do better';
+    } else {
+      return 'Radish';
+    }
   }
 
-  static SIZE_LARGE = {
-    price: 100,
-    calories: 40,
-  }
-
-  static STUFFING_CHEESE = {
-    price: 10,
-    calories: 20,
-  }
-
-  static STUFFING_SALAD = {
-    price: 20,
-    calories: 5,
-  }
-
-  static STUFFING_POTATO = {
-    price: 15,
-    calories: 10,
-  }
-
-  static TOPPING_CONDIMENT = {
-    price: 15,
-    calories: 0,
-  }
-
-  static TOPPING_MAYO = {
-    price: 20,
-    calories: 5,
-  }
-
-  constructor (size, stuffing) {
-    this.size = size;
-    this.stuffing = stuffing;
-    this.toppings = [];
-  }
-
-  addTopping(topping) {
-    this.toppings.push(topping);
-  }
-
-  calculatePrice() {
-    const totalPrice = this.size.price + this.stuffing.price + this.toppings.reduce((acc, topping) => acc + topping.price, 0);
-    return totalPrice;
-  }
-
-  calculateCalories() {
-    const totalCalories = this.size.calories + this.stuffing.calories + this.toppings.reduce((acc, topping) => acc + topping.calories, 0);
-    return totalCalories;
+  processStudent() {
+    console.log(`Student Age: ${this.getStudentAge()}`);
+    console.log(`Student\'s Average Grade: ${this.getAverageGrade()}`);
+    console.log(`Overall Activity: ${this.summary()}`);
+    console.log('------------');
   }
 }
 
-let hamburger = new Hamburger(Hamburger.SIZE_SMALL, Hamburger.STUFFING_CHEESE);
+const studentEdgar = new Student('Edgar', 'Poe', 1809, [100, 90, 90, 90]);
+const studentOlaf = new Student('Olaf', 'Ferguson', 2003, [88, 93, 80, 90]);
+const studentSarah = new Student('Sarah', 'Broms', 2001, [56, 60, 40, 50]);
 
-hamburger.addTopping(Hamburger.TOPPING_MAYO);
+// console.log(studentEdgar.getStudentAge());
 
-console.log(`Calories: ${hamburger.calculateCalories()}`);
+// console.log(studentEdgar.getAverageGrade());
 
-console.log(`Price: ${hamburger.calculatePrice()}`);
+// studentEdgar.present().present().present().absent().present();
 
-hamburger.addTopping(Hamburger.TOPPING_CONDIMENT);
+// console.log(studentEdgar.summary());
 
-console.log(`Price with sauce: ${hamburger.calculatePrice()}`);
-
-  // calculatePrice() {
-  //   const totalPrice = this.size.price + this.stuffing.price;
-  //   this.topping.forEach((topping) => {
-  //     totalPrice += topping.price;
-  //   })
-  //   return totalPrice;
-  // }
-  // calculateCalories() {
-  //   const totalCalories = this.size.calories + this.stuffing.calories;
-  //   this.topping.forEach((topping) => {
-  //     totalPrice += topping.calories;
-  //   })
-  //   return totalCalories;
-  // }
+studentEdgar.present().present().present().present().present();
+studentOlaf.present().present().present().absent().present();
+studentSarah.present().present().present().present().present();
+studentEdgar.processStudent();
+studentOlaf.processStudent();
+studentSarah.processStudent();
