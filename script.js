@@ -13,7 +13,7 @@ class Student {
   }
 
   // getAverageGrade() {
-  //   const sum = this.grades.reduce((sum, grade) => sum + grade, 0);
+  //   const sum = this.grades.reduce((total, grade) => total + grade, 0);
   //   const averageGrade = sum / this.grades.length;
   //   return isNaN(averageGrade) ? 0 : averageGrade;
   // }
@@ -36,18 +36,6 @@ class Student {
     }
       return this;
   }
-
-  // present() {
-  //   const nextEmptyIndex = this.attendance.indexOf(null);
-  //   this.attendance[nextEmptyIndex] = true;
-  //   return this;
-  // }
-  
-  // absent() {
-  //   const nextEmptyIndex = this.attendance.indexOf(null);
-  //   this.attendance[nextEmptyIndex] = false;
-  //   return this;
-  // }
 
   attendanceRatio() {
     const attendedClasses = this.attendance.filter(value => value).length;
