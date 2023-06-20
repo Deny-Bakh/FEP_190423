@@ -194,3 +194,5 @@
   
   // const mathResult = new SuperMath();
   // mathResult.check();
+
+  // Have a nice day)
