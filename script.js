@@ -55,11 +55,11 @@ class Student {
   processStudent() {
     console.log(`Student Age: ${this.getStudentAge()}`);
     console.log(`Student\'s Average Grade: ${this.getAverageGrade()}`);
-    console.log(`Overall Activity: ${this.summary()}`);
     console.log(`Attendancy ratio: ${this.attendanceRatio()}`);
     if(this.maxAttendancy()) {
       console.log(`Max attendancy days this month reached`);
     }
+    console.log(`Overall Activity: ${this.summary()}`);
     console.log('------------');
   }
 }
