@@ -1,198 +1,147 @@
-// const OPERATIONS = {
-//   '+': (x, y) => x + y,
-//   '-': (x, y) => x - y,
-//   '/': (x, y) => x / y,
-//   '*': (x, y) => x * y,
-//   '%': (x, y) => x % y
-// };
-// class SuperMath {
+class Human {
+  constructor(name, sex) {
+    this.name = name;
+    this.sex = sex;
+  }
+}
 
-//   check(obj) {
-//     const userMath = confirm(`Do you want to perform the operation ${obj.znak} with ${obj.x} and ${obj.y}?`);
-//     if (userMath) {
-//       const result = OPERATIONS[obj.znak](obj.x, obj.y);
-//       alert(`This is your result: ${result}`);
-//     } else {
-//       this.input();
-//     }
-//   }
+class Apartment {
+  constructor() {
+    this.residents = [];
+  }
 
-//   input() {
-//     do {
-//       this.x = parseFloat(prompt('Please enter X number'));
-//     } while (isNaN(this.x) || !this.x);
+  addResident(human) {
+    // if (!this.residents.includes(human)) {
+      this.residents.push(human);
+      console.log(`${human.name} who is ${human.sex} bought an apartment`);
+    // }
+  }
+}
 
-//     do {
-//       this.y = parseFloat(prompt('Please enter Y number'));
-//     } while (isNaN(this.y) || !this.y);
+class Building {
+  constructor(maxApartments) {
+    this.apartments = [];
+    this.maxApartments = maxApartments;
+  }
 
-//     do {
-//       this.znak = prompt(`Please enter a sign (${Object.keys(OPERATIONS).join(', ')})`);
-//     } while (!Object.keys(OPERATIONS).includes(this.znak));
-
-//     this.check({x: this.x, znak: this.znak, y: this.y});
-//   }
-// }
-
-// const mathResult = new SuperMath();
-// mathResult.check({x: 12, y: 3, znak: '/'});
-
-// ********************************************************************************************************
-
-// const OPERATIONS = {
-//   '+': (x, y) => x + y,
-//   '-': (x, y) => x - y,
-//   '*': (x, y) => x * y,
-//   '/': (x, y) => x / y,
-// };
-
-// class SuperMath {
-//   constructor() {
-//     this.input();
-//   }
-
-//   input() {
-//     do {
-//       this.x = +prompt('Enter x?');
-//     } while (isNaN(this.x));
-    
-//     do {
-//       this.y = +prompt('Enter y?');
-//     } while (isNaN(this.y));
-
-//     do {
-//       this.znak = prompt(`Enter ${this.getOperations()} ?`);
-//     } while (!OPERATIONS[this.znak]);
-
-//     return this;
-//   }
-
-//   check() {
-//     const confirFromUser = confirm(`Do you want to do this ${this.x} ${this.znak} ${this.y}?`);
-    
-//     return confirFromUser ? OPERATIONS[this.znak](this.x, this.y) : this.input().check();
-//   }
-
-//   getOperations() {
-//     return Object.keys(OPERATIONS).join(', ');
-//   }
-// }
-
-// const math = new SuperMath();
-
-// console.log(math.check());
-
-// ********************************************************************************************************
-
-  const OPERATIONS = {
-    '+': (x, y) => x + y,
-    '-': (x, y) => x - y,
-    '/': (x, y) => x / y,
-    '*': (x, y) => x * y,
-    '%': (x, y) => x % y
-  };
-  class SuperMath {
-    constructor() {
-      this.validation = {
-        checkIfNumber: {
-          rule: (data) => !isNaN(parseFloat(data)),
-          validationMessage: 'Please enter a NUMBER!!!'
-        },
-        checkIfSign: {
-          rule: (data) => Object.keys(OPERATIONS).includes(data),
-          validationMessage: 'Please enter a SIGN!!!'
-        }
-      }
-    }
-    
-    check(obj) {
-      const userMath = confirm(`Do you want to perform the operation ${obj.znak} with ${obj.x} and ${obj.y}?`);
-      if (userMath) {
-        const result = OPERATIONS[obj.znak](obj.x, obj.y);
-        alert(`This is your result: ${result}`);
-      } else {
-        this.input();
-      }
-    }
-
-    input() {
-      this.x = parseFloat(this.showPrompt('Please enter X number', this.validation.checkIfNumber));
-      this.y = parseFloat(this.showPrompt('Please enter Y number', this.validation.checkIfNumber));
-      this.znak = this.showPrompt(`Please enter a sign (${Object.keys(OPERATIONS).join(', ')})`, this.validation.checkIfSign);
-  
-      this.check({x: this.x, znak: this.znak, y: this.y});
-    }
-
-    showPrompt(message, validation) {
-      let promptResult;
-      promptResult = prompt(message);
-
-      if (validation.rule(promptResult)) {
-        return promptResult
-      } else {
-        return this.showPrompt(validation.validationMessage, validation);
-      }
+  addApartment(apartment, human) {
+    if (this.apartments.length < this.maxApartments) {
+      this.apartments.push(apartment);
+      console.log(`Apartment which ${human.name} bought is built in the new building.`);
+    } else {
+      console.log(`It was a fraudulent scheme and ${human.name} was left without an apartment in the new building`);
     }
   }
-  
-  const mathResult = new SuperMath();
-  mathResult.check({x: 12, y: 3, znak: '/'});
+}
 
-  // ********************************************************************************************************
+const human1 = new Human('Edgar', 'male');
+const human2 = new Human('Freya', 'female');
+const human3 = new Human('Olaf', 'male');
+const human4 = new Human('Lily', 'female');
 
-  // const OPERATIONS = {
-  //   '+': (x, y) => x + y,
-  //   '-': (x, y) => x - y,
-  //   '/': (x, y) => x / y,
-  //   '*': (x, y) => x * y,
-  //   '%': (x, y) => x % y
-  // };
-  // class SuperMath {
-  //   constructor() {
-  //     this.validation = {
-  //       checkIfNumber: {
-  //         rule: (data) => !isNaN(parseFloat(data)),
-  //         validationMessage: 'Please enter a NUMBER!!!'
-  //       },
-  //       checkIfSign: {
-  //         rule: (data) => Object.keys(OPERATIONS).includes(data),
-  //         validationMessage: 'Please enter a SIGN!!!'
-  //       }
-  //     }
-  //     this.input();
-  //   }
-    
-  //   check() {
-  //     const userMath = confirm(`Do you want to perform the operation ${this.znak} with ${this.x} and ${this.y}?`);
-  //     if (userMath) {
-  //       const result = OPERATIONS[this.znak](this.x, this.y);
-  //       alert(`This is your result: ${result}`);
-  //     } else {
-  //       this.input().check();
-  //     }
-  //   }
+const apartment1 = new Apartment();
+const apartment2 = new Apartment();
+const apartment3 = new Apartment();
+const apartment4 = new Apartment();
 
-  //   input() {
-  //     this.x = parseFloat(this.showPrompt('Please enter X number', this.validation.checkIfNumber));
-  //     this.y = parseFloat(this.showPrompt('Please enter Y number', this.validation.checkIfNumber));
-  //     this.znak = this.showPrompt(`Please enter a sign (${Object.keys(OPERATIONS).join(', ')})`, this.validation.checkIfSign);
-  
-  //     return this;
-  //   }
+apartment1.addResident(human1);
+apartment2.addResident(human2);
+apartment3.addResident(human3);
+apartment4.addResident(human4);
 
-  //   showPrompt(message, validation) {
-  //     let promptResult;
-  //     promptResult = prompt(message);
+const house = new Building(3);
 
-  //     if (validation.rule(promptResult)) {
-  //       return promptResult
-  //     } else {
-  //       return this.showPrompt(validation.validationMessage, validation);
-  //     }
-  //   }
-  // }
-  
-  // const mathResult = new SuperMath();
-  // mathResult.check();
+house.addApartment(apartment1, human1);
+house.addApartment(apartment2, human2);
+house.addApartment(apartment3, human3);
+house.addApartment(apartment4, human4);
 
-  // Have a nice day)
+console.log(house);
+
+// ***********************************************************************************
+
+// class Human {
+//   constructor(name, sex) {
+//     this.name = name;
+//     this.sex = sex;
+//   }
+// }
+
+// class Apartment {
+//   residents = [];
+
+//   addResident(human) {
+//     if(!this.residents.includes(human)) {
+//       this.residents.push(human);
+//       console.log((`${human.name} who is ${human.sex} bought an apartment`));
+//     }
+//   }
+// }
+
+// class Building {
+//   constructor(maxApartments) {
+//     this.apartments = [];
+//     this.maxApartments = maxApartments;
+//   }
+
+//   // addApartment(apartment, human) {
+//   //   if(this.apartments.length < this.maxApartments) {
+//   //     this.apartments.push(apartment);
+//   //     apartment.addResident(human);
+//   //   } else {
+//   //     console.log(`It was a fraudulent scheme and ${human.name} was left without an apartment in the new building`);
+//   //   }
+//   // }
+
+//   maxAppartments() {
+//     return this.apartments.length < this.maxApartments;
+//   }
+
+//   // addApartment(apartment) {
+//   //   if(this.maxAppartments()) {
+//   //     this.apartments.push(apartment);
+//   //     console.log(`${this.apartments.length} apartment has been built in this building`);
+//   //   } else if (!this.maxAppartments()) {
+//   //     console.log(`The max number of apartments has been reached in this building`);
+//   //   }
+//   // }
+
+//   addApartment(apartment) {
+//     if (this.maxAppartments()) {
+//       this.apartments.push(apartment);
+//       console.log(`${this.apartments.length} apartment has been built in this building`);
+//     } else if (!this.maxAppartments() && !this.maxApartmentsReached) {
+//       this.maxApartmentsReached = true;
+//       console.log(`The max number of apartments has been reached in this building`);
+//     }
+//   }
+// }
+
+// const human1 = new Human('John', 'male');
+// const human2 = new Human('Mary', 'female');
+// const human3 = new Human('James', 'male');
+// const human4 = new Human('Lily', 'female');
+// const human5 = new Human('Eric', 'male');
+
+// const apartment1 = new Apartment();
+// const apartment2 = new Apartment();
+// const apartment3 = new Apartment();
+// const apartment4 = new Apartment();
+// const apartment5 = new Apartment();
+
+// apartment1.addResident(human1);
+// apartment2.addResident(human2);
+// apartment3.addResident(human3);
+// apartment4.addResident(human4);
+// apartment4.addResident(human5);
+
+// const house = new Building(3);
+
+// house.addApartment(apartment1);
+// house.addApartment(apartment2);
+// house.addApartment(apartment3);
+// house.addApartment(apartment4);
+// house.addApartment(apartment5);
+
+// console.log(house);
+
