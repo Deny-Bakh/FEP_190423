@@ -71,10 +71,10 @@ console.log(house);
 //   residents = [];
 
 //   addResident(human) {
-//     if(!this.residents.includes(human)) {
+//     // if(!this.residents.includes(human)) {
 //       this.residents.push(human);
 //       console.log((`${human.name} who is ${human.sex} bought an apartment`));
-//     }
+//     // }
 //   }
 // }
 
@@ -97,24 +97,24 @@ console.log(house);
 //     return this.apartments.length < this.maxApartments;
 //   }
 
+//   addApartment(apartment) {
+//     if(this.maxAppartments()) {
+//       this.apartments.push(apartment);
+//       console.log(`The apartment has been added to the building`);
+//     } else {
+//       console.log(`The max number of apartments has been reached. Cannot add more apartments`);
+//     }
+//   }
+
 //   // addApartment(apartment) {
-//   //   if(this.maxAppartments()) {
+//   //   if (this.maxAppartments()) {
 //   //     this.apartments.push(apartment);
-//   //     console.log(`${this.apartments.length} apartment has been built in this building`);
-//   //   } else if (!this.maxAppartments()) {
+//   //     console.log(`Apartment ${this.apartments.length} has been built in this building`);
+//   //   } else if (!this.maxApartmentsReached) {
+//   //     this.maxApartmentsReached = true;
 //   //     console.log(`The max number of apartments has been reached in this building`);
 //   //   }
 //   // }
-
-//   addApartment(apartment) {
-//     if (this.maxAppartments()) {
-//       this.apartments.push(apartment);
-//       console.log(`${this.apartments.length} apartment has been built in this building`);
-//     } else if (!this.maxAppartments() && !this.maxApartmentsReached) {
-//       this.maxApartmentsReached = true;
-//       console.log(`The max number of apartments has been reached in this building`);
-//     }
-//   }
 // }
 
 // const human1 = new Human('John', 'male');
