@@ -1,192 +1,190 @@
-class Human {
-  constructor(name, sex) {
-    this.name = name;
-    this.sex = sex;
+const roles = {
+	admin: "https://img.icons8.com/emoji/48/man-teacher.png",
+	student: "https://img.icons8.com/emoji/48/graduation-cap-emoji.png",
+	lector: "https://img.icons8.com/emoji/48/person-teacher.png"
+};
+
+const gradation = {
+  0: 'fail',
+	20: "satisfactory",
+	55: "good",
+	85: "very-good",
+	100: "excellent"
+};
+
+const users = [
+	{
+		name: "Jack Smith",
+		age: 23,
+		img: "https://img.icons8.com/emoji/48/person-student.png",
+		role: "student",
+		courses: [
+			{
+				"title": "Front-end Pro",
+				"mark": 20
+			},
+			{
+				"title": "Java Enterprise",
+				"mark": 100
+			}
+		]
+	},
+	{
+		name: "Amal Smith",
+		age: 20,
+		img: "https://img.icons8.com/emoji/48/man-student.png",
+		role: "student"
+	},
+	{
+		name: "Noah Smith",
+		age: 43,
+		img: "https://img.icons8.com/external-justicon-lineal-color-justicon/64/external-student-back-to-school-justicon-lineal-color-justicon.png",
+		role: "student",
+		courses: [
+			{
+				"title": "Front-end Pro",
+				"mark": 50
+			}
+		]
+	},
+	{
+		name: "Charlie Smith",
+		age: 18,
+		img: "https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/58/external-student-female-profession-vitaliy-gorbachev-flat-vitaly-gorbachev-1.png",
+		role: "student",
+		courses: [
+			{
+				"title": "Front-end Pro",
+				"mark": 75
+			},
+			{
+				"title": "Java Enterprise",
+				"mark": 23
+			}]
+	},
+	{
+		name: "Emily Smith",
+		age: 30,
+		img: "https://img.icons8.com/color/96/secretary-woman.png",
+		role: "admin",
+		courses: [
+			{
+				"title": "Front-end Pro",
+				"score": 10,
+				"lector": "Leo Smith"
+			},
+			{
+				"title": "Java Enterprise",
+				"score": 50,
+				"lector": "David Smith"
+			},
+			{
+				"title": "QA",
+				"score": 75,
+				"lector": "Emilie Smith"
+			}]
+	},
+	{
+		name: "Leo Smith",
+		age: 253,
+		img: "https://img.icons8.com/bubbles/100/administrator-male.png",
+		role: "lector",
+		courses: [
+			{
+				"title": "Front-end Pro",
+				"score": 78,
+				"studentsScore": 79
+			},
+			{
+				"title": "Java Enterprise",
+				"score": 85,
+				"studentsScore": 85
+			}
+		]
+	}
+]
+
+class User {
+  constructor(user) {
+    this.img = user.img;
+    this.name = user.name;
+    this.age = user.age;
+    this.role = user.role;
+    this.courses = user.courses;
+  }
+
+  render() {
+    document.write(`<div class="wrapper">
+    <div class="header">
+      <div class="user_info">
+        <img class="user_image" src="${this.img}" alt="${this.img}" height="50">  
+        <div class="user_data">
+          <p>Name: <b>${this.name}</b></p>
+          <p>Age: <b>${this.age}</b></p>
+        </div>
+      </div>
+      <div class="user_role ${this.role}">
+      	<img src="${roles[this.role]}" alt="${roles[this.role]}" height="50">
+        <p><b class="user_role-title">${this.role}</b></p>
+      </div>
+    </div>
+    <div class="footer">
+      ${this.courses?.length ? this.renderCourses().join('') : ''}
+		</div>
+</div>`)
+  }
+
+  convertGrade(grade) {
+    const score =  Object.keys(gradation).sort((a, b) => b - a).find(score => grade >= score);
+    return gradation[score];
+  }
+
+  renderCourses() {
+      return this.courses.map(({ title, mark }) => {
+        const progress = this.convertGrade(mark);
+        return `<div class="footer_user ${this.role}">${title} <div class="${progress} progress">${progress}</div></div>`;
+      });
   }
 }
 
-class Apartment {
-  constructor() {
-    this.residents = [];
-  }
+class Student extends User {
+}
 
-  addResident(human) {
-      this.residents.push(human);
-      console.log(`${human.name} who is ${human.sex} bought an apartment`);
+class Lector extends User {
+  renderCourses() {
+      return this.courses.map(({ title, score, studentsScore}) => {
+        const progress = this.convertGrade(score);
+        const averageScore = this.convertGrade(studentsScore);
+        return `<div class="footer_user ${this.role} flex_column"> <p> Title: <b>${title}</b></p>
+        <div class="staff_score">Lector\s score: <div  class="${progress} progress">${progress} </div></div>
+        <div class="staff_score">Average student\s score: <div class="${averageScore} progress">${averageScore}</div></div></div> `;
+      });
   }
 }
 
-class Building {
-  constructor(maxApartments) {
-    this.apartments = [];
-    this.maxApartments = maxApartments;
-  }
-
-  addApartment(apartment, human) {
-    if (this.apartments.length < this.maxApartments) {
-      this.apartments.push(apartment);
-      console.log(`Apartment which ${human.name} bought is built in the new building.`);
-    } else {
-      console.log(`It was a fraudulent scheme and ${human.name} was left without an apartment in the new building`);
-    }
+class Admin extends User {
+  renderCourses() {
+      return this.courses.map(({ title, score, lector}) => {
+        const progress = this.convertGrade(score);
+        return `<div class=" footer_user ${this.role} flex_column"> <p> Title: <b>${title}</b></p>
+        <div class="staff_score">Admin\s score: <div  class="${progress} progress">${progress} </div></div>
+        <p>Lector: <b>${lector}</b></p> </div>`;
+      });
   }
 }
 
-const human1 = new Human('Edgar', 'male');
-const human2 = new Human('Freya', 'female');
-const human3 = new Human('Olaf', 'male');
-const human4 = new Human('Lily', 'female');
+users.forEach(user => {
+  let newUser;
 
-const apartment1 = new Apartment();
-const apartment2 = new Apartment();
-const apartment3 = new Apartment();
-const apartment4 = new Apartment();
+  if (user.role === 'lector') {
+    newUser = new Lector(user);
+  } else if (user.role === 'admin') {
+    newUser = new Admin(user);
+  } else if (user.role === 'student') {
+    newUser = new Student(user);
+  }
 
-apartment1.addResident(human1);
-apartment2.addResident(human2);
-apartment3.addResident(human3);
-apartment4.addResident(human4);
-
-const house = new Building(3);
-
-house.addApartment(apartment1, human1);
-house.addApartment(apartment2, human2);
-house.addApartment(apartment3, human3);
-house.addApartment(apartment4, human4);
-
-console.log(house);
-
-// ***********************************************************************************
-
-// class Human {
-//   constructor(name, sex) {
-//     this.name = name;
-//     this.sex = sex;
-//   }
-// }
-
-// class Apartment {
-//   residents = [];
-
-//   addResident(human) {
-//       this.residents.push(human);
-//   }
-// }
-
-// class Building {
-//   constructor(maxApartments) {
-//     this.apartments = [];
-//     this.maxApartments = maxApartments;
-//   }
-
-//   addApartment(apartment) {
-//     if(this.apartments.length < this.maxApartments) {
-//       this.apartments.push(apartment);
-//     } else {
-//       console.log(`The max number of apartments has been reached. Cannot add more apartments`);
-//     }
-//   }
-// }
-
-// const human1 = new Human('Edgar', 'male');
-// const human2 = new Human('Freya', 'female');
-// const human3 = new Human('Olaf', 'male');
-// const human4 = new Human('Lily', 'female');
-
-// const apartment1 = new Apartment();
-// const apartment2 = new Apartment();
-// const apartment3 = new Apartment();
-// const apartment4 = new Apartment();
-
-// apartment1.addResident(human1);
-// apartment2.addResident(human2);
-// apartment3.addResident(human3);
-// apartment4.addResident(human4);
-
-// const house = new Building(3);
-
-// house.addApartment(apartment1);
-// house.addApartment(apartment2);
-// house.addApartment(apartment3);
-// house.addApartment(apartment4);
-
-// console.log(house);
-
-// ***********************************************************************************
-
-// class Human {
-//   constructor(name, sex) {
-//     this.name = name;
-//     this.sex = sex;
-//   }
-// }
-
-// class Apartment {
-//   residents = [];
-
-//   addResident(human) {
-//     // if(!this.residents.includes(human)) {
-//       this.residents.push(human);
-//       console.log((`${human.name} who is ${human.sex} bought an apartment`));
-//     // }
-//   }
-// }
-
-// class Building {
-//   constructor(maxApartments) {
-//     this.apartments = [];
-//     this.maxApartments = maxApartments;
-//   }
-
-//   maxAppartments() {
-//     return this.apartments.length < this.maxApartments;
-//   }
-
-//   // addApartment(apartment) {
-//   //   if(this.maxAppartments()) {
-//   //     this.apartments.push(apartment);
-//   //     console.log(`The apartment has been added to the building`);
-//   //   } else {
-//   //     console.log(`The max number of apartments has been reached. Cannot add more apartments`);
-//   //   }
-//   // }
-
-//   addApartment(apartment) {
-//     if (this.maxAppartments()) {
-//       this.apartments.push(apartment);
-//       console.log(`Apartment ${this.apartments.length} has been built in this building`);
-//     } else if (!this.maxApartmentsReached) {
-//       this.maxApartmentsReached = true;
-//       console.log(`The max number of apartments has been reached in this building`);
-//     }
-//   }
-// }
-
-// const human1 = new Human('Edgar', 'male');
-// const human2 = new Human('Freya', 'female');
-// const human3 = new Human('Olaf', 'male');
-// const human4 = new Human('Lily', 'female');
-// const human5 = new Human('Gulliermo', 'male');
-
-// const apartment1 = new Apartment();
-// const apartment2 = new Apartment();
-// const apartment3 = new Apartment();
-// const apartment4 = new Apartment();
-// const apartment5 = new Apartment();
-
-// apartment1.addResident(human1);
-// apartment2.addResident(human2);
-// apartment3.addResident(human3);
-// apartment4.addResident(human4);
-// apartment4.addResident(human5);
-
-// const house = new Building(3);
-
-// house.addApartment(apartment1);
-// house.addApartment(apartment2);
-// house.addApartment(apartment3);
-// house.addApartment(apartment4);
-// house.addApartment(apartment5);
-
-// console.log(house);
-
+  if (newUser) {
+    newUser.render();
+  }
+});
