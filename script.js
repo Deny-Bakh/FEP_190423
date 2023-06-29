@@ -135,7 +135,7 @@ class User {
   }
 
   convertGrade(grade) {
-    const score =  Object.keys(gradation).sort((a, b) => b - a).find(score => grade >= score);
+    const score =  Object.keys(gradation).sort((a, b) => a - b).find(score => grade <= score);
     return gradation[score];
   }
 
