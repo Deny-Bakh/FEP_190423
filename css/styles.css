@@ -1,47 +1,4 @@
-/* .invisible {
-  color: white;
-} */
-
-/* .sidebar {
-  position: fixed;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  background-color: lightgray;
-  padding: 10px;
-  display: none;
-} */
-
-#table {
-  border: 1px solid black;
-  border-radius: 15px;
-  background-color: aqua;
-  padding: 5px;
-}
-
-.tr_td_properties {
-  text-align: center;
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 3px;
-}
-
-.image_properties {
-  height: 300px;
-  width: 300px;
-  border-radius: 30px;
-}
-
-#sidebar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 100%;
-  background-color: lightgray;
-}
-
-.maindiv_properties {
+ .maindiv_properties {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 20px;
   display: flex;
