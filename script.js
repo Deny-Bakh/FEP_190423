@@ -134,6 +134,11 @@ class User {
 </div>`)
   }
 
+  // convertGrade(grade) {
+  //   const score = Object.keys(gradation).find(score => grade <= score);
+  //   return gradation[score];
+  // }
+
   convertGrade(grade) {
     const score =  Object.keys(gradation).sort((a, b) => a - b).find(score => grade <= score);
     return gradation[score];
@@ -162,7 +167,7 @@ class Lector extends User {
         const progress = this.convertGrade(score);
         const averageScore = this.convertGrade(studentsScore);
         return `<div class="footer_user ${this.role} flex_column"> <p> Title: <b>${title}</b></p>
-        <div class="staff_score">Lector\s score: <div  class="${progress} progress">${progress} </div></div>
+        <div class="staff_score">Lector\'s score: <div  class="${progress} progress">${progress} </div></div>
         <div class="staff_score">Average student\s score: <div class="${averageScore} progress">${averageScore}</div></div></div> `;
       });
   }
@@ -176,7 +181,7 @@ class Admin extends User {
       return this.courses.map(({ title, score, lector}) => {
         const progress = this.convertGrade(score);
         return `<div class=" footer_user ${this.role} flex_column"> <p> Title: <b>${title}</b></p>
-        <div class="staff_score">Admin\s score: <div  class="${progress} progress">${progress} </div></div>
+        <div class="staff_score">Admin\'s score: <div  class="${progress} progress">${progress} </div></div>
         <p>Lector: <b>${lector}</b></p> </div>`;
       });
   }
