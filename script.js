@@ -148,9 +148,15 @@ class User {
 }
 
 class Student extends User {
+  constructor(args){
+    super(args)
+  }
 }
 
 class Lector extends User {
+  constructor(args){
+    super(args)
+  }
   renderCourses() {
       return this.courses.map(({ title, score, studentsScore}) => {
         const progress = this.convertGrade(score);
@@ -163,6 +169,9 @@ class Lector extends User {
 }
 
 class Admin extends User {
+    constructor(args){
+    super(args)
+  }
   renderCourses() {
       return this.courses.map(({ title, score, lector}) => {
         const progress = this.convertGrade(score);
