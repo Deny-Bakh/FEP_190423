@@ -1,95 +1,30 @@
-let arr = [];
+let images = 9;
 
-for(let i = 1; i <= 100; i++) {
-    arr.push(i);
-}
+let randomIndex = Math.floor(Math.random() * images) + 1;
+// randomIndex++;
+let imgElement = document.createElement('img');
+imgElement.classList.add('image_properties');
+imgElement.setAttribute('src', `images/${randomIndex}.jpg`);
+// imgElement.src = `images/${randomIndex}.jpg`;
+document.body.append(imgElement);
 
-arr.sort(() => 0.5 - Math.random());
+// ******************************************************************************************************
 
-// arr.sort(function(){ return 0.5 - Math.random()});
+// let images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"];
 
-let table = document.createElement('table');
-table.setAttribute('id', 'table');
-// table.id = 'table';
-
-let count = 0;
-
-for (let i = 0; i < 10; i++) {
-  let tr = document.createElement('tr');
-  tr.classList.add('tr_td_properties');
-
-  for (let j = 0; j < 10; j++) {
-    let td = document.createElement('td');
-    td.classList.add('tr_td_properties');
-    td.innerText = arr[count];
-    count++;
-    tr.append(td);
-  }
-
-  table.append(tr);
-}
-
-document.body.append(table);
-
-// ***********************************************************************************************
-
-// let table = document.createElement('table');
-// table.setAttribute('id', 'table');
-
-// let count = 0;
-
-// for (let i = 0, arr = []; i < 10; i++) {
-//   arr = [];
-
-//   for (let j = 1; j <= 10; j++) {
-//     arr.push(i * 10 + j);
-//   }
-
-//   arr.sort(() => 0.5 - Math.random());
-
-//   let tr = document.createElement('tr');
-//   tr.classList.add('tr_td_properties');
-
-//   for (let j = 0; j < 10; j++) {
-//     let td = document.createElement('td');
-//     td.classList.add('tr_td_properties');
-//     td.innerText = arr[j];
-//     tr.append(td);
-//   }
-
-//   table.append(tr);
+// function getRandomImageIndex() {
+//   return Math.floor(Math.random() * images.length);
 // }
 
-// document.body.append(table);
+// let imgElement = document.createElement('img');
+// imgElement.classList.add('image_properties');
 
-// ***********************************************************************************************
-
-// let arr = [];
-
-// for(let i = 1; i <= 100; i++) {
-//     arr.push(i);
+// function changeImage() {
+//   let imgIndex = getRandomImageIndex();
+//   let randomImage = images[imgIndex];
+//   imgElement.src = "images/" + randomImage;
 // }
 
-// arr.sort(function(){ return 0.5 - Math.random()});
+// document.body.append(imgElement);
 
-// let table = document.createElement('table');
-// table.setAttribute('id', 'table');
-
-// let count = 0;
-
-// for (let i = 0; i < 10; i++) {
-//   let tr = document.createElement('tr');
-//   tr.classList.add('tr_td_properties');
-
-//   for (let j = 0; j < 10; j++) {
-//     let td = document.createElement('td');
-//     td.classList.add('tr_td_properties');
-//     td.innerText = arr[count];
-//     count++;
-//     tr.append(td);
-//   }
-
-//   table.append(tr);
-// }
-
-// document.body.append(table);
+// setInterval(changeImage, 1000);
