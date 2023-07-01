@@ -1,111 +1,63 @@
-html, body {
-  font-family: 'Raleway', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-p {
-  margin: 0;
-}
-
-.wrapper {
-  background-color: #F8F8F8;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 15px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
-}
-
-.user_info {
-  display: flex;
-  align-items: center;
-}
-
-.user_image {
-  margin-right: 10px;
-}
-
-.user_role {
-  display: flex;
-  align-items: center;
-  background-color: #ECEAFF;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.user_role-title {
-  margin-left:10px;
-  text-transform: capitalize;
-}
-
-.footer {
-  display: flex;
-}
-
-.footer_user {
-  display: flex;
-  margin-right: 15px;
-  padding: 10px;
-  border-radius: 10px;
-  align-items: center;
-}
-
-.student {
-  background-color: #ECEAFF;
-}
-
-.lector {
- background-color:  #E9F2FF;
-}
-
-.admin {
- background-color:  #FFE9E8;
-}
-
-.progress {
-  text-transform: capitalize;
-  border-radius: 10px;
-  margin-left: 10px;
-  padding: 8px;
-}
-
-.satisfactory {
-  background-color: #EDD8EA;
-  color: #F44A3F;
-}
-
-.good {
-  background-color: #DED8F7;
-  color: #693DB7;
-}
-
-.very-good {
-  background-color:#D6E4FA;
-  color: #8866C9;
-}
-
-.excellent {
-  background-color:#DBE4ED;
-  color: #4CAF51;
-}
-
-.fail {
-  background-color:black;
+/* .invisible {
   color: white;
+} */
+
+/* .sidebar {
+  position: fixed;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: lightgray;
+  padding: 10px;
+  display: none;
+} */
+
+#table {
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: aqua;
+  padding: 5px;
 }
 
-.flex_column {
-  flex-direction: column;
-  align-items: flex-start;
+.tr_td_properties {
+  text-align: center;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 3px;
 }
 
-.staff_score {
+.image_properties {
+  height: 300px;
+  width: 300px;
+  border-radius: 30px;
+}
+
+#sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
+  background-color: lightgray;
+}
+
+.maindiv_properties {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
   display: flex;
-  align-items: center;
-  margin: 2px 0;
+  justify-content: flex-start;
+  color: darkviolet;
+}
+
+.ghostdiv_properties {
+  color: darkgrey;
+  margin-left: 20px;
+}
+
+.ghostdiv_properties {
+  display: none;
+}
+
+.maindiv_properties:hover .ghostdiv_properties {
+  display: block;
 }
