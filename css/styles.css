@@ -1,18 +1,16 @@
-.wrapper_form {
+.container {
   display: flex;
+  justify-content: space-evenly;
+
 }
 
-.button {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  width: 100px;
-  height: 40px;
-  margin-left: 20px;
-  border-radius: 15px;
-}
-
-.input {
+img {
   display: block;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  background-color: aqua;
+}
+
+.result {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 20px;
+  text-align: center;
 }

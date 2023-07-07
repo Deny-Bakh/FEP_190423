@@ -1,38 +1,38 @@
-const wrapperFormOne = document.createElement('div');
-const wrapperFormTwo = document.createElement('div');
-const inputOne = document.createElement('input');
-const inputTwo = document.createElement('input');
-const buttonOne = document.createElement('button');
-const buttonTwo = document.createElement('button');
+const imagesArray = ['cute', 'happy', 'love', 'smile', 'laugh'];
 
-wrapperFormOne.className = 'wrapper_form';
-wrapperFormTwo.className = 'wrapper_form';
-inputOne.className = 'input';
-inputTwo.className = 'input';
-// buttonTwo.classList.add('button');
-buttonTwo.className = 'button';
-// buttonOne.classList.add('button');
-buttonOne.className = 'button';
+let containerDiv = document.createElement('div');
+containerDiv.classList.add('container');
 
-buttonOne.textContent = 'BUTTON';
-buttonTwo.textContent = 'BUTTON';
+imagesArray.forEach((image) => {
+  let wrapperDiv = document.createElement('div');
+  wrapperDiv.classList.add('wrapper');
 
-function redirect(input) {
-  const value = input.value;
-  const reg = /^https?:\/\//;
+  let emojiImg = document.createElement('img');
+  emojiImg.classList.add('emoji_pic')
+  emojiImg.setAttribute('src', `images/${image}.png`);
 
-  if (reg.test(value)) {
-    url = value;
-  } else {
-    url = 'https://' + value;
-  }
-  window.location.href = url;
-}
+  let countPar = document.createElement('p');
+  countPar.classList.add('result');
+  countPar.innerText = 0;
 
-wrapperFormOne.append(inputOne, buttonOne);
-wrapperFormTwo.append(inputTwo, buttonTwo);
-document.body.append(wrapperFormOne, wrapperFormTwo);
+  wrapperDiv.append(emojiImg, countPar);
 
-buttonOne.addEventListener('click', () => redirect(inputOne));
-buttonTwo.addEventListener('click', () => redirect(inputTwo));
+  containerDiv.append(wrapperDiv);
+})
+
+document.body.append(containerDiv);
+
+let smileDivs = document.querySelectorAll('.wrapper');
+
+smileDivs.forEach((item) => {
+  let count = 0;
+  console.log(item);
+  const image = item.querySelector('.emoji_pic');
+  const result = item.querySelector('.result');
+  
+  image.addEventListener('click', () =>  {
+    count++;
+    result.innerText = count;
+  });
+})
 
