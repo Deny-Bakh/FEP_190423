@@ -1,12 +1,14 @@
-const wrapperFormOne = document.createElement('div');
-const wrapperFormTwo = document.createElement('div');
+const wrapperDivOne = document.createElement('div');
+const wrapperDivTwo = document.createElement('div');
+// const wrapperFormOne = document.createElement('form');
+// const wrapperFormTwo = document.createElement('form');
 const inputOne = document.createElement('input');
 const inputTwo = document.createElement('input');
 const buttonOne = document.createElement('button');
 const buttonTwo = document.createElement('button');
 
-wrapperFormOne.className = 'wrapper_form';
-wrapperFormTwo.className = 'wrapper_form';
+wrapperDivOne.className = 'wrapper_form';
+wrapperDivTwo.className = 'wrapper_form';
 inputOne.className = 'input';
 inputTwo.className = 'input';
 // buttonTwo.classList.add('button');
@@ -29,9 +31,9 @@ function redirect(input) {
   window.location.href = url;
 }
 
-wrapperFormOne.append(inputOne, buttonOne);
-wrapperFormTwo.append(inputTwo, buttonTwo);
-document.body.append(wrapperFormOne, wrapperFormTwo);
+wrapperDivOne.append(inputOne, buttonOne);
+wrapperDivTwo.append(inputTwo, buttonTwo);
+document.body.append(wrapperDivOne, wrapperDivTwo);
 
 buttonOne.addEventListener('click', () => redirect(inputOne));
 buttonTwo.addEventListener('click', () => redirect(inputTwo));
