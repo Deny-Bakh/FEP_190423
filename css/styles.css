@@ -1,16 +1,14 @@
-.container {
-  display: flex;
-  justify-content: space-evenly;
-
-}
-
-img {
+.image_slider {
   display: block;
   background-color: aqua;
 }
 
-.result {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 20px;
-  text-align: center;
+.slide_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  visibility: hidden;
 }

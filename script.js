@@ -1,38 +1,64 @@
-const imagesArray = ['cute', 'happy', 'love', 'smile', 'laugh'];
+let images = ['cute', 'happy', 'laugh', 'love', 'smile'];
+let currentIndex = 0;
 
-let containerDiv = document.createElement('div');
-containerDiv.classList.add('container');
+const sliderWrapper = document.createElement('div');
+sliderWrapper.classList.add('slide_wrapper')
+const prevButton = document.createElement('button');
+const nextButton = document.createElement('button');
 
-imagesArray.forEach((image) => {
-  let wrapperDiv = document.createElement('div');
-  wrapperDiv.classList.add('wrapper');
+prevButton.innerText = 'Prev';
+nextButton.innerText = 'Next';
 
-  let emojiImg = document.createElement('img');
-  emojiImg.classList.add('emoji_pic')
-  emojiImg.setAttribute('src', `images/${image}.png`);
+const imageElement = document.createElement('img');
+imageElement.classList.add('image_slider');
+sliderWrapper.append(prevButton, imageElement, nextButton);
 
-  let countPar = document.createElement('p');
-  countPar.classList.add('result');
-  countPar.innerText = 0;
+function updateImage() {
+  imageElement.src = `./images/${images[currentIndex]}.png`;
+  prevButton.classList.toggle('hidden', currentIndex === 0);
+  nextButton.classList.toggle('hidden', currentIndex === images.length - 1);
+}
 
-  wrapperDiv.append(emojiImg, countPar);
+// function updateImage() {
+//   imageElement.src = `./images/${images[currentIndex]}.png`;
+//   prevButton.disabled = currentIndex === 0;
+//   nextButton.disabled = currentIndex === images.length - 1;
+// }
 
-  containerDiv.append(wrapperDiv);
-})
+// function updateImage() {
+//   imageElement.src = `./images/${images[currentIndex]}.png`;
 
-document.body.append(containerDiv);
+//   if (currentIndex === 0) {
+//     prevButton.style.visibility = 'hidden';
+//   } else {
+//     prevButton.style.visibility = 'visible';
+//   }
 
-let smileDivs = document.querySelectorAll('.wrapper');
+//   if (currentIndex === images.length - 1) {
+//     nextButton.style.visibility = 'hidden';
+//   } else {
+//     nextButton.style.visibility = 'visible';
+//   }
+// }
 
-smileDivs.forEach((item) => {
-  let count = 0;
-  console.log(item);
-  const image = item.querySelector('.emoji_pic');
-  const result = item.querySelector('.result');
-  
-  image.addEventListener('click', () =>  {
-    count++;
-    result.innerText = count;
-  });
-})
+function showNextImage() {
+  if (currentIndex < images.length - 1) {
+    currentIndex++;
+    updateImage();
+  }
+}
+
+function showPrevImage() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    updateImage();
+  }
+}
+
+prevButton.addEventListener('click', showPrevImage);
+nextButton.addEventListener('click', showNextImage);
+
+document.body.append(sliderWrapper);
+
+updateImage();
 
