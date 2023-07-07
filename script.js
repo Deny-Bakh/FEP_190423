@@ -61,4 +61,3 @@ nextButton.addEventListener('click', showNextImage);
 document.body.append(sliderWrapper);
 
 updateImage();
-
