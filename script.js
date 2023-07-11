@@ -1,74 +1,31 @@
-const productsArray = [
-  {
-    category: "Electronics",
-    products: [
-      {
-        name: "Laptop",
-        price: 999,
-        description: "Powerful laptop for all your computing needs",
-        image: "laptop.jpg"
-      },
-      {
-        name: "Smartphone",
-        price: 699,
-        description: "Feature-rich smartphone with high-quality camera",
-        image: "smartphone.jpg"
-      },
-      {
-        name: "Tablet",
-        price: 399,
-        description: "Lightweight tablet for entertainment and productivity",
-        image: "tablet.jpg"
+let previousLevel;
+
+const generateList = (array, deep) => {
+  const ul = document.createElement('ul');
+  
+  array.forEach((item) => {
+    const li = document.createElement('li');
+    if (Array.isArray(item)) {
+      li.append(generateList(item, 'deep'));
+    } else {
+      if (deep) {
+        li.innerHTML = `${previousLevel}.${item}`;
+      } else {
+        li.innerHTML = item;
+        previousLevel = item;
       }
-    ]
-  },
-  {
-    category: "Clothing",
-    products: [
-      {
-        name: "Shirt",
-        price: 29,
-        description: "Comfortable cotton shirt in various colors",
-        image: "shirt.jpg"
-      },
-      {
-        name: "Pants",
-        price: 49,
-        description: "Stylish pants made from durable fabric",
-        image: "pants.jpg"
-      },
-      {
-        name: "Shoes",
-        price: 79,
-        description: "Trendy shoes for any occasion",
-        image: "shoes.jpg"
-      }
-    ]
-  },
-  {
-    category: "Books",
-    products: [
-      {
-        name: "Fiction",
-        price: 19,
-        description: "Engaging fictional stories by popular authors",
-        image: "fiction.jpg"
-      },
-      {
-        name: "Non-fiction",
-        price: 25,
-        description: "Informative non-fiction books on various subjects",
-        image: "nonfiction.jpg"
-      },
-      {
-        name: "Science",
-        price: 32,
-        description: "Books exploring scientific concepts and discoveries",
-        image: "science.jpg"
-      }
-    ]
-  }
-];
+    }
+    ul.append(li);
+  });
+
+  return ul;
+};
+
+
+
+const array = [1, 2, [1, 2, [1, 2]], 3];
+document.body.append(generateList(array));
+
 
 const createElements = (tag, className, text) => {
   const element = document.createElement(tag);
@@ -84,74 +41,54 @@ const createElements = (tag, className, text) => {
   return element;
 }
 
-const bodyContainer = createElements('div', 'body_container');
-const categoryWrapper = createElements('div', 'category_wrapper');
-const productsWrapper = createElements('div', 'wrapper');
+const form = createElements('form', 'form');
 
-const createCategories = () => {
-  productsArray.forEach((product) => {
-    const category = createElements('div', 'category', product.category);
-    
-    category.addEventListener('click', () => {
-      checkProductVisible(product.category, '.category_products');
-    });
+const nameLabel = createElements('label', 'label', 'Name');
 
-    categoryWrapper.append(category);
-  });
-};
 
-const checkProductVisible = (itemName, className) => {
-  const categoryName = document.querySelectorAll(className);
-  categoryName.forEach((item) => {
-    const hasVisible = item.classList.contains('visible');
-    const hasName = item.classList.contains(itemName);
-    if (hasName) {
-      item.classList.add('visible');
-    }
-    if (hasVisible) {
-      item.classList.remove('visible');
-    }
-  })
+const userName = createElements('input', 'user_name');
+userName.required = true;
+
+const lastNameLabel = createElements('label', 'label', 'Last Name');
+
+const userLastName = createElements('input', 'user_last_name');
+userLastName.required = true;
+
+const birthLabel = createElements('label', 'label', 'Date of Birth');
+
+const dateOfBirth = createElements('input', 'date_of_birth');
+dateOfBirth.required = true;
+
+const sexLabel = document.createElement('label');
+sexLabel.innerText = 'Sex\n';
+
+const maleLabel = document.createElement('label');
+maleLabel.innerText = 'Male';
+const male = document.createElement('input');
+male.type = 'radio';
+male.name = 'sex';
+male.value = 'male';
+male.classList.add('male');
+
+console.log(male);
+
+const femaleLabel = document.createElement('label');
+femaleLabel.innerText = 'Female';
+const female = document.createElement('input');
+female.type = 'radio';
+female.name = 'sex';
+female.value = 'female';
+female.classList.add('female');
+
+const cityLabel = document.createElement('label');
+cityLabel.innerText = 'City:\n';
+const citySelect = document.createElement("select");
+citySelect.classList.add('city_select');
+citySelect.required = true;
+const cityOptions = ['Kyiv', 'Kharkiv', 'Lviv', 'Lutsk'];
+for (var i = 0; i < cityOptions.length; i++) {
+  var option = document.createElement("option");
+  option.value = cityOptions[i].toLowerCase();
+  option.textContent = cityOptions[i];
+  citySelect.appendChild(option);
 }
-
-const removeAllVisible = () => {
-  const visibleElements = document.querySelectorAll('.visible');
-  visibleElements.forEach((item) => item.classList.remove('visible'));
-}
-
-const createProducts = () => {
-  productsArray.forEach((item) => {
-    const categoryProducts = createElements('div', ['category_products', item.category]);
-
-    item.products.forEach((value) => {
-      const product = createElements('div', 'product', value.name);
-      
-      const productInfo = createElements('div', ['product_info', value.name]);
-      const price = createElements('span', 'product_price', `${value.price}$`);
-      const description = createElements('p', 'product_description', value.description);
-      const image = createElements('img', 'product_image', value.image);
-      image.src = `./images/${value.image}`
-      const button = createElements('button', 'button', 'Buy');
-
-      productInfo.append(price, description, image, button);
-
-      product.addEventListener('click', () => checkProductVisible(value.name, '.product_info'));
-      button.addEventListener('click', () => {
-        alert(`You bought ${value.name}`);
-        removeAllVisible()
-      });
-
-      const productContainer = createElements('div', 'product_container');
-      productContainer.append(product, productInfo);
-      categoryProducts.append(productContainer);
-    })
-  
-    productsWrapper.append(categoryProducts);
-  })
-}
-
-createCategories()
-createProducts()
-
-bodyContainer.append(categoryWrapper, productsWrapper);
-document.body.append(bodyContainer);
