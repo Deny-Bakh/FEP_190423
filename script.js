@@ -74,10 +74,10 @@ cityOptions.forEach((city) => {
 form.append(cityLabel, citySelect);
 
 
-const addressLabel = createLabel('Adress:', 'adress');
+const addressLabel = createLabel('Address:', 'address');
 const address = document.createElement('textarea');
-address.name = 'Adress';
-address.id = 'adress';
+address.name = 'Address';
+address.id = 'address';
 address.required = true;
 address.rows = '2';
 address.cols = '25';
