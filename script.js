@@ -757,6 +757,7 @@ buttonSubmit.addEventListener('click', (event) => {
   
   //   bodyContainer.classList.add('hide');
     displayOrderDetails(orderData);
+    addOrderDataToLocalStorage(orderData);
   }
 });
 
@@ -910,6 +911,9 @@ if(valid.length>0){
 }
 }
 
-// function addNewCardToLocalStorage (item) {
-//   const 
-// }
+function addOrderDataToLocalStorage (item) {
+  const orderData = localStorage.getItem('orderData');
+  const updatedOrderData = orderData ? [...JSON.parse(orderData), item] : [item];
+
+  localStorage.setItem('orderData', JSON.stringify(updatedOrderData));
+}
