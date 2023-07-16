@@ -191,7 +191,7 @@ const productsArray = [
   
   const nameDiv = createElements('div', 'input_holder');
   const nameLabel = createLabel('Full Name:', 'fullName');
-  const nameInput = createInput('text', 'Full Name', 'fullName');
+  const nameInput = createInput('text', 'fullName', 'fullName');
   nameInput.classList.add('form_check');
   const namePar = createElements('p', 'err_txt', 'Please fill in full name!');
   
@@ -203,7 +203,7 @@ const productsArray = [
   const cityLabel = createLabel('City:', 'city');
   const citySelect = document.createElement('select');
   citySelect.classList.add('form_check');
-  citySelect.name = 'City';
+  citySelect.name = 'city';
   citySelect.id = 'city';
 
   const citySpan = createElements('p', 'err_txt', 'Please select one!');
@@ -227,7 +227,7 @@ const productsArray = [
   const postOfficeDiv = createElements('div', 'input_holder');
   postOfficeDiv.classList.add('post_office_div')
   const postOfficeLabel = createLabel('Post Office №:', 'postOffice');
-  const postOfficeInput = createInput('number', 'Post Office', 'postOffice');
+  const postOfficeInput = createInput('number', 'postOffice', 'postOffice');
   postOfficeInput.classList.add('form_check');
   postOfficeInput.min = '1';
   const postOfficeSpan = createElements('p', 'err_txt', 'Please enter a number!');
@@ -260,7 +260,7 @@ const productsArray = [
   
   const productsQuantityDiv = createElements('div', 'input_holder');
   const productsQuantityLabel = createLabel('Quantity of Products:', 'productsQuantity');
-  const productsQuantityInput = createInput('number', 'Quantity of Products', 'productsQuantity');
+  const productsQuantityInput = createInput('number', 'quantityOfProducts', 'productsQuantity');
   productsQuantityInput.classList.add('form_check');
   productsQuantityInput.min = '1';
   const productsQuantitySpan = createElements('p', 'err_txt', 'Please enter a number!');
@@ -271,7 +271,7 @@ const productsArray = [
   const orderCommentDiv = createElements('div', 'input_holder');
   const orderCommentLabel = createLabel('Comment on the Order:', 'orderComment');
   const orderCommentTextarea = document.createElement('textarea');
-  orderCommentTextarea.name = 'Comment on the Order';
+  orderCommentTextarea.name = 'commentOnTheOrder';
   orderCommentTextarea.classList.add('form_check');
   orderCommentTextarea.id = 'orderComment';
   orderCommentTextarea.rows = '5';
@@ -309,18 +309,77 @@ const productsArray = [
     }
   });
   
-  function displayOrderDetails(productInfo, formData) {
+//   function displayOrderDetails(productInfo, formData) {
+//     const container = createElements('div', 'card_container');
+//     container.innerHTML = `
+//       <div>
+//         <div>Product Information:</div>
+//         ${generateKeyValueRows(productInfo)}
+//       </div>
+//       <div>
+//         <div>Order Information:</div>
+//         ${generateKeyValueRows(formData)}
+//       </div>
+//     `;
+  
+//     modalForm.reset();
+//     removeAllVisible();
+//     modalFormWrapp.classList.remove('form_visible');
+//     document.body.append(container);
+//   }
+  
+//   function generateKeyValueRows(data) {
+//     const keyMappings = {
+//       name: 'Name:',
+//       price: 'Price:',
+//       description: 'Description:',
+//       'Full Name': 'Full Name:',
+//       City: 'City:',
+//       'Post Office': 'Post Office:',
+//       paymentMethod: 'Payment Method:',
+//       'Quantity of Products': 'Quantity of Products:',
+//       'Comment on the Order': 'Comment on the Order:'
+//     };
+  
+//     return Object.entries(data)
+//       .map(([key, value]) => {
+//         const displayKey = keyMappings[key] || key;
+  
+//         if (key === 'image') {
+//           return `<div><img class='image_display' src="./images/${value}" alt="Product Image"></div>`;
+//         } else {
+//           return `<div><span class="span_space">${displayKey}</span><span>${value}</span></div>`;
+//         }
+//       })
+//       .join('');
+//   }
+
+const keyMappings = {
+    name: 'Name:',
+    price: 'Price:',
+    description: 'Description:',
+    fullName: 'Full Name:',
+    city: 'City:',
+    postOffice: 'Post Office:',
+    paymentMethod: 'Payment Method:',
+    quantityOfProducts: 'Quantity of Products:',
+    commentOnTheOrder: 'Comment on Order:'
+  };
+
+function displayOrderDetails(productInfo, formData) {
     const container = createElements('div', 'card_container');
-    container.innerHTML = `
-      <div>
-        <div>Product Information:</div>
-        ${generateKeyValueRows(productInfo)}
-      </div>
-      <div>
-        <div>Order Information:</div>
-        ${generateKeyValueRows(formData)}
-      </div>
-    `;
+  
+    const productInfoDiv = createElements('div');
+    productInfoDiv.innerHTML = '<h2>Product Information:</h2>';
+    const productInfoRows = createKeyValueRows(productInfo);
+    productInfoRows.forEach(row => productInfoDiv.append(row));
+    container.append(productInfoDiv);
+  
+    const orderInfoDiv = createElements('div');
+    orderInfoDiv.innerHTML = '<h2>Order Information:</h2>';
+    const orderInfoRows = createKeyValueRows(formData);
+    orderInfoRows.forEach(row => orderInfoDiv.appendChild(row));
+    container.appendChild(orderInfoDiv);
   
     modalForm.reset();
     removeAllVisible();
@@ -328,30 +387,30 @@ const productsArray = [
     document.body.append(container);
   }
   
-  function generateKeyValueRows(data) {
-    const keyMappings = {
-      name: 'Name:',
-      price: 'Price:',
-      description: 'Description:',
-      'Full Name': 'Full Name:',
-      City: 'City:',
-      'Post Office': 'Post Office:',
-      paymentMethod: 'Payment Method:',
-      'Quantity of Products': 'Quantity of Products:',
-      'Comment on the Order': 'Comment on the Order:'
-    };
+  function createKeyValueRows(data) {
+    const rows = [];
   
-    return Object.entries(data)
-      .map(([key, value]) => {
-        const displayKey = keyMappings[key] || key;
+    for (const [key, value] of Object.entries(data)) {
+      const displayKey = keyMappings[key] || key;
   
-        if (key === 'image') {
-          return `<div><img class='image_display' src="./images/${value}" alt="Product Image"></div>`;
-        } else {
-          return `<div><span class="span_space">${displayKey}</span><span>${value}</span></div>`;
-        }
-      })
-      .join('');
+      if (key === 'image') {
+        const imageDiv = createElements('div');
+        const image = createElements('img', 'image_display');
+        image.src = `./images/${value}`;
+        image.alt = 'Product Image';
+        imageDiv.append(image);
+        rows.push(imageDiv);
+      } else {
+        const rowDiv = createElements('div');
+        const keySpan = createElements('span', 'span_space', displayKey);
+        const valueSpan = createElements('span', '', value);
+        rowDiv.append(keySpan);
+        rowDiv.append(valueSpan);
+        rows.push(rowDiv);
+      }
+    }
+  
+    return rows;
   }
 
   function validateInputs(modalForm){
