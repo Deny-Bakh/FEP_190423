@@ -824,7 +824,7 @@ function displayOrderDetails(productInfo, formData) {
   const orderInfoDiv = createElements('div');
   orderInfoDiv.innerHTML = '<h2>Order Information:</h2>';
   const orderInfoRows = createKeyValueRows(formData);
-  orderInfoRows.forEach(row => orderInfoDiv.appendChild(row));
+  orderInfoRows.forEach(row => orderInfoDiv.append(row));
   container.append(orderInfoDiv);
 
   modalForm.reset();
