@@ -664,7 +664,7 @@ cityOptions.forEach((city) => {
   citySelect.append(cityVar);
 })
 
-citySelect.options[0].selected = true;
+citySelect.options[0].hidden = true;
 citySelect.options[0].disabled = true;
 
 cityDiv.append(cityLabel, citySelect, citySpan);
@@ -750,55 +750,15 @@ buttonSubmit.addEventListener('click', (event) => {
       .flatMap((category) => category.products)
       .find((product) => product.name === selectedProductName);
 
+      const orderData = {
+        productInfo: selectedProduct,
+        orderInfo: resultFormData
+      };
+  
   //   bodyContainer.classList.add('hide');
-    displayOrderDetails(selectedProduct, resultFormData);
+    displayOrderDetails(orderData);
   }
 });
-
-//   function displayOrderDetails(productInfo, formData) {
-//     const container = createElements('div', 'card_container');
-//     container.innerHTML = `
-//       <div>
-//         <div>Product Information:</div>
-//         ${generateKeyValueRows(productInfo)}
-//       </div>
-//       <div>
-//         <div>Order Information:</div>
-//         ${generateKeyValueRows(formData)}
-//       </div>
-//     `;
-
-//     modalForm.reset();
-//     removeAllVisible();
-//     modalFormWrapp.classList.remove('form_visible');
-//     document.body.append(container);
-//   }
-
-//   function generateKeyValueRows(data) {
-//     const keyMappings = {
-//       name: 'Name:',
-//       price: 'Price:',
-//       description: 'Description:',
-//       'Full Name': 'Full Name:',
-//       City: 'City:',
-//       'Post Office': 'Post Office:',
-//       paymentMethod: 'Payment Method:',
-//       'Quantity of Products': 'Quantity of Products:',
-//       'Comment on the Order': 'Comment on the Order:'
-//     };
-
-//     return Object.entries(data)
-//       .map(([key, value]) => {
-//         const displayKey = keyMappings[key] || key;
-
-//         if (key === 'image') {
-//           return `<div><img class='image_display' src="./images/${value}" alt="Product Image"></div>`;
-//         } else {
-//           return `<div><span class="span_space">${displayKey}</span><span>${value}</span></div>`;
-//         }
-//       })
-//       .join('');
-//   }
 
 const keyMappings = {
   name: 'Name:',
@@ -812,18 +772,18 @@ const keyMappings = {
   commentOnTheOrder: 'Comment on Order:'
 };
 
-function displayOrderDetails(productInfo, formData) {
+function displayOrderDetails(orderData) {
   const container = createElements('div', 'card_container');
 
   const productInfoDiv = createElements('div');
   productInfoDiv.innerHTML = '<h2>Product Information:</h2>';
-  const productInfoRows = createKeyValueRows(productInfo);
+  const productInfoRows = createKeyValueRows(orderData.productInfo);
   productInfoRows.forEach(row => productInfoDiv.append(row));
   container.append(productInfoDiv);
 
   const orderInfoDiv = createElements('div');
   orderInfoDiv.innerHTML = '<h2>Order Information:</h2>';
-  const orderInfoRows = createKeyValueRows(formData);
+  const orderInfoRows = createKeyValueRows(orderData.orderInfo);
   orderInfoRows.forEach(row => orderInfoDiv.append(row));
   container.append(orderInfoDiv);
 
@@ -949,3 +909,7 @@ if(valid.length>0){
   return true;
 }
 }
+
+// function addNewCardToLocalStorage (item) {
+//   const 
+// }
