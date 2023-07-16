@@ -21,4 +21,3 @@ requestData('GET', 'children/data.json', (data) => {
     console.log(combinedChildren);
   });
 });
-
