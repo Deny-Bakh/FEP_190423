@@ -752,15 +752,18 @@ buttonSubmit.addEventListener('click', (event) => {
       .flatMap((category) => category.products)
       .find((product) => product.name === selectedProductName);
 
+      const date = new Date();
+      
+
       const orderData = {
         productInfo: selectedProduct,
-        orderInfo: resultFormData
+        orderInfo: resultFormData,
+        orderDate: date
       };
   
   //   bodyContainer.classList.add('hide');
     displayOrderDetails(orderData);
     // orderData.unshift(...JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)));
-    console.log(orderData);
     addOrderDataToLocalStorage(orderData);
   }
 });
@@ -792,6 +795,10 @@ function displayOrderDetails(orderData) {
   orderInfoRows.forEach(row => orderInfoDiv.append(row));
   container.append(orderInfoDiv);
 
+  console.log(orderData);
+
+  // const orderData = cre
+
   modalForm.reset();
   removeAllVisible();
   modalFormWrapp.classList.remove('form_visible');
@@ -802,7 +809,7 @@ function createKeyValueRows(data) {
   const rows = [];
 
   for (const [key, value] of Object.entries(data)) {
-    const displayKey = keyMappings[key] || key;
+    const displayKey = keyMappings[key];
 
     if (key === 'image') {
       const imageDiv = createElements('div');
@@ -915,10 +922,10 @@ if(valid.length>0){
 }
 }
 
-const myOrders = createElements('button', 'my_orders_button', 'My Orders');
+const myOrdersButton = createElements('button', 'my_orders_button', 'My Orders');
 document.body.append(myOrders);
 
-myOrders.addEventListener('click', () => {
+myOrdersButton.addEventListener('click', () => {
   bodyContainer.classList.add('hide');
 
   const ordersContainer = createElements('div', 'orders_container');
@@ -937,15 +944,15 @@ function addOrderDataToLocalStorage (item) {
   localStorage.setItem(LOCAL_STORAGE_ORDER_DATA, JSON.stringify(updatedOrderData));
 }
 
-// function loadSavedOrderData() {
-//   const orderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA));
+function loadSavedOrderData() {
+  const orderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA));
 
-//   if (orderData && orderData.length > 0) {
-//     orderData.forEach((data) => {
-//       displayOrderDetails(data);
-//     });
-//   }
-// }
+  if (orderData && orderData.length > 0) {
+    orderData.forEach((data) => {
+      displayOrderDetails(data);
+    });
+  }
+}
 
 
 
@@ -1263,8 +1270,8 @@ function addOrderDataToLocalStorage (item) {
 //     const formData = new FormData(modalForm);
 //     const resultFormData = Object.fromEntries(formData);
 
-//     const validationArray = displayErrorRed(resultFormData);
-//     if (!validationArray.includes(false)) {
+//     const validationArray = formValidation(resultFormData);
+//     if (!Object.values(validationArray).includes(false)) {
 //       const selectedProduct = productsArray
 //       .flatMap((category) => category.products)
 //       .find((product) => product.name === selectedProductName);
@@ -1293,7 +1300,7 @@ function addOrderDataToLocalStorage (item) {
 //       [
 //           {
 //               message: 'Please enter only digits!',
-//               rule: '/^[0-9]+$/', 
+//               rule: /^[0-9]+$/, 
 //           },
 //           {
 //             message: 'Please enter a number!',
@@ -1307,7 +1314,7 @@ function addOrderDataToLocalStorage (item) {
 //       [
 //           {
 //               message: 'Please enter only digits!',
-//               rule: '/^[0-9]+$/', 
+//               rule: /^[0-9]+$/, 
 //           },
 //           {
 //             message: 'Please enter a number!',
@@ -1349,40 +1356,95 @@ function addOrderDataToLocalStorage (item) {
 //       },
 //       {
 //           message: 'Please enter only alphabets and spaces!',
-//           rule: '/^[a-zA-Z\s]+$/',
+//           rule: /^[a-zA-Z\s]+$/,
 //       }
 //   ]
 //   },
 // ]
 
 
-// function displayErrorRed(formData) {
-//   let valid = [];
+// // function displayErrorRed(formData) {
+// //   let valid = [];
+// //   Object.keys(formData).forEach((objectKey) => {
+// //     const validationData = validationRules.filter((object) => object.input === objectKey);
+// //     validationData[0].validations.forEach((item) => {
+// //       const errorMessage = document.querySelector(`#${validationData[0].colorError} .err_txt`);
+// //       if (item.rule === 'required' && formData[objectKey].length === 0) {
+// //       errorMessage.innerText = item.message;
+// //       errorMessage.parentNode.classList.add('error');
+// //       valid.push(false);
+// //     } else if (item.rule === 'maxLength' && formData[objectKey].length > 100) {
+// //       console.log('maxLength');
+// //       errorMessage.innerText = item.message;
+// //       errorMessage.parentNode.classList.add('error');
+// //       valid.push(false);
+// //     } else {
+// //       // item.rule.test(formData[objectKey])
+// //       errorMessage.innerText = '';
+// //       console.log('else');
+// //       errorMessage.parentNode.classList.remove('error');
+// //       valid.push(true);
+// //     }
+// //     })
+// //   })
+// //   return valid;
+// // }
+
+// function formValidation(formData) {
+//   const valid = {};
+
 //   Object.keys(formData).forEach((objectKey) => {
-//     const validationData = validationRules.filter((object) => object.input === objectKey);
-//     validationData[0].validations.forEach((item) => {
-//       // console.log(item);
-//       console.log(formData[objectKey]);
-//       const errorMessage = document.querySelector(`#${validationData[0].colorError} .err_txt`);
-//       if (item.rule === 'required' && formData[objectKey].length === 0) {
-//       errorMessage.innerText = item.message;
-//       errorMessage.parentNode.classList.add('error');
-//       valid.push(false);
-//     } else if (item.rule === 'maxLength' && formData[objectKey].length > 100) {
-//       errorMessage.innerText = item.message;
-//       errorMessage.parentNode.classList.add('error');
-//       valid.push(false);
+//     const validationData = validationRules.find((object) => object.input === objectKey);
+
+//     if (validationData) {
+      
+//       valid[validationData.input] = true;
+
+//       validationData.validations.forEach((item) => {
+//         const errorMessage = document.querySelector(`#${validationData.colorError} .err_txt`);
+        
+//         let isValid = true;
+//         const reg = new RegExp(item.rule);
+
+//         if(valid[validationData.input]) {
+//           if (item.rule === 'required' && formData[objectKey].length === 0) {
+//             errorMessage.innerText = item.message;
+//             errorMessage.parentNode.classList.add('error');
+//             valid[validationData.input] = false;
+//             isValid = false;
+//           } else if (item.rule === 'maxLength' && formData[objectKey].length > 100) {
+//             errorMessage.innerText = item.message;
+//             errorMessage.parentNode.classList.add('error');
+//             valid[validationData.input] = false;
+//             isValid = false;
+//           } else if (item.rule !== 'required' && item.rule !== 'maxLength') {
+//             if (!reg.test(formData[objectKey])) {
+//               errorMessage.innerText = item.message;
+//               errorMessage.parentNode.classList.add('error');
+//               valid[validationData.input] = false;
+//               isValid = false;
+//             }
+//           } 
+  
+//           if (isValid) {
+//             const errorMessage = document.querySelector(`#${validationData.colorError} .err_txt`);
+//             errorMessage.innerText = '';
+//             errorMessage.parentNode.classList.remove('error');
+//             valid[validationData.input] = true;
+//           }
+//         }
+//         });
 //     }
-//     else {
-//       // item.rule.test(formData[objectKey])
-//       errorMessage.innerText = '';
-//       errorMessage.parentNode.classList.remove('error');
-//       valid.push(true);
-//     }
-//     })
-//   })
+//   });
+
 //   return valid;
 // }
+
+// function displayError () {
+//   errorMessage.innerText = item.message;
+//   errorMessage.parentNode.classList.add('error');
+// }
+
 
 // function displayOrderDetails(productInfo, formData) {
 //   const container = createElements('div', 'card_container');
@@ -1429,93 +1491,93 @@ function addOrderDataToLocalStorage (item) {
 //     .join('');
 // }
 
-// //   function validateInputs(modalForm){
-// // 	let inputs = modalForm.querySelectorAll('.form_check');
-// // 	let valid = [];
-// // 	let radioCheck = false;
-// // 	inputs.forEach(function(i){
-// // 		if(i.hasAttribute('type')){
-// // 			checkAttr = i.getAttribute('type');
-// //             console.log(checkAttr);
-// // 		}else{
-// // 			checkAttr = i.tagName;
-// // 		}
+//   function validateInputs(modalForm){
+// 	let inputs = modalForm.querySelectorAll('.form_check');
+// 	let valid = [];
+// 	let radioCheck = false;
+// 	inputs.forEach(function(i){
+// 		if(i.hasAttribute('type')){
+// 			checkAttr = i.getAttribute('type');
+//             console.log(checkAttr);
+// 		}else{
+// 			checkAttr = i.tagName;
+// 		}
   
-// // 		switch(checkAttr){
-// // 			case 'radio':
-// // 				if(!radioCheck){
-// // 					if(!i.checked){
-// // 						radioCheck = false;
-// // 					}else{
-// // 						radioCheck = true;
-// // 					}
-// // 				}
-// // 			break;
-// //       case 'number':
-// //         if (!i.value) {
-// //           i.parentNode.classList.add('error');
-// //           valid.push(i.getAttribute('name'));
-// //         } else if (!/^[0-9]+$/.test(i.value)) {
-// //           i.parentNode.classList.add('error');
-// //           valid.push(i.getAttribute('name'));
-// //           const errorMessage = 'Please enter only digits.';
-// //           const errorSpan = i.parentNode.querySelector('.err_txt');
-// //           errorSpan.innerText = errorMessage;
-// //         } else {
-// //           i.parentNode.classList.remove('error');
-// //           const errorSpan = i.parentNode.querySelector('.err_txt');
-// //         }
-// //         break;
-// //       case 'text':
-// //         if (i.getAttribute('name') === 'Full Name') {
-// //           if (!i.value) {
-// //             i.parentNode.classList.add('error');
-// //             valid.push(i.getAttribute('name'));
-// //             namePar.innerText = 'Please enter your full name';
-// //           } else if (!/^[a-zA-Z\s]+$/.test(i.value)) {
-// //             i.parentNode.classList.add('error');
-// //             valid.push(i.getAttribute('name'));
-// //             namePar.innerText = 'Please enter a valid name (only alphabets and spaces are allowed)';
-// //           } else {
-// //             i.parentNode.classList.remove('error');
-// //           }
-// //         } else {
-// //           if (i.value === '') {
-// //             i.parentNode.classList.add('error');
-// //             valid.push(i.getAttribute('name'));
-// //           } else {
-// //             i.parentNode.classList.remove('error');
-// //           }
-// //         }
-// //         break;
-// // 			case 'select':
-// // 				if(i[select.selectedIndex].value==''){
-// // 					i.parentNode.classList.add("error");
-// // 					valid.push(i.getAttribute('name'));
-// // 				}else{
-// // 					i.parentNode.classList.remove("error");
-// // 				}
-// // 			break;
-// // 			default:
-// // 				if(i.value==''){
-// // 					i.parentNode.classList.add("error");
-// // 					valid.push(i.getAttribute('name'));
-// // 				}else{
-// // 					i.parentNode.classList.remove("error");
-// // 				}
-// // 			break;
-// // 		}
-// // 	});
-// // 	if(!radioCheck){
-// // 		document.getElementsByClassName('radiocheck')[0].classList.add("error");
-// // 		valid.push ('radio');
-// // 	}else{
-// // 		document.getElementsByClassName('radiocheck')[0].classList.remove("error");
-// // 	}
+// 		switch(checkAttr){
+// 			case 'radio':
+// 				if(!radioCheck){
+// 					if(!i.checked){
+// 						radioCheck = false;
+// 					}else{
+// 						radioCheck = true;
+// 					}
+// 				}
+// 			break;
+//       case 'number':
+//         if (!i.value) {
+//           i.parentNode.classList.add('error');
+//           valid.push(i.getAttribute('name'));
+//         } else if (!/^[0-9]+$/.test(i.value)) {
+//           i.parentNode.classList.add('error');
+//           valid.push(i.getAttribute('name'));
+//           const errorMessage = 'Please enter only digits.';
+//           const errorSpan = i.parentNode.querySelector('.err_txt');
+//           errorSpan.innerText = errorMessage;
+//         } else {
+//           i.parentNode.classList.remove('error');
+//           const errorSpan = i.parentNode.querySelector('.err_txt');
+//         }
+//         break;
+//       case 'text':
+//         if (i.getAttribute('name') === 'Full Name') {
+//           if (!i.value) {
+//             i.parentNode.classList.add('error');
+//             valid.push(i.getAttribute('name'));
+//             namePar.innerText = 'Please enter your full name';
+//           } else if (!/^[a-zA-Z\s]+$/.test(i.value)) {
+//             i.parentNode.classList.add('error');
+//             valid.push(i.getAttribute('name'));
+//             namePar.innerText = 'Please enter a valid name (only alphabets and spaces are allowed)';
+//           } else {
+//             i.parentNode.classList.remove('error');
+//           }
+//         } else {
+//           if (i.value === '') {
+//             i.parentNode.classList.add('error');
+//             valid.push(i.getAttribute('name'));
+//           } else {
+//             i.parentNode.classList.remove('error');
+//           }
+//         }
+//         break;
+// 			case 'select':
+// 				if(i[select.selectedIndex].value==''){
+// 					i.parentNode.classList.add("error");
+// 					valid.push(i.getAttribute('name'));
+// 				}else{
+// 					i.parentNode.classList.remove("error");
+// 				}
+// 			break;
+// 			default:
+// 				if(i.value==''){
+// 					i.parentNode.classList.add("error");
+// 					valid.push(i.getAttribute('name'));
+// 				}else{
+// 					i.parentNode.classList.remove("error");
+// 				}
+// 			break;
+// 		}
+// 	});
+// 	if(!radioCheck){
+// 		document.getElementsByClassName('radiocheck')[0].classList.add("error");
+// 		valid.push ('radio');
+// 	}else{
+// 		document.getElementsByClassName('radiocheck')[0].classList.remove("error");
+// 	}
 
-// // 	if(valid.length>0){
-// // 		return false;
-// // 	}else{
-// // 		return true;
-// // 	}
-// // }
+// 	if(valid.length>0){
+// 		return false;
+// 	}else{
+// 		return true;
+// 	}
+// }
