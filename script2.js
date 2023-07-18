@@ -374,7 +374,7 @@ const productsArray = [
 
     container.addEventListener('click', () => {
         const infoVisible = document.querySelector('.card_wrapper');
-        infoVisible.classList.add('visible');
+        infoVisible.classList.toggle('visible');
       });
 
     deleteButton.addEventListener('click', () => {

@@ -992,7 +992,7 @@ myOrdersButton.addEventListener('click', () => {
 
 // container.addEventListener('click', () => {
 //   const infoVisible = document.querySelectorAll('.card_wrapper');
-//   infoVisible.forEach(element => element.classList.add('visible'));
+//   infoVisible.forEach(element => element.classList.toggle('visible'));
 //   // infoVisible.classList.add('visible');
 // })
 
