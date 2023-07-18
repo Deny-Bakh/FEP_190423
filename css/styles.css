@@ -26,6 +26,10 @@ p {
   display: none;
 }
 
+.card_wrapper {
+  display: none;
+}
+
 .visible {
   display: block;
 }
@@ -233,8 +237,4 @@ td {
   right: 20px;
   height: 40px;
   cursor: pointer;
-}
-
-.card_wrapper {
-  display: none;
 }

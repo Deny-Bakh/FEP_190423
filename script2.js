@@ -372,6 +372,11 @@ const productsArray = [
     //   removeOrderData(item.id);
     // })
 
+    container.addEventListener('click', () => {
+        const infoVisible = document.querySelector('.card_wrapper');
+        infoVisible.classList.add('visible');
+      });
+
     deleteButton.addEventListener('click', () => {
         // const container = event.target.parentNode;
         // const itemId = container.dataset.itemId;
