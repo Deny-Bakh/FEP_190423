@@ -517,6 +517,7 @@ const productsArray = [
 ];
 
 const LOCAL_STORAGE_ORDER_DATA = 'orderData';
+const LOCAL_STORAGE_REMOVE_ORDER_DATA = 'removeOrderData';
 
 const createElements = (tag, className, text) => {
   const element = document.createElement(tag);
@@ -754,7 +755,6 @@ buttonSubmit.addEventListener('click', (event) => {
 
       const date = new Date();
       
-
       const orderData = {
         productInfo: selectedProduct,
         orderInfo: resultFormData,
@@ -783,21 +783,38 @@ const keyMappings = {
 function displayOrderDetails(orderData) {
   const container = createElements('div', 'card_container');
 
-  const productInfoDiv = createElements('div');
+  const productInfoDiv = createElements('div', 'card_wrapper');
   productInfoDiv.innerHTML = '<h2>Product Information:</h2>';
   const productInfoRows = createKeyValueRows(orderData.productInfo);
   productInfoRows.forEach(row => productInfoDiv.append(row));
   container.append(productInfoDiv);
 
-  const orderInfoDiv = createElements('div');
+  const orderInfoDiv = createElements('div', 'card_wrapper');
   orderInfoDiv.innerHTML = '<h2>Order Information:</h2>';
   const orderInfoRows = createKeyValueRows(orderData.orderInfo);
   orderInfoRows.forEach(row => orderInfoDiv.append(row));
   container.append(orderInfoDiv);
 
+  const id = Math.floor(Math.random() * 1000000000000000);
+
   console.log(orderData);
 
-  // const orderData = cre
+  const orderDate = createElements('p');
+  const date = new Date();
+  orderDate.innerText = date;
+  container.append(orderDate);
+
+  const orderPrice = createElements('div');
+  orderPrice.innerHTML = `<p>${orderData.productInfo.price}$</p>`
+  container.append(orderPrice);
+
+  const deleteButton = createElements('img', 'delete_button');
+  deleteButton.src = './images/370086_bin_delete_empty_out_recycle_icon.svg';
+  container.append(deleteButton);
+
+  deleteButton.addEventListener('click', () => {
+    remmoveOrderData(item.id);
+  })
 
   modalForm.reset();
   removeAllVisible();
@@ -923,35 +940,105 @@ if(valid.length>0){
 }
 
 const myOrdersButton = createElements('button', 'my_orders_button', 'My Orders');
-document.body.append(myOrders);
+document.body.append(myOrdersButton);
+
+// myOrdersButton.addEventListener('click', () => {
+//   bodyContainer.classList.add('hide');
+
+//   const ordersContainer = createElements('div', 'orders_container');
+//   document.body.append(ordersContainer);
+
+//   const loadOrderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
+//   loadOrderData.forEach((data) => {
+//     displayOrderDetails(data);
+//   })
+// })
+
+let isMyOrdersVisible = false;
 
 myOrdersButton.addEventListener('click', () => {
-  bodyContainer.classList.add('hide');
+  if (isMyOrdersVisible) {
+    bodyContainer.classList.remove('hide');
+    const ordersContainer = document.querySelector('.orders_container');
+    ordersContainer.remove();
+  } else {
+    bodyContainer.classList.add('hide');
+    const ordersContainer = createElements('div', 'orders_container');
+    document.body.append(ordersContainer);
+    loadSavedOrderData();
+  }
 
-  const ordersContainer = createElements('div', 'orders_container');
-  document.body.append(ordersContainer);
+  isMyOrdersVisible = !isMyOrdersVisible;
+});
 
-  const loadOrderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
-  loadOrderData.forEach((data) => {
-    displayOrderDetails(data);
-  })
-})
+// myOrdersButton.addEventListener('click', () => {
+//   if (isMyOrdersVisible) {
+//     bodyContainer.classList.remove('hide');
+//     const ordersContainer = document.querySelector('.orders_container');
+//     ordersContainer.remove();
+//   } else {
+//     bodyContainer.classList.add('hide');
+//     const ordersContainer = createElements('div', 'orders_container');
+//     document.body.append(ordersContainer);
+
+//     const loadOrderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
+//     loadOrderData.forEach((data) => {
+//       displayOrderDetails(data);
+//     });
+//   }
+
+//   isMyOrdersVisible = !isMyOrdersVisible;
+// });
+
+// container.addEventListener('click', () => {
+//   const infoVisible = document.querySelectorAll('.card_wrapper');
+//   infoVisible.forEach(element => element.classList.add('visible'));
+//   // infoVisible.classList.add('visible');
+// })
 
 function addOrderDataToLocalStorage (item) {
   const orderData = localStorage.getItem(LOCAL_STORAGE_ORDER_DATA);
-  const updatedOrderData = orderData ? [...JSON.parse(orderData), item] : [item];
+  const updatedOrderData = orderData ? [item, ...JSON.parse(orderData)] : [item];
 
   localStorage.setItem(LOCAL_STORAGE_ORDER_DATA, JSON.stringify(updatedOrderData));
 }
+
+// function loadSavedOrderData() {
+//   const orderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA));
+
+//   if (orderData && orderData.length > 0) {
+//     orderData.forEach((data) => {
+//       displayOrderDetails(data);
+//     });
+//   }
+// }
 
 function loadSavedOrderData() {
   const orderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA));
 
   if (orderData && orderData.length > 0) {
-    orderData.forEach((data) => {
+    const filteredOrderData = filterRemovedOrderData(orderData, JSON.parse(localStorage.getItem(LOCAL_STORAGE_REMOVE_ORDER_DATA)) || []);
+    filteredOrderData.forEach((data) => {
       displayOrderDetails(data);
     });
   }
+}
+
+function addRemovedOrderDataToLocalStorage(id) {
+  const removeOrderId = localStorage.getItem(LOCAL_STORAGE_REMOVE_ORDER_DATA);
+  const updatedOrderId = removeOrderId ? [id, ...JSON.parse(removeOrderId)] : [item];
+
+  localStorage.setItem(LOCAL_STORAGE_REMOVE_ORDER_DATA, JSON.stringify(updatedOrderId));
+}
+
+function filterRemovedOrderData(orderData, idList) {
+  const filteredOrderData = orderData.filter((item) => !idList.includes(item.id));
+  return filteredOrderData;
+}
+
+function remmoveOrderData(id) {
+  filterRemovedOrderData([id]);
+  addRemovedOrderDataToLocalStorage(id)
 }
 
 

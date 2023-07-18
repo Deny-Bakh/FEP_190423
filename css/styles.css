@@ -224,4 +224,17 @@ td {
   border-radius: 15px;
   padding: 20px;
   max-width: 220px;
+  position: relative;
+}
+
+.delete_button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.card_wrapper {
+  display: none;
 }
