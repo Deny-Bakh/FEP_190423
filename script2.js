@@ -356,12 +356,14 @@ const productsArray = [
     console.log(orderData);
   
     const orderDate = createElements('p');
+    orderDate.classList.add('order_short_info')
     const date = new Date();
     orderDate.innerText = date;
     container.append(orderDate);
   
     const orderPrice = createElements('div');
-    orderPrice.innerHTML = `<p>${orderData.productInfo.price}$</p>`
+    orderPrice.classList.add('order_short_info')
+    orderPrice.innerHTML = `<p>Price: ${orderData.productInfo.price}$</p>`
     container.append(orderPrice);
   
     const deleteButton = createElements('img', 'delete_button');
@@ -372,15 +374,36 @@ const productsArray = [
     //   removeOrderData(item.id);
     // })
 
-    container.addEventListener('click', () => {
-        const infoVisible = document.querySelector('.card_wrapper');
-        infoVisible.classList.toggle('visible');
+    // container.addEventListener('click', () => {
+    //     const infoVisible = document.querySelectorAll('.card_wrapper');
+    //     infoVisible.classList.toggle('visible');
+    //   });
+
+    // container.addEventListener('click', (event) => {
+    //   const target = event.target;
+    //   const infoVisible = target.closest('.card_container').querySelectorAll('.card_wrapper');
+    //   if (infoVisible) {
+    //     infoVisible.classList.toggle('visible');
+    //   }
+    // });
+
+    container.addEventListener('click', (event) => {
+      const target = event.target;
+      const infoVisible = target.closest('.card_container').querySelectorAll('.card_wrapper');
+      infoVisible.forEach((element) => {
+        element.classList.toggle('visible');
       });
+      const shortInfoHidden = target.closest('.card_container').querySelectorAll('.order_short_info');
+      shortInfoHidden.forEach((element) => {
+        element.classList.toggle('hide');
+      })
+    });
 
     deleteButton.addEventListener('click', () => {
         // const container = event.target.parentNode;
         // const itemId = container.dataset.itemId;
         removeOrderData(orderId);
+
       });
   
     modalForm.reset();
@@ -523,6 +546,21 @@ const productsArray = [
   
   let isMyOrdersVisible = false;
   
+  // myOrdersButton.addEventListener('click', () => {
+  //   if (isMyOrdersVisible) {
+  //     bodyContainer.classList.remove('hide');
+  //     const ordersContainer = document.querySelector('.orders_container');
+  //     ordersContainer.remove();
+  //   } else {
+  //     bodyContainer.classList.add('hide');
+  //     const ordersContainer = createElements('div', 'orders_container');
+  //     document.body.append(ordersContainer);
+  //     loadSavedOrderData();
+  //   }
+  
+  //   isMyOrdersVisible = !isMyOrdersVisible;
+  // });
+
   myOrdersButton.addEventListener('click', () => {
     if (isMyOrdersVisible) {
       bodyContainer.classList.remove('hide');
@@ -603,14 +641,44 @@ const productsArray = [
     return filteredOrderData;
   }
   
+// function removeOrderData(orderId) {
+//   const savedOrderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
+//   const updatedOrderData = savedOrderData.filter(item => item.id !== orderId);
+//   localStorage.setItem(LOCAL_STORAGE_ORDER_DATA, JSON.stringify(updatedOrderData));
+
+//   const removedOrderIds = JSON.parse(localStorage.getItem(LOCAL_STORAGE_REMOVE_ORDER_DATA)) || [];
+//   removedOrderIds.push(orderId);
+//   localStorage.setItem(LOCAL_STORAGE_REMOVE_ORDER_DATA, JSON.stringify(removedOrderIds));
+
+//   const orderContainer = document.querySelector(`[data-item-id="${orderId}"]`);
+//   if (orderContainer) {
+//     orderContainer.remove();
+//   }
+// }
+
+// function removeOrderData(orderId) {
+//   const savedOrderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
+//   const updatedOrderData = savedOrderData.filter(item => item.orderId !== orderId);
+//   localStorage.setItem(LOCAL_STORAGE_ORDER_DATA, JSON.stringify(updatedOrderData));
+
+//   const removedOrderIds = JSON.parse(localStorage.getItem(LOCAL_STORAGE_REMOVE_ORDER_DATA)) || [];
+//   removedOrderIds.push(orderId);
+//   localStorage.setItem(LOCAL_STORAGE_REMOVE_ORDER_DATA, JSON.stringify(removedOrderIds));
+
+//   const orderContainer = document.querySelector(`[data-item-id="${orderId}"]`);
+//   if (orderContainer) {
+//     orderContainer.remove();
+//   }
+// }
+
 function removeOrderData(orderId) {
-  const savedOrderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
-  const updatedOrderData = savedOrderData.filter(item => item.id !== orderId);
+  const orderData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_ORDER_DATA)) || [];
+  const updatedOrderData = orderData.filter(item => item.orderId !== orderId);
   localStorage.setItem(LOCAL_STORAGE_ORDER_DATA, JSON.stringify(updatedOrderData));
 
-  const removedOrderIds = JSON.parse(localStorage.getItem(LOCAL_STORAGE_REMOVE_ORDER_DATA)) || [];
-  removedOrderIds.push(orderId);
-  localStorage.setItem(LOCAL_STORAGE_REMOVE_ORDER_DATA, JSON.stringify(removedOrderIds));
+  let orderRemovedData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_REMOVE_ORDER_DATA)) || [];
+  orderRemovedData.push(orderId);
+  localStorage.setItem(LOCAL_STORAGE_REMOVE_ORDER_DATA, JSON.stringify(orderRemovedData));
 
   const orderContainer = document.querySelector(`[data-item-id="${orderId}"]`);
   if (orderContainer) {
