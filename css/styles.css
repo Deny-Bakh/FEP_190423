@@ -79,6 +79,7 @@ p {
   height: 300px;
   object-fit: fill;
   border-radius: 20px;
+  
 }
 
 .product_price {
@@ -145,38 +146,36 @@ p {
   padding: 50px;
   max-width: 30vw;
   margin: 0 auto;
-  /* overflow: hidden; */
   background-color: blanchedalmond;
 }
+
 .float-left {
   float: left;
   width: 50%;
   padding: 10px;
 }
+
 .modal_form input[type="text"],
 .modal_form input[type="number"],
 .modal_formtextarea,
 .modal_form select {
   border: 1px solid #000;
-  /* padding: 15px; */
   font-size: 16px;
   line-height: 20px;
-  /* height: 50px; */
   width: 100%;
   display: block;
   margin: 0;
 }
+
 .modal_form textarea {
   height: 150px;
   width: -webkit-fill-available;
-  /* resize: none; */
 }
+
 .modal_form input[type="submit"] {
   border: 1px solid #000;
-  /* padding: 15px; */
   font-size: 16px;
   line-height: 20px;
-  /* height: 50px; */
   width: 150px;
   display: block;
   margin: 0;
@@ -184,17 +183,14 @@ p {
   color: #000;
   transition: all 0.3s ease;
 }
+
 .modal_form input[type="submit"]:hover {
   background: #000;
   color: #fff;
 }
-/* .modal_form .input_holder{
-	margin-bottom: 15px;
-} */
+
 .modal_form .err_txt {
   visibility: hidden;
-  /* padding:10px 5px;
-  margin-bottom:15px; */
   color: #f20;
 }
 .modal_form .input_holder.error {
@@ -227,8 +223,9 @@ td {
   border: 1px solid black;
   border-radius: 15px;
   padding: 20px;
-  max-width: 500px;
+  max-width: 400px;
   position: relative;
+  margin-bottom: 20px;
 }
 
 .delete_button {
@@ -237,4 +234,16 @@ td {
   right: 20px;
   height: 40px;
   cursor: pointer;
+}
+
+.my_orders_button {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  border-radius: 15px;
+  width: 200px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.order_short_info {
+  margin-right: 50px;
 }
