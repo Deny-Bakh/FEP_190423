@@ -1,86 +1,410 @@
-function fetchData(url) {
+let userData = {
+  'USD': 1000,
+  'EUR': 900,
+  'UAH': 15000,
+  'BIF': 20000,
+  'AOA': 100
+},
+bankData = {
+  'USD': {
+    max: 3000,
+    min: 100,
+    img: '💵'
+  },
+  'EUR': {
+    max: 1000,
+    min: 50,
+    img: '💶'
+  },
+  'UAH': {
+    max: 0,
+    min: 0,
+    img: '💴'
+  },
+  'GBP': {
+    max: 10000,
+    min: 100,
+    img: '💷'
+  }
+}
+
+// function getMoney(userData, bankData) {
+//   const initialQuestion = new Promise((resolve, reject) => {
+//     const confirmViewBalance = window.confirm('View card balance?');
+
+//     if (confirmViewBalance) {
+//       resolve(userData);
+//     } else {
+//       reject({ userData, bankData })
+//     }
+//   })
+
+//   return initialQuestion
+//     .then(userData => {
+//       return new Promise((resolve) => {
+//         let validCurrency = false;
+//         while (!validCurrency) {
+//           const currency = window.prompt('Enter currency (USD, EUR, UAH, BIF, AOA):');
+//           if (currency in userData) {
+//             console.log(`Balance is: ${userData[currency]} ${currency}`);
+//             validCurrency = true;
+//           } else {
+//             console.log('Invalid currency. Please enter a valid currency.');
+//           }
+//         }
+//         resolve(userData);
+//       });
+//     })
+//     .catch(({ userData, bankData }) => {
+//       return new Promise((resolve, reject) => {
+//         let validWithdrawal = false;
+//         while (!validWithdrawal) {
+//           const currency = window.prompt('Enter currency (USD, EUR, GBP):');
+//           const amount = parseFloat(window.prompt('Enter the amount to withdraw:'));
+
+//           if (!(currency in userData) || !(currency in bankData) || bankData[currency].max === 0) {
+//             console.log('Invalid currency. Please enter a valid currency.');
+//           } else if (amount > bankData[currency].max) {
+//             console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+//           } else if (amount < bankData[currency].min) {
+//             console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+//           } else {
+//             console.log(`Here are your cash ${amount} ${currency} ${bankData[currency].img}`);
+//             validWithdrawal = true;
+//           }
+//         }
+//         resolve(userData);
+//       });
+//     })
+//     .finally(() => {
+//       console.log('Thank you, have a nice day 😊');
+//     });
+// }
+
+
+// getMoney(userData, bankData);
+
+// *************************************************************************
+
+// function promptInput(message) {
+//   return new Promise((resolve) => {
+//     const input = window.prompt(message);
+//     resolve(input.trim().toUpperCase());
+//   });
+// }
+
+// async function viewBalance(userData) {
+//   const currency = await promptInput('Enter currency (USD, EUR, UAH, BIF, AOA):');
+//   if (currency in userData) {
+//     console.log(`Balance is: ${userData[currency]} ${currency}`);
+//   } else {
+//     console.log('Invalid currency. Please enter a valid currency.');
+//     await viewBalance(userData);
+//   }
+// }
+
+// async function withdrawMoney(userData, bankData) {
+//   const currency = await promptInput('Enter currency (USD, EUR, GBP):');
+//   const amount = parseFloat(window.prompt('Enter the amount to withdraw:'));
+
+//   if (!(currency in userData) || !(currency in bankData) || bankData[currency].max === 0) {
+//     console.log('Invalid currency. Please enter a valid currency.');
+//     await withdrawMoney(userData, bankData); // Recursively ask for valid input
+//   } else if (amount > bankData[currency].max) {
+//     console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+//     await withdrawMoney(userData, bankData); // Recursively ask for valid input
+//   } else if (amount < bankData[currency].min) {
+//     console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+//     await withdrawMoney(userData, bankData); // Recursively ask for valid input
+//   } else {
+//     console.log(`Here are your cash ${amount} ${currency} ${bankData[currency].img}`);
+//   }
+// }
+
+// async function getMoney(userData, bankData) {
+//   const confirmViewBalance = window.confirm('View card balance?');
+//   if (confirmViewBalance) {
+//     await viewBalance(userData);
+//   } else {
+//     await withdrawMoney(userData, bankData);
+//   }
+
+//   console.log('Thank you, have a nice day 😊');
+// }
+
+// getMoney(userData, bankData);
+
+// *************************************************************************
+// const parse = (data) => JSON.parse(data);
+
+function requestData(url) {
   return fetch(url)
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
-        throw new Error('Data not found');
+        throw new Error('Network response was not ok');
       }
       return response.json();
     })
-    .catch((error) => {
-      console.error('An unexpected error:', error);
-      throw error;
+    .catch(error => {
+      console.error('Error fetching data:', error);
     });
 }
 
-function displayPost(post) {
-  const postTitle = document.createElement('h2');
-  postTitle.innerText = post.title;
-  const postBody = document.createElement('p');
-  postBody.innerText = post.body;
-  const postWrapper = document.createElement('div');
-  postWrapper.id = 'postWrapper';
-  postWrapper.append(postTitle, postBody);
-  const postContainer = document.getElementById('postHolder');
-
-  if (!postContainer.contains(postWrapper)) {
-    postContainer.innerHTML = '';
-    postContainer.append(postWrapper);
-  }
-}
-
-function displayComments(comments) {
-  const commentContainer = document.createElement('div');
-  commentContainer.id = 'commentsContainer';
-
-  const existingCommentsContainer = document.getElementById('commentsContainer');
-  if (existingCommentsContainer) {
-    existingCommentsContainer.remove();
-  }
-
-  comments.forEach(comment => {
-    const commentItem = document.createElement('p');
-    commentItem.innerText = comment.body;
-    commentContainer.append(commentItem);
+requestData('data.json')
+  .then(data => {
+    const userData = data.userData;
+    const bankData = data.bankData;
+    getMoney(userData, bankData);
   });
 
-  const postContainer = document.getElementById('postHolder');
-  postContainer.append(commentContainer);
+function promptInput(message) {
+  return new Promise((resolve) => {
+    const input = window.prompt(message);
+    resolve(input ? input.trim().toUpperCase(): '');
+  });
 }
 
-document.querySelector('#searchButton').addEventListener('click', () => {
-  const postId = document.querySelector('#postId').value;
+// function promptInput(message) {
+//   return new Promise((resolve) => {
+//     const input = window.prompt(message);
+//     if (input === null) {
+//       // User canceled or closed the window, resolve with an empty string or any other default value
+//       resolve('');
+//     } else {
+//       resolve(input.trim().toUpperCase());
+//     }
+//   });
+// }
 
-  if (postId >= 1 && postId <= 100) {
-    const postUrl = `https://jsonplaceholder.typicode.com/posts/${postId}`;
-    fetchData(postUrl)
-      .then((post) => {
-        displayPost(post);
-        document.querySelector('#commentButton').classList.add('visible');
+function viewBalance(userData) {
+  const availableCurrencies = Object.keys(userData).join(', ');
+  return promptInput(`Enter currency (${availableCurrencies}):`)
+    .then((currency) => {
+      if (currency in userData) {
+        console.log(`Balance is: ${userData[currency]} ${currency}`);
+      } else {
+        console.log('Invalid currency. Please enter a valid currency.');
+        return viewBalance(userData);
+      }
+    });
+}
 
-        let isCommentVisible = false;
+// function withdrawMoney(userData, bankData) {
+//   let currency, amount;
+//   // const availableCurrencies = Object.keys(bankData).join(', ');
+//   const availableCurrencies = Object.keys(bankData).filter((currency) => bankData[currency].max !== 0).join(', ');
 
-        document.querySelector('#commentButton').addEventListener('click', () => {
-          const commentsContainer = document.querySelector('#commentsContainer');
-          if (isCommentVisible) {
-            if (commentsContainer) {
-              commentsContainer.innerHTML = '';
-            }
-          } else {
-            const commentUrl = `https://jsonplaceholder.typicode.com/posts/${postId}/comments`;
-            fetchData(commentUrl)
-              .then(comments => displayComments(comments))
-              .catch(error => {
-                console.error('Error while fetching comments:', error);
-              });
-          }
-          isCommentVisible = !isCommentVisible;
-        });
+//   return promptInput(`Enter currency (${availableCurrencies}):`)
+//     .then((inputCurrency) => {
+//       currency = inputCurrency;
+//       amount = parseFloat(window.prompt('Enter the amount to withdraw:'));
+
+//       if (!(currency in userData) || !(currency in bankData) || bankData[currency].max === 0) {
+//         console.log('Invalid currency. Please enter a valid currency.');
+//         return withdrawMoney(userData, bankData);
+//       } else if (amount > bankData[currency].max) {
+//         console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+//         return withdrawMoney(userData, bankData);
+//       } else if (amount < bankData[currency].min) {
+//         console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+//         return withdrawMoney(userData, bankData);
+//       } else {
+//         console.log(`Here are your cash ${amount} ${currency} ${bankData[currency].img}`);
+//       }
+//     });
+// }
+
+// function withdrawMoney(userData, bankData) {
+//   let currency, amount;
+//   // const availableCurrencies = Object.keys(bankData).join(', ');
+//   const availableCurrencies = Object.keys(bankData).filter((currency) => bankData[currency].max !== 0).join(', ');
+
+//   return promptInput(`Enter currency (${availableCurrencies}):`)
+//     .then((inputCurrency) => {
+//       currency = inputCurrency;
+      
+//       if (!(currency in userData) || !(currency in bankData) || bankData[currency].max === 0) {
+//         console.log('Invalid currency. Please enter a valid currency.');
+//         return withdrawMoney(userData, bankData);
+//       }
+      
+//       return new Promise((resolve) => {
+//         resolve(parseFloat(window.prompt('Enter the amount to withdraw:')));
+//       });
+//     })
+//     .then((inputAmount) => {
+//       amount = inputAmount;
+      
+//       if (isNaN(amount) || amount <= 0) {
+//         console.log('Invalid amount. Please enter a valid number.');
+//         return withdrawMoney(userData, bankData);
+//       }
+
+//       if (amount > bankData[currency].max) {
+//         console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+//         return withdrawMoney(userData, bankData);
+//       }
+
+//       if (amount < bankData[currency].min) {
+//         console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+//         return withdrawMoney(userData, bankData);
+//       }
+
+//       console.log(`Here are your cash ${amount} ${currency} ${bankData[currency].img}`);
+//     });
+// }
+
+function withdrawMoney(userData, bankData) {
+  let currency, amount;
+  // const availableCurrencies = Object.keys(bankData).join(', ');
+  const availableCurrencies = Object.keys(bankData).filter((currency) => bankData[currency].max !== 0).join(', ');
+
+  return promptInput(`Enter currency (${availableCurrencies}):`)
+    .then((inputCurrency) => {
+      currency = inputCurrency;
+      
+      if (!(currency in userData) || !(currency in bankData) || bankData[currency].max === 0) {
+        console.log('Invalid currency. Please enter a valid currency.');
+        return withdrawMoney(userData, bankData);
+      }
+      
+      return handleAmountPrompt();
+    });
+
+  function handleAmountPrompt() {
+    return new Promise((resolve) => {
+      const inputAmount = parseFloat(window.prompt('Enter the amount to withdraw:'));
+      if (isNaN(inputAmount) || inputAmount <= 0) {
+        console.log('Invalid amount. Please enter a valid number.');
+        return handleAmountPrompt();
+      }
+      resolve(inputAmount);
+    })
+    .then((inputAmount) => {
+      amount = inputAmount;
+
+      if (amount > bankData[currency].max) {
+        console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+        return handleAmountPrompt();
+      }
+
+      if (amount < bankData[currency].min) {
+        console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+        return handleAmountPrompt();
+      }
+
+      console.log(`Here are your cash ${amount} ${currency} ${bankData[currency].img}`);
+    });
+  }
+}
+
+function getMoney(userData, bankData) {
+  const confirmViewBalance = window.confirm('View card balance?');
+  if (confirmViewBalance) {
+    viewBalance(userData)
+      .then(() => {
+        console.log('Thank you, have a nice day 😊');
       })
-      .catch(error => {
-        console.error('Error while fetching post:', error);
+      .catch((err) => {
+        console.log('Error:', err);
       });
   } else {
-    alert("Invalid Post ID. Enter a number from 1 to 100.");
+    withdrawMoney(userData, bankData)
+      .then(() => {
+        console.log('Thank you, have a nice day 😊');
+      })
+      .catch((err) => {
+        console.log('Error:', err);
+      });
   }
-});
+}
+
+getMoney(userData, bankData);
+
+// function getMoney(userData, bankData) {
+//   const initialQuestion = new Promise((resolve, reject) => {
+//     const confirmViewBalance = window.confirm('View card balance?');
+
+//     if (confirmViewBalance) {
+//       resolve(userData);
+//     } else {
+//       reject({ userData, bankData });
+//     }
+//   });
+
+//   return initialQuestion
+//     .then(userData => {
+//       return new Promise((resolve) => {
+//         let validCurrency = false;
+//         while (!validCurrency) {
+//           const currency = window.prompt('Enter currency (USD, EUR, UAH, BIF, AOA):');
+//           if (currency in userData) {
+//             console.log(`Balance is: ${userData[currency]} ${currency}`);
+//             validCurrency = true;
+//           } else {
+//             console.log('Invalid currency. Please enter a valid currency.');
+//           }
+//         }
+//         resolve(userData);
+//       });
+//     })
+//     .catch(({ userData, bankData }) => {
+//       return new Promise((resolve, reject) => {
+//         let validWithdrawal = false;
+//         while (!validWithdrawal) {
+//           const currency = window.prompt('Enter currency (USD, EUR, GBP):');
+//           const amount = parseFloat(window.prompt('Enter the amount to withdraw:'));
+
+//           if (!(currency in userData) || !(currency in bankData) || bankData[currency].max === 0) {
+//             console.log('Invalid currency. Please enter a valid currency.');
+//           } else if (amount > bankData[currency].max) {
+//             console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+//           } else if (amount < bankData[currency].min) {
+//             console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+//           } else {
+//             console.log(`Here are your cash ${amount} ${currency} ${bankData[currency].img}`);
+//             validWithdrawal = true;
+//           }
+//         }
+//         resolve(userData);
+//       });
+//     })
+//     .finally(() => {
+//       console.log('Thank you, have a nice day 😊');
+//     });
+// }
+
+// // Example usage:
+// const userData = {
+//   'USD': 1000,
+//   'EUR': 900,
+//   'UAH': 15000,
+//   'BIF': 20000,
+//   'AOA': 100
+// };
+
+// const bankData = {
+//   'USD': {
+//     max: 3000,
+//     min: 100,
+//     img: '💵'
+//   },
+//   'EUR': {
+//     max: 1000,
+//     min: 50,
+//     img: '💶'
+//   },
+//   'UAH': {
+//     max: 0,
+//     min: 0,
+//     img: '💴'
+//   },
+//   'GBP': {
+//     max: 10000,
+//     min: 100,
+//     img: '💷'
+//   }
+// };
+
+// getMoney(userData, bankData);
 
