@@ -45,12 +45,64 @@ function viewBalance(userData) {
   });
 }
 
-function handleAmountPrompt(bankData, currency) {
+// function handleAmountPrompt(bankData, currency) {
+//   return new Promise((resolve) => {
+//     const inputAmount = parseFloat(window.prompt('Enter the amount to withdraw:'));
+//     if (isNaN(inputAmount) || inputAmount <= 0) {
+//     console.log('Invalid amount. Please enter a valid number.');
+//     return handleAmountPrompt(bankData, currency);
+//     }
+//     resolve(inputAmount);
+//   })
+//   .then((inputAmount) => {
+//     console.log('currency', currency);
+//     console.log('bankData', bankData);
+//     if (inputAmount > bankData[currency].max) {
+//     console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+//     return handleAmountPrompt(bankData, currency);
+//     } 
+
+//     if (inputAmount < bankData[currency].min) {
+//     console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+//     return handleAmountPrompt(bankData, currency);
+//     }
+
+//     console.log(`Here are your cash ${inputAmount} ${currency} ${bankData[currency].img}`);
+//     console.log('Thank you, have a nice day 😊');
+//   });
+// }
+
+// function withdrawMoney(data) {
+//   const availableCurrencies = Object.keys(data.bankData).join(', ');
+
+//   return promptInput(`Enter currency to withdrow (${availableCurrencies}):`)
+//   .then((inputCurrency) => {
+//     if (!(inputCurrency in data.userData)) {
+//       console.log('You don\'t have this currency');
+//       return withdrawMoney(data);
+//     } 
+//     else if(!(inputCurrency in data.bankData)) {
+//       console.log('Invalid currency. Please enter a valid currency.');
+//       return withdrawMoney(data);
+//     } 
+//     else if (data.bankData[inputCurrency].max === 0) {
+//       console.log(`No ${inputCurrency} in the machine. Please enter another currency`);
+//       return withdrawMoney(data);
+//     }
+    
+//     return handleAmountPrompt(data.bankData, inputCurrency);
+//   });
+// }
+
+function handleAmountPrompt(userData, bankData, currency) {
   return new Promise((resolve) => {
     const inputAmount = parseFloat(window.prompt('Enter the amount to withdraw:'));
     if (isNaN(inputAmount) || inputAmount <= 0) {
-    console.log('Invalid amount. Please enter a valid number.');
-    return handleAmountPrompt(bankData, currency);
+      console.log('Invalid amount. Please enter a valid number.');
+      return handleAmountPrompt(userData, bankData, currency);
+    } else if (inputAmount > userData[currency]) {
+      console.log(`You don't have sufficient funds. Your current balance is ${userData[currency]} ${currency}.`);
+      return handleAmountPrompt(userData, bankData, currency);
     }
     resolve(inputAmount);
   })
@@ -58,13 +110,13 @@ function handleAmountPrompt(bankData, currency) {
     console.log('currency', currency);
     console.log('bankData', bankData);
     if (inputAmount > bankData[currency].max) {
-    console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
-    return handleAmountPrompt(bankData, currency);
+      console.log(`The entered amount is greater than the allowed maximum. Maximum withdrawal amount: ${bankData[currency].max}`);
+      return handleAmountPrompt(userData, bankData, currency);
     }
 
     if (inputAmount < bankData[currency].min) {
-    console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
-    return handleAmountPrompt(bankData, currency);
+      console.log(`The entered amount is less than the allowed minimum. Minimum withdrawal amount: ${bankData[currency].min}`);
+      return handleAmountPrompt(userData, bankData, currency);
     }
 
     console.log(`Here are your cash ${inputAmount} ${currency} ${bankData[currency].img}`);
@@ -90,7 +142,7 @@ function withdrawMoney(data) {
       return withdrawMoney(data);
     }
     
-    return handleAmountPrompt(data.bankData, inputCurrency);
+    return handleAmountPrompt(data.userData, data.bankData, inputCurrency);
   });
 }
 
