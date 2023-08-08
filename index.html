@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <form id="searchForm">
+    <!-- <form id="searchForm">
         <input type="text" id="searchInput" class="search_input" placeholder="Search For a Book">
         <button type="submit" class="search_button">Search</button>
     </form>
@@ -16,6 +16,22 @@
     <div class="container" id="bookList"></div>
     <div class="load-more-container">
         <button id="loadMoreBtn" class="hidden">Load More</button>
+    </div> -->
+    <!-- <form id="searchForm">
+        <input type="text" id="searchInput" class="search_input" placeholder="Search for GitHub User">
+        <button type="submit" class="search_button">Search</button>
+    </form> -->
+    <div class="container">
+        <h1>GitHub User Explorer</h1>
+        <input type="text" id="username" placeholder="Enter GitHub Username">
+        <button id="searchBtn">Search</button>
+        <button id="randomBtn">Random User</button>
+        <div class="user-info" id="user-info">
+            <!-- User information will be displayed here -->
+        </div>
+        <div class="user-repos" id="user-repos">
+            <!-- User repositories will be displayed here -->
+        </div>
     </div>
     <script src="2.js"></script>
 </body>
