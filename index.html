@@ -8,7 +8,16 @@
 </head>
 
 <body>
-    <script src="script.js"></script>
+    <form id="searchForm">
+        <input type="text" id="searchInput" class="search_input" placeholder="Search For a Book">
+        <button type="submit" class="search_button">Search</button>
+    </form>
+    <div id="errorContainer" class="error-container"></div>
+    <div class="container" id="bookList"></div>
+    <div class="load-more-container">
+        <button id="loadMoreBtn" class="hidden">Load More</button>
+    </div>
+    <script src="2.js"></script>
 </body>
 
 </html>
