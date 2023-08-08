@@ -6,6 +6,7 @@ body {
 .container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 20px;
 }
 
@@ -19,15 +20,11 @@ body {
   padding: 5px 10px;
 }
 
-.search_button {
+.style_button {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   border-radius: 15px;
   padding: 5px 10px;
 }
-
-/* .book_text {
-  height: 100px;
-} */
 
 .book_card {
   border-radius: 15px;
@@ -55,8 +52,6 @@ p {
 .book_description {
   height: 200px;
   overflow-x: hidden;
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
 }
 
 .hidden {
@@ -66,7 +61,7 @@ p {
 .load-more-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px; /* Adjust as needed */
+  margin-top: 20px;
 }
 
 .error-container {
