@@ -3,37 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <!-- <form id="searchForm">
-        <input type="text" id="searchInput" class="search_input" placeholder="Search For a Book">
-        <button type="submit" class="search_button">Search</button>
-    </form>
-    <div id="errorContainer" class="error-container"></div>
-    <div class="container" id="bookList"></div>
-    <div class="load-more-container">
-        <button id="loadMoreBtn" class="hidden">Load More</button>
-    </div> -->
-    <!-- <form id="searchForm">
-        <input type="text" id="searchInput" class="search_input" placeholder="Search for GitHub User">
-        <button type="submit" class="search_button">Search</button>
-    </form> -->
     <div class="container">
         <h1>GitHub User Explorer</h1>
-        <input type="text" id="username" placeholder="Enter GitHub Username">
-        <button id="searchBtn">Search</button>
-        <button id="randomBtn">Random User</button>
-        <div class="user-info" id="user-info">
-            <!-- User information will be displayed here -->
+        <div class="wrapper">
+            <button class="button" id="randomBtn">Random User</button>
+            <input type="text" id="username" placeholder="Enter GitHub Username">
+            <button class="button" id="searchBtn">Search</button>
         </div>
-        <div class="user-repos" id="user-repos">
-            <!-- User repositories will be displayed here -->
+        <div class="info_wrapper">
+            <div class="user-info" id="user-info"></div>
+            <div class="user-repos" id="user-repos"></div>
         </div>
     </div>
-    <script src="2.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
