@@ -207,20 +207,13 @@ function clearBookList() {
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 
-setInterval(function() {
-  searchButton.disabled = searchInput.value.trim() === '';
-}, 500);
-
-// const searchInput = document.getElementById('searchInput');
-// const searchButton = document.getElementById('searchButton');
-
-// searchInput.addEventListener('input', function() {
-//     if(searchInput.value.trim() === '') {
-//         searchButton.disabled = true;
-//     } else {
-//         searchButton.disabled = false;
-//     }
-// });
+searchInput.addEventListener('input', function() {
+    if(searchInput.value.trim() === '') {
+        searchButton.disabled = true;
+    } else {
+        searchButton.disabled = false;
+    }
+});
 
 document.getElementById('searchForm').addEventListener('submit', handleSubmit);
 document.getElementById('loadMoreBtn').addEventListener('click', handleLoadMore);
