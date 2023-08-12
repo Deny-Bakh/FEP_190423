@@ -15,13 +15,13 @@ let isUsernameInvalid = false;
 function handleInput() {
     const username = usernameInput.value.trim();
     if (validateUsername(username)) {
-        if (isUsernameInvalid) {
-            clearErrorMessage();
-            isUsernameInvalid = false;
-            usernameInput.style.border = '1px solid #ccc';
-            usernameInput.style.color = 'black';
-        }
-        enableSearchButton();
+        // if (isUsernameInvalid) {
+        //     clearErrorMessage();
+        //     isUsernameInvalid = false;
+        //     usernameInput.style.border = '1px solid #ccc';
+        //     usernameInput.style.color = 'black';
+        // }
+        // enableSearchButton();
     } else {
         if (!isUsernameInvalid) {
             userInfoDiv.innerHTML = '';
