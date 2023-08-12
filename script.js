@@ -112,8 +112,8 @@ function clearBookList() {
   container.innerHTML = '';
 }
 
-// const searchInput = document.getElementById('searchInput');
-// const searchButton = document.getElementById('searchButton');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
 
 function updateSearchButtonState() {
   searchButton.disabled = searchInput.value.trim() === '';
