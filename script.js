@@ -1,3 +1,4 @@
+const accessToken = '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';
 const usernameInput = document.getElementById('username');
 const searchBtn = document.getElementById('searchBtn');
 const randomBtn = document.getElementById('randomBtn');
@@ -8,32 +9,36 @@ searchBtn.addEventListener('click', fetchUserData);
 randomBtn.addEventListener('click', fetchRandomUser);
 usernameInput.addEventListener('input', handleInput);
 
+usernameInput.addEventListener('keyup', function(event) {
+  if (event.key === 'Enter' && !searchBtn.disabled) {
+    fetchUserData();
+  }
+});
+
 searchBtn.disabled = true;
 
 let isUsernameInvalid = false;
 
 function handleInput() {
-    const username = usernameInput.value.trim();
-    if (validateUsername(username)) {
-        // if (isUsernameInvalid) {
-        //     clearErrorMessage();
-        //     isUsernameInvalid = false;
-        //     usernameInput.style.border = '1px solid #ccc';
-        //     usernameInput.style.color = 'black';
-        // }
-        // enableSearchButton();
-    } else {
-        if (!isUsernameInvalid) {
-            userInfoDiv.innerHTML = '';
-            userReposDiv.innerHTML = '';
+  const username = usernameInput.value.trim();
 
-            displayError('Invalid username format.');
-            isUsernameInvalid = true;
-            usernameInput.style.border = '1px solid red';
-            usernameInput.style.color = 'red';
-        }
-        disableSearchButton();
-    }
+  isUsernameInvalid = false;
+  clearErrorMessage();
+  resetInputStyle();
+
+  if (username === '') {
+      disableSearchButton();
+  } else if (validateUsername(username)) {
+      enableSearchButton();
+  } else {
+      if (!isUsernameInvalid) {
+          displayError('Invalid username format');
+          isUsernameInvalid = true;
+          usernameInput.style.border = '1px solid red';
+          usernameInput.style.color = 'red';
+      }
+      disableSearchButton();
+  }
 }
 
 async function fetchUserData() {
@@ -42,18 +47,16 @@ async function fetchUserData() {
         return;
     }
 
-    userInfoDiv.classList.add('fade-out');
-    userReposDiv.classList.add('fade-out');
+    toggleFadeEffect(true);
 
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise(resolve => setTimeout(resolve, 200));
 
     userInfoDiv.innerHTML = '';
     userReposDiv.innerHTML = '';
 
     await fetchAndDisplayUserData(username);
 
-    userInfoDiv.classList.remove('fade-out');
-    userReposDiv.classList.remove('fade-out');
+    toggleFadeEffect(false);
 }
 
 function validateUsername(username) {
@@ -64,7 +67,12 @@ function validateUsername(username) {
 
 async function fetchAndDisplayUserData(username) {
     try {
-        const response = await fetch(`https://api.github.com/users/${username}`);
+        const response = await fetch(`https://api.github.com/users/${username}`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
+        
         if (response.status === 404) {
             throw new Error('NO USER WITH THIS NAME');
         }
@@ -88,30 +96,69 @@ async function fetchAndDisplayUserData(username) {
 }
 
 async function fetchRandomUser() {
-    try {
-        userInfoDiv.classList.add('fade-out');
-        userReposDiv.classList.add('fade-out');
+  try {
+      toggleFadeEffect(true);
 
-        await new Promise(resolve => setTimeout(resolve, 300));
+      await new Promise(resolve => setTimeout(resolve, 200));
 
-        userInfoDiv.innerHTML = '';
-        userReposDiv.innerHTML = '';
+      userInfoDiv.innerHTML = '';
+      userReposDiv.innerHTML = '';
 
-        const response = await fetch('https://api.github.com/users');
-        const usersData = await response.json();
-        const randomIndex = Math.floor(Math.random() * usersData.length);
-        const randomUser = usersData[randomIndex];
+      await tryFetchRandomUser();
 
-        await fetchAndDisplayUserData(randomUser.login);
-
-        userInfoDiv.classList.toggle('fade-out');
-        userReposDiv.classList.toggle('fade-out');
-
-    } catch (error) {
-        displayError('Error fetching random user.');
-    }
+      toggleFadeEffect(false);
+  } catch (error) {
+      displayError(error.message);
+  }
 }
 
+async function tryFetchRandomUser() {
+  const randomUserId = Math.floor(Math.random() * 1000000);
+  const response = await fetch(`https://api.github.com/user/${randomUserId}`, {
+      headers: {
+          Authorization: `Bearer ${accessToken}`
+      }
+  });
+
+  if (response.status === 404) {
+      // const error = new Error(`User not found for ID: ${randomUserId}`);
+      // displayError(error.message);
+      // console.error(error.message);
+      await tryFetchRandomUser();
+  } else if (!response.ok) {
+      throw new Error('Network error while fetching random user.');
+  } else {
+      const randomUserData = await response.json();
+      await fetchAndDisplayUserData(randomUserData.login);
+  }
+}
+
+// async function tryFetchRandomUser() {
+//   const maxRetries = 5;
+//   let retryCount = 0;
+
+//   while (retryCount < maxRetries) {
+//     const randomUserId = Math.floor(Math.random() * 1000000);
+//     const response = await fetch(`https://api.github.com/user/${randomUserId}`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     });
+
+//     if (response.status === 404) {
+//       retryCount++;
+//       if (retryCount === maxRetries) {
+//         displayError('Max retries reached. Unable to fetch random user.');
+//       }
+//     } else if (!response.ok) {
+//       throw new Error('Network error while fetching random user.');
+//     } else {
+//       const randomUserData = await response.json();
+//       await fetchAndDisplayUserData(randomUserData.login);
+//       break;
+//     }
+//   }
+// }
 
 function displayUserData(userData) {
     userInfoDiv.innerHTML = '';
@@ -153,7 +200,11 @@ async function fetchUserRepositories(username) {
     userReposDiv.innerHTML = '';
 
     try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        const response = await fetch(`https://api.github.com/users/${username}/repos`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        });
         const reposData = await response.json();
 
         displayUserRepositories(reposData);
@@ -186,18 +237,21 @@ function displayUserRepositories(reposData) {
 }
 
 function displayError(message) {
-    const errorMessage = document.createElement('p');
-    errorMessage.classList.add('error');
-    errorMessage.innerText = message;
-    userInfoDiv.append(errorMessage);
-    userReposDiv.innerHTML = '';
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.innerText = message;
+  errorMessage.classList.add('error');
 }
 
 function clearErrorMessage() {
-    const errorMessage = userInfoDiv.querySelector('.error');
-    if (errorMessage) {
-        errorMessage.remove();
-    }
+  const errorMessage = document.getElementById('error-message');
+  errorMessage.innerText = '';
+  // errorMessage.classList.remove('error');
+}
+
+function resetInputStyle() {
+  isUsernameInvalid = false;
+  usernameInput.style.border = '1px solid #ccc';
+  usernameInput.style.color = 'black';
 }
 
 function enableSearchButton() {
@@ -206,6 +260,16 @@ function enableSearchButton() {
 
 function disableSearchButton() {
     searchBtn.disabled = true;
+}
+
+function toggleFadeEffect(addEffect) {
+  if (addEffect) {
+    userInfoDiv.classList.add('fade-out');
+    userReposDiv.classList.add('fade-out');
+  } else {
+    userInfoDiv.classList.remove('fade-out');
+    userReposDiv.classList.remove('fade-out');
+  }
 }
 
 function getRandomColor() {

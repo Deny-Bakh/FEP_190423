@@ -1,3 +1,5 @@
+@import url('media.css');
+
 body {
   font-family: Arial, sans-serif;
 }
@@ -47,18 +49,20 @@ input[type="text"] {
 .user-repos .repo-card {
   border-radius: 15px;
   border: 1px solid #ddd;
-  /* padding: 10px;
-  margin-bottom: 10px; */
+  padding: 10px;
+  margin-bottom: 10px;
   background-color: #f7f7f7;
-  animation: fadeIn ease-in-out 1s;
+  animation: flyIn ease-in-out 1s;
 }
 
-@keyframes fadeIn {
+@keyframes flyIn {
   0% {
-      opacity: 0;
+    transform: translateY(100%);
+    opacity: 0;
   }
   100% {
-      opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -93,53 +97,21 @@ input[type="text"] {
   border-radius: 15px 15px 0 0;
 }
 
-@media (max-width: 992px) {
-
-  .container{
-    padding: 20px 60px;
-  }
-
-  .userInfoDiv{
-    font-size: 18px;
-    margin-bottom: 15px;
-  }
-
-  .repo-card {
-    padding: 8px;
-    margin-bottom: 8px;
-  }
+.error {
+  color: red;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-weight: bold;
+  min-height: 20px;
 }
 
-@media (max-width: 576px) {
-
-  .container {
-    padding: 10px 30px;
-  }
-
-  .wrapper {
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    margin-top: 20px;
-    max-width: 300px;
-  }
-
-  .button {
-    width: 100%;
-  }
-
-  .user_card {
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-
-  .repo-card {
-    font-size: 14px;
-    word-break: break-all;
-    padding: 6px;
-    margin-bottom: 6px;
-  }
+.button:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
 }
 
-
+.username {
+  border: 1px solid #ccc;
+  outline: none;
+}
 
