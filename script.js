@@ -1,4 +1,4 @@
-const accessToken = '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';
+const accessToken = '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';
 const usernameInput = document.getElementById('username');
 const searchBtn = document.getElementById('searchBtn');
 const randomBtn = document.getElementById('randomBtn');
