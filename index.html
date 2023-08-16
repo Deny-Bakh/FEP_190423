@@ -1,28 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
-    <link rel="stylesheet" href="css/styles.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Heroes</title>
+	<link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body>
-    <div class="container">
-        <h1>GitHub User Explorer</h1>
-        <div class="wrapper">
-            <button class="button" id="randomBtn">Random User</button>
-            <input type="text" id="username" class="username" placeholder="Enter GitHub Username">
-            <button class="button" id="searchBtn">Search</button>
-        </div>
-        <div class="info_wrapper">
-            <p id="error-message" class="error"></p> 
-            <div class="user-info" id="user-info"></div>
-            <div class="user-repos" id="user-repos"></div>
-        </div>
-    </div>
-    <script src="script.js"></script>
-</body>
 
+	<form class="heroes__form" id="heroesForm">
+		<label>
+			Name Surname: <input type="text" id="fullName" placeholder="Iron Man" value="Iron Man" data-name="heroName">
+		</label>
+		<label>
+			Comics: <select id="universeSelect" data-name="heroComics">
+				<option value="Marvel">Marvel</option>
+				<option value="DC">DC</option>
+				<option value="Comix Zone">Comix Zone</option>
+			</select>
+		</label>
+		<label>
+			Favourite: 
+			<div class="heroFavouriteInput">
+				<input type="checkbox" id="favourite" data-name="heroFavourite">
+			</div>
+		</label>
+
+		<button type="button" id="addHeroButton">Add Hero</button>
+	</form>
+
+	<table class="heroes__table" id="heroesTable">
+		<thead>
+			<tr>
+				<th>Name Surname</th>
+				<th>Comics</th>
+				<th>Favourite</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Iron Man</td>
+				<td>Marvel</td>
+				<td>
+					<label class="heroFavouriteInput">
+						Favourite: <input type="checkbox">
+					</label>
+				</td>
+				<td><button>Delete</button></td>
+			</tr>
+		</tbody>
+	</table>
+	<script src="script.js"></script>
+</body>
 </html>
