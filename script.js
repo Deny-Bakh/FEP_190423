@@ -148,14 +148,22 @@ function handleDeleteButtonClick(hero, newRow) {
 
 async function deleteHero(heroId) {
     try {
-        const response = await fetch(`${API}heroInfo/${heroId}`, { method: 'DELETE' });
-        if (!response.ok) {
-            throw new Error('Failed to delete hero.');
-        }
+        await controller(`heroInfo/${heroId}`, METHODS.DELETE);
     } catch (error) {
         console.error('Error while deleting hero:', error);
     }
 }
+
+// async function deleteHero(heroId) {
+//     try {
+//         const response = await fetch(`${API}heroInfo/${heroId}`, { method: 'DELETE' });
+//         if (!response.ok) {
+//             throw new Error('Failed to delete hero.');
+//         }
+//     } catch (error) {
+//         console.error('Error while deleting hero:', error);
+//     }
+// }
 
 async function init() {
     try {
