@@ -1,0 +1,29 @@
+ul, li {
+    list-style-type: none
+}
+
+.user-main-name {
+    text-align: center;
+}
+
+.user-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .user-item {
+    text-align: center;
+    flex-basis: calc(33.33% - 20px);
+    margin: 10px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+    box-sizing: border-box;
+  }
+  
+  .user-item h3 {
+    margin-top: 0;
+  }

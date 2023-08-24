@@ -1,16 +1,10 @@
-import sum from './components/add.js';
-import sub from './components/sub.js';
-import div from './components/div.js';
-import mult from './components/mult.js';
+import { displayUsers } from "./display.js";
 
-const resultAdd = sum(10, 20);
-console.log(resultAdd);
+// displayUsers();
 
-const resultSub = sub(10, 20);
-console.log(resultSub);
+document.addEventListener("DOMContentLoaded", () => {
+    displayUsers();
+  });
 
-const resultDiv = div(10, 2);
-console.log(resultDiv);
-
-const resultMult = mult(10, 20);
-console.log(resultMult);
+// const userList = document.getElementById('user-list');
+// document.body.append(userList);
