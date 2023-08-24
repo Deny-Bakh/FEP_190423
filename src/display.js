@@ -25,4 +25,4 @@ function displayUsers() {
   });
 }
 
-export { displayUsers };
+export default displayUsers;
